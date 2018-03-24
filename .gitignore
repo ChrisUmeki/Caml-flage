@@ -18,3 +18,11 @@ _build/
 # oasis generated files
 setup.data
 setup.log
+
+# latex build files
+*.synctex.gz
+*.log
+*.aux
+
+# MacOS
+.DS_Store
