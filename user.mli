@@ -3,17 +3,20 @@ open Opium.Std
 
 module type User = sig
 
-  type t = {
-    username : string;
-    mutable posts : post list;
-    mutable exposed_users : string list;
-  }
+  type t
 
-  val score_threshold: int
+  val username : t -> string
 
-  val score_calculator: string -> string -> int
+  val posts : t -> post list
+
+  val exposed_users : t -> string list
+
+  val score_threshold : int
+
+  val score_calculator : string -> string -> int
 
   val interaction_score : ((string*string),int) Hashtbl.t
 
-end
+  val get_score: (string*string) -> int
 
+end
