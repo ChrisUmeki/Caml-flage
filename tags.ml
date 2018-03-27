@@ -1,6 +1,6 @@
 open Opium.Std
 
-type tags = {
+type tag = {
   name: string;
   posts: post list;
 }
