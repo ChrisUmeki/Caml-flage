@@ -16,8 +16,8 @@ module User = struct
 
   let threshold_score = 100
 
-  let score_calculator = failwith "Unimplemented"
+  let score_calculator u1 u2 = failwith "Unimplemented"
 
-let interaction_score = failwith "Unimplemented"
+  let interaction_score (u1,u2) ht = failwith "Unimplemented"
 
 end

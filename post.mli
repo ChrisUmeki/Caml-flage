@@ -16,9 +16,6 @@ type post = {
 }
 
 
-
-
-
 val make_post : string -> medium -> string -> string -> post
 
 val add_reply : post -> post
