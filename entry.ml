@@ -1,7 +1,7 @@
 
 module type Entry = sig
   type t
-  val make_post : string -> bool -> string -> string -> t
+  val make_post : string -> string option -> string -> string -> t
   val add_reply : string -> string -> t -> t
 end
 
@@ -9,7 +9,7 @@ module Comment : Entry = struct
 
   type t = {
     id: int;
-    score: int;
+    mutable score: int;
     text: string;
     user: string;
     mutable children: t list;
@@ -22,16 +22,20 @@ module Comment : Entry = struct
   let add_reply a b c =
     failwith "Unimplemented"
 
+  let up_camel a b =
+    failwith "Unimplemented"
+
 end
 
 module Post : Entry = struct
 
   type t = {
       id: int;
-      score: int;
+      mutable score: int;
       title: string;
       text: string;
-      is_url: bool;
+      has_url: bool;
+      url: string option;
       user: string;
       mutable children: t list;
       tag: string;
