@@ -5,17 +5,20 @@ type server_state = {
   mutable tags : string list;
 }
 
+let get_curr_state t =
+    t.curr_state
+
 let update_curr_state t new_state =
     t.curr_state <- new_state
 
-let update_users t new_user =
+let update_users t (new_user:string) =
   if not (List.mem new_user t.users) then
     t.users <- new_user::t.users
 
-let update_entries t new_entry =
+let update_entries t (new_entry:string) =
   if not (List.mem new_entry t.entries) then
     t.entries <- new_entry::t.entries
 
-let update_tags t new_tag =
+let update_tags t (new_tag:string) =
   if not (List.mem new_tag t.tags) then
-    t.users <- new_user::t.users
+    t.tags <- new_tag::t.tags

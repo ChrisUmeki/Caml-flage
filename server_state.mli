@@ -5,10 +5,12 @@ type server_state = {
   mutable tags : string list;
 }
 
-val update_curr_state : server_state -> string -> server_state
+val get_curr_state : server_state -> string
 
-val update_users : server_state -> string -> server_state
+val update_curr_state : server_state -> string -> unit
 
-val update_entries : server_state -> string -> server_state
+val update_users : server_state -> string -> unit
 
-val update_tags : server_state -> string -> server_state
+val update_entries : server_state -> string -> unit
+
+val update_tags : server_state -> string -> unit
