@@ -1,11 +1,8 @@
 open Opium.Std
-
-type state = {
-    mutable s : string; 
-}
+open Server_state
 
 let listen st = get "/:id/:text" begin fun req ->
-    st.s <- (param req "text"); 
+    Server_state.update_curr_state (param req "text") st; 
     `String ( param req "id" )|> respond'
 end
 
@@ -22,6 +19,6 @@ let my_state : state = {s = "old state"}
 let () = App.empty
          |> listen my_state
          |> front my_state
-         |> not_found 
+         |> not_found
          |> App.run_command
          |> ignore
