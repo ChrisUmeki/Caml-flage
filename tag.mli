@@ -1,9 +1,9 @@
 open Entry
 
-type tag
+type t
 
 (* [post tag] takes in a tag and returns a list of posts that are associated
  * with the tag *)
-val posts_list: tag -> string list
+val posts_list: t -> Post.t list
 
-val tag_name: tag -> string
+val tag_name: t -> string

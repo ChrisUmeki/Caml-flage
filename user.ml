@@ -1,10 +1,10 @@
-open Opium.Std
+open Entry
 
 module User = struct
 
   type t = {
     username : string;
-    mutable posts : string list;
+    mutable posts : Post.t list;
     mutable exposed_users : string list;
   }
 
@@ -14,7 +14,7 @@ module User = struct
 
   let exposed_users u = u.exposed_users
 
-  let threshold_score = 100
+  let score_threshold = 100
 
   let score_calculator u1 u2 = failwith "Unimplemented"
 

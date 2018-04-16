@@ -1,8 +1,8 @@
-open Opium.Std
+open Entry
 
-type tag = {
+type t = {
   name: string;
-  posts: string list;
+  posts: Post.t list;
 }
 
 let posts_list tag = tag.posts
