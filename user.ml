@@ -4,7 +4,7 @@ module User = struct
 
   type t = {
     username : string;
-    mutable posts : post list;
+    mutable posts : string list;
     mutable exposed_users : string list;
   }
 
