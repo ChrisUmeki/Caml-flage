@@ -9,21 +9,25 @@ module type Entry = sig
   *)
   val make_post : string -> string option -> string -> string -> t
 
-  (* [add_reply text user parent] takes in text, the username making the
+  (* [make_comment text user parent] takes in text, the username making the
    * Comment, and the Post which is being replied to.
    * effects: the parent Post's mutable field to store replies will have another
    * value
   *)
-  val add_reply : string -> string -> t -> t
+  val make_comment : string -> string -> t -> t
+
+  val add_reply : t -> t -> unit
 
   (* [up_camel entry] is entry with its score incremented *)
-  val up_camel : t -> t
+  val up_camel : t -> unit
 
   (* [down_camel entry] is entry with its score decremented *)
-  val down_camel : t -> t
+  val down_camel : t -> unit
 
   (* [get_score entry] is the score of entry *)
   val get_score : t -> int
+
+  val get_id : t -> int
 
 end
 

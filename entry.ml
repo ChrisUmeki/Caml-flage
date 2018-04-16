@@ -1,11 +1,12 @@
-
 module type Entry = sig
   type t
   val make_post : string -> string option -> string -> string -> t
-  val add_reply : string -> string -> t -> t
-  val up_camel : t -> t
-  val down_camel : t -> t
+  val make_comment : string -> string -> t -> t
+  val add_reply : t -> t -> unit
+  val up_camel : t -> unit
+  val down_camel : t -> unit
   val get_score : t -> int
+  val get_id : t -> int
 end
 
 module Comment : Entry = struct
@@ -16,23 +17,39 @@ module Comment : Entry = struct
     text: string;
     user: string;
     mutable children: t list;
-    parent_id: string;
+    parent_id: int;
   }
-
-  let make_post a b c d =
-    failwith "Unimplemented"
-
-  let add_reply a b c =
-    failwith "Unimplemented"
+  let get_id a =
+    a.id
 
   let up_camel a =
-    failwith "Unimplemented"
+    a.score <- a.score + 1
 
   let down_camel a =
-    failwith "Unimplemented"
+    a.score <- a.score - 1
 
   let get_score a =
-    failwith "Unimplemented"
+    a.score
+
+  let make_post a b c d =
+    failwith "Not a post"
+
+  let add_reply par reply =
+    par.children <- reply::par.children
+
+  let make_comment txt usr par =
+    let reply = {
+      id = 0;
+      score = 0;
+      text = txt;
+      user = usr;
+      children = [];
+      parent_id = get_id par;
+    } in
+      add_reply par reply;
+      reply
+
+
 
 end
 
@@ -50,19 +67,28 @@ module Post : Entry = struct
       tag: string;
   }
 
+  let get_id a =
+    a.id
+
+  let add_reply par reply =
+    par.children <- reply::par.children
+
   let make_post a b c d =
     failwith "Unimplemented"
 
-  let add_reply a b c =
-    failwith "Unimplemented"
+  let make_comment txt usr par =
+    failwith "Not a comment"
+
+  let add_reply par reply =
+    par.children <- reply::par.children
 
   let up_camel a =
-    failwith "Unimplemented"
+    a.score <- a.score + 1
 
   let down_camel a =
-    failwith "Unimplemented"
+    a.score <- a.score - 1
 
   let get_score a =
-    failwith "Unimplemented"
+    a.score
 
 end

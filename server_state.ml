@@ -1,5 +1,8 @@
 type server_state = {
   mutable curr_state : string;
+  mutable users : string list;
+  mutable entries : string list;
+  mutable tags : string list;
 }
 
 let init_state = {
