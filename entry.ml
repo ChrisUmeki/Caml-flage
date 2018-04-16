@@ -3,6 +3,9 @@ module type Entry = sig
   type t
   val make_post : string -> string option -> string -> string -> t
   val add_reply : string -> string -> t -> t
+  val up_camel : t -> t
+  val down_camel : t -> t
+  val get_score : t -> int
 end
 
 module Comment : Entry = struct
@@ -22,7 +25,13 @@ module Comment : Entry = struct
   let add_reply a b c =
     failwith "Unimplemented"
 
-  let up_camel a b =
+  let up_camel a =
+    failwith "Unimplemented"
+
+  let down_camel a =
+    failwith "Unimplemented"
+
+  let get_score a =
     failwith "Unimplemented"
 
 end
@@ -45,6 +54,15 @@ module Post : Entry = struct
     failwith "Unimplemented"
 
   let add_reply a b c =
+    failwith "Unimplemented"
+
+  let up_camel a =
+    failwith "Unimplemented"
+
+  let down_camel a =
+    failwith "Unimplemented"
+
+  let get_score a =
     failwith "Unimplemented"
 
 end
