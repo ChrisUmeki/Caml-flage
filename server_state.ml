@@ -1,8 +1,8 @@
 type server_state = {
   mutable curr_state : string;
-  mutable users : string list;
-  mutable entries : string list;
-  mutable tags : string list;
+  mutable users : User.t list;
+  mutable entries : Entry.t list;
+  mutable tags : Tag.t list;
 }
 
 let init_state = {
@@ -18,15 +18,15 @@ let get_curr_state t =
 let update_curr_state t new_state =
   t.curr_state <- new_state
 
-let update_users t (new_user:string) =
+let update_users t (new_user : User.t) =
   if not (List.mem new_user t.users) then
     t.users <- new_user::t.users
 
-let update_entries t (new_entry:string) =
+let update_entries t (new_entry : Entry.t) =
   if not (List.mem new_entry t.entries) then
     t.entries <- new_entry::t.entries
 
-let update_tags t (new_tag:string) =
+let update_tags t (new_tag : Tag.t) =
   if not (List.mem new_tag t.tags) then
     t.tags <- new_tag::t.tags
 
