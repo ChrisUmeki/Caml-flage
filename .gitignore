@@ -29,3 +29,8 @@ setup.log
 
 # ignore built pdf for now
 designdoc.pdf
+
+# react things
+*/node_modules/
+*/build/
+*/lib/
