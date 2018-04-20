@@ -15,11 +15,15 @@ let not_found = get "/*" begin fun req ->
     `String ("Not found") |> respond'
 end
 
+let blah = get "/blah" begin fun req ->
+    `Html ("my-react-app/src/index.html") |> respond'
+end
+
 let my_state = init_state
 
 let () = App.empty
          |> listen my_state
          |> front my_state
-         |> not_found
+         |> blah
          |> App.run_command
          |> ignore
