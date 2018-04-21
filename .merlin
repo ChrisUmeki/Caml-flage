@@ -1,0 +1,4 @@
+PKG opium
+
+B _build/
+S *
