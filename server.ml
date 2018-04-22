@@ -16,12 +16,15 @@ let not_found = get "/*" begin fun req ->
 end
 
 let blah = get "/blah" begin fun req ->
-    `Html ("my-react-app/src/index.html") |> respond'
+  let location = Cohttp.Header.init_with "Location" "/index.html" in
+  respond' ~headers:location ~code:`Found (`String "")
 end
 
 let my_state = init_state
 
 let () = App.empty
+         |> middleware (Middleware.static ~local_path:"./my-react-app/src" ~uri_prefix:"/")
+         |> middleware (Middleware.static ~local_path:"./my-react-app/build" ~uri_prefix:"../build/Index.js")
          |> listen my_state
          |> front my_state
          |> blah
