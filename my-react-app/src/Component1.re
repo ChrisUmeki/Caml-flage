@@ -18,7 +18,7 @@ let handleClick = (_event, _self) => Js.log("clicked!");
 let make = (~message, _children) => {
   ...component,
   render: self =>
-    <div onClick=(self.handle(handleClick))>
+    <div style = (ReactDOMRe.Style.make(~color = "#3a9cff", ~fontSize = "68px", ~textAlign =  "center", () )) onClick=(self.handle(handleClick))>
       (ReasonReact.stringToElement(message))
     </div>,
 };

@@ -25,6 +25,11 @@ function make(message, _) {
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
               return React.createElement("div", {
+                          style: {
+                            color: "#3a9cff",
+                            fontSize: "68px",
+                            textAlign: "center"
+                          },
                           onClick: Curry._1(self[/* handle */0], handleClick)
                         }, message);
             }),

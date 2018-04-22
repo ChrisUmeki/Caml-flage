@@ -22,15 +22,37 @@ function make(greeting, _) {
           /* render */(function (self) {
               var message3 = String(self[/* state */2][/* count */0]);
               var match = self[/* state */2][/* show */1];
-              return React.createElement("div", undefined, React.createElement("button", {
-                              onClick: (function () {
-                                  return Curry._1(self[/* send */4], /* Upvote */0);
-                                })
-                            }, "Upvote"), React.createElement("button", {
-                              onClick: (function () {
-                                  return Curry._1(self[/* send */4], /* Downvote */1);
-                                })
-                            }, "Downvote"), React.createElement("div", undefined, "number of camels: " + message3), match ? greeting : null);
+              return React.createElement("div", {
+                          style: {
+                            fontSize: "25px",
+                            textAlign: "center"
+                          }
+                        }, React.createElement("div", {
+                              style: {
+                                borderColor: "black",
+                                borderStyle: "solid",
+                                textAlign: "center"
+                              }
+                            }, greeting, React.createElement("button", {
+                                  style: {
+                                    backgroundColor: "A52A2A",
+                                    fontSize: "25px",
+                                    marginTop: "100px",
+                                    textAlign: "center"
+                                  },
+                                  onClick: (function () {
+                                      return Curry._1(self[/* send */4], /* Upvote */0);
+                                    })
+                                }, "Upvote"), React.createElement("button", {
+                                  style: {
+                                    backgroundColor: "A52A2A",
+                                    fontSize: "25px",
+                                    textAlign: "center"
+                                  },
+                                  onClick: (function () {
+                                      return Curry._1(self[/* send */4], /* Downvote */1);
+                                    })
+                                }, "Downvote"), React.createElement("div", undefined, "number of camels: " + message3)), match ? greeting : null);
             }),
           /* initialState */(function () {
               return /* record */[
