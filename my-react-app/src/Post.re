@@ -36,16 +36,16 @@ type state = {
       let message2 = "Downvote";
       let message3 = string_of_int(self.state.count);
       <div>
-        <div style =  (ReactDOMRe.Style.make( ~borderStyle = "solid", ~borderColor = "black", ~textAlign =  "center", () ))>
-          <div style = (ReactDOMRe.Style.make( ~fontSize = "25px", ~textAlign =  "center", ~margin = "50px", () ))>
+        <div id = "one">
+          <div id = "gr">
             (ReasonReact.stringToElement(greeting))
           </div>
   
-          <button id = "up" onClick=(_event => self.send(Upvote))>
+          <button className = "up" onClick=(_event => self.send(Upvote))>
             (ReasonReact.stringToElement(message))
           </button>
   
-          <button className = "down" style = (ReactDOMRe.Style.make(~backgroundColor = "A52A2A", ~fontSize = "25px", ~textAlign =  "center", () )) onClick=(_event => self.send(Downvote))>
+          <button className = "down" onClick=(_event => self.send(Downvote))>
             (ReasonReact.stringToElement(message2))
           </button>
   

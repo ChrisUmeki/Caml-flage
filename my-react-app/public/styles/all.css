@@ -8,24 +8,55 @@
     text-decoration: coral;
     background-color: aqua;
 } */
-.navbar {
-    padding: 12 px 12 px;
-    background-color: black;
-    
-}
 
-#b1 {
-    font-size: 100px;
-    text-decoration: coral;
-    background-color: aqua;
+.up {
+    font-size: 18px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: rgba(255, 196, 0, 0.37);
 }
 
 .down {
-    font: white;
-    background-color: aqua;
+    font-size: 18px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: rgba(255, 196, 0, 0.37);
 }
 
-
-.hey {
-    background-color: black;
+#navbar {
+    overflow: hidden;
+    display: inline;
+    background-color: white;
 }
+
+li {
+    display:inline;
+    background-color: gray;
+    font-size: 25px;
+  }
+  
+  li a{
+    color: white;
+    padding: 12px 70px;
+    text-decoration: none;
+    
+  }
+  
+  li a:hover{ 
+    color: rgba(255, 196, 0, 0.37);
+  }
+
+#one {
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+}
+
+#gr {
+font-size: 25px;
+text-align: center;
+margin: 50px;
+}
+
+#index2 {
+    margin-top: 12px;
+}
+

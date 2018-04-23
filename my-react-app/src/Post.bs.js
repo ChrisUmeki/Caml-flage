@@ -22,29 +22,16 @@ function make(greeting, _) {
           /* render */(function (self) {
               var message3 = String(self[/* state */2][/* count */0]);
               return React.createElement("div", undefined, React.createElement("div", {
-                              style: {
-                                borderColor: "black",
-                                borderStyle: "solid",
-                                textAlign: "center"
-                              }
+                              id: "one"
                             }, React.createElement("div", {
-                                  style: {
-                                    fontSize: "25px",
-                                    margin: "50px",
-                                    textAlign: "center"
-                                  }
+                                  id: "gr"
                                 }, greeting), React.createElement("button", {
-                                  id: "up",
+                                  className: "up",
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Upvote */0);
                                     })
                                 }, "Upvote"), React.createElement("button", {
                                   className: "down",
-                                  style: {
-                                    backgroundColor: "A52A2A",
-                                    fontSize: "25px",
-                                    textAlign: "center"
-                                  },
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Downvote */1);
                                     })
