@@ -10,6 +10,6 @@ ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, C
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Component2$ReactTemplate.make("HELLOOOO", /* array */[])), "index2");
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Component2$ReactTemplate.make("camels", /* array */[])), "index3");
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Component2$ReactTemplate.make("camels are the coolest", /* array */[])), "index3");
 
 /*  Not a pure module */

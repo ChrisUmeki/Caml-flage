@@ -30,13 +30,13 @@ function make(greeting, _) {
                             }, React.createElement("div", {
                                   style: {
                                     fontSize: "25px",
+                                    margin: "50px",
                                     textAlign: "center"
                                   }
                                 }, greeting), React.createElement("button", {
                                   style: {
                                     backgroundColor: "A52A2A",
                                     fontSize: "25px",
-                                    marginTop: "100px",
                                     textAlign: "center"
                                   },
                                   onClick: (function () {
