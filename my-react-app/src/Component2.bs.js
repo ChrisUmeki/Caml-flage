@@ -21,19 +21,18 @@ function make(greeting, _) {
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
               var message3 = String(self[/* state */2][/* count */0]);
-              var match = self[/* state */2][/* show */1];
-              return React.createElement("div", {
-                          style: {
-                            fontSize: "25px",
-                            textAlign: "center"
-                          }
-                        }, React.createElement("div", {
+              return React.createElement("div", undefined, React.createElement("div", {
                               style: {
                                 borderColor: "black",
                                 borderStyle: "solid",
                                 textAlign: "center"
                               }
-                            }, greeting, React.createElement("button", {
+                            }, React.createElement("div", {
+                                  style: {
+                                    fontSize: "25px",
+                                    textAlign: "center"
+                                  }
+                                }, greeting), React.createElement("button", {
                                   style: {
                                     backgroundColor: "A52A2A",
                                     fontSize: "25px",
@@ -52,7 +51,7 @@ function make(greeting, _) {
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Downvote */1);
                                     })
-                                }, "Downvote"), React.createElement("div", undefined, "number of camels: " + message3)), match ? greeting : null);
+                                }, "Downvote"), React.createElement("div", undefined, "number of camels: " + message3)));
             }),
           /* initialState */(function () {
               return /* record */[

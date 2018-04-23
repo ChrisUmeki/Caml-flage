@@ -32,23 +32,26 @@ let make = (~greeting, _children) => {
     let message ="Upvote";
     let message2 = "Downvote";
     let message3 = string_of_int(self.state.count);
-    <div style = (ReactDOMRe.Style.make( ~fontSize = "25px", ~textAlign =  "center", () )) >
-    <div style =  (ReactDOMRe.Style.make( ~borderStyle = "solid", ~borderColor = "black", ~textAlign =  "center", () ))>
-     (ReasonReact.stringToElement(greeting))
-      <button style = (ReactDOMRe.Style.make(~marginTop = "100px", ~backgroundColor = "A52A2A", ~fontSize = "25px", ~textAlign =  "center", () )) onClick=(_event => self.send(Upvote))>
-        (ReasonReact.stringToElement(message))
-      </button>
-      <button style = (ReactDOMRe.Style.make(~backgroundColor = "A52A2A", ~fontSize = "25px", ~textAlign =  "center", () )) onClick=(_event => self.send(Downvote))>
-        (ReasonReact.stringToElement(message2))
-      </button>
-      <div>
-        (ReasonReact.stringToElement("number of camels: " ++ message3))
+    <div>
+
+      <div style =  (ReactDOMRe.Style.make( ~borderStyle = "solid", ~borderColor = "black", ~textAlign =  "center", () ))>
+        <div style = (ReactDOMRe.Style.make( ~fontSize = "25px", ~textAlign =  "center", () ))>
+          (ReasonReact.stringToElement(greeting))
+        </div>
+        
+        <button style = (ReactDOMRe.Style.make(~marginTop = "100px", ~backgroundColor = "A52A2A", ~fontSize = "25px", ~textAlign =  "center", () )) onClick=(_event => self.send(Upvote))>
+          (ReasonReact.stringToElement(message))
+        </button>
+
+        <button style = (ReactDOMRe.Style.make(~backgroundColor = "A52A2A", ~fontSize = "25px", ~textAlign =  "center", () )) onClick=(_event => self.send(Downvote))>
+          (ReasonReact.stringToElement(message2))
+        </button>
+
+        <div>
+          (ReasonReact.stringToElement("number of camels: " ++ message3))
+        </div>
+
       </div>
-      </div>
-      (
-        self.state.show ?
-          ReasonReact.stringToElement(greeting) : ReasonReact.nullElement
-      )
     </div>;
   },
 };
