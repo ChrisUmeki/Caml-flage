@@ -1,5 +1,6 @@
 /* import React from 'react';
 import "./all.css"; */
+open Js.Promise;
 
 /* State declaration */
 type state = {
@@ -27,7 +28,13 @@ type state = {
     /* State transitions */
     reducer: (action, state) =>
       switch (action) {
-      | Upvote => ReasonReact.Update({...state, count: state.count + 1})
+      | Upvote => 
+        Js.Promise.(
+        Axios.post("/")
+        |> then_((response) => resolve(Js.log(response##data)))
+        |> catch((error) => resolve(Js.log(error)))
+      );
+      ReasonReact.Update({...state, count: state.count + 1});
       | Downvote => ReasonReact.Update({...state, count: state.count - 1})
       },
   
