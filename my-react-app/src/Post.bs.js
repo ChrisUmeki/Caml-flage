@@ -34,15 +34,12 @@ function make(greeting, _) {
                                     textAlign: "center"
                                   }
                                 }, greeting), React.createElement("button", {
-                                  style: {
-                                    backgroundColor: "A52A2A",
-                                    fontSize: "25px",
-                                    textAlign: "center"
-                                  },
+                                  id: "up",
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Upvote */0);
                                     })
                                 }, "Upvote"), React.createElement("button", {
+                                  className: "down",
                                   style: {
                                     backgroundColor: "A52A2A",
                                     fontSize: "25px",
