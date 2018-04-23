@@ -10,5 +10,16 @@ module.exports = {
     path: outputDir,
     publicPath: outputDir,
     filename: 'Index.js',
-  },
+  }
 };
+
+
+// ,
+//   module: {
+//     rules: [
+//         {
+//             test: /\.css$/,
+//             use: [ 'style-loader', 'css-loader' ]
+//         }
+//     ]
+// }

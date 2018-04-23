@@ -3,14 +3,20 @@
     font-size: 16px;
 }
 
+/* #index2 {
+    font-size: 100px;
+    text-decoration: coral;
+    background-color: aqua;
+} */
 .navbar {
     padding: 12 px 12 px;
     background-color: black;
     
 }
 
-.up {
-    font: white;
+#b1 {
+    font-size: 100px;
+    text-decoration: coral;
     background-color: aqua;
 }
 
@@ -19,3 +25,7 @@
     background-color: aqua;
 }
 
+
+.hey {
+    background-color: black;
+}
