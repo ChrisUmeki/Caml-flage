@@ -34,11 +34,11 @@ let make = (~greeting, _children) => {
     let message3 = string_of_int(self.state.count);
     <div>
       <div style =  (ReactDOMRe.Style.make( ~borderStyle = "solid", ~borderColor = "black", ~textAlign =  "center", () ))>
-        <div style = (ReactDOMRe.Style.make( ~fontSize = "25px", ~textAlign =  "center", ~margin = "50px", () ))>
+        <div style = (ReactDOMRe.Style.make( ~fontSize = "25px", ~textAlign =  "center", ~margin = "50px", () )) class = "up">
           (ReasonReact.stringToElement(greeting))
         </div>
         
-        <button style = (ReactDOMRe.Style.make(~backgroundColor = "A52A2A", ~fontSize = "25px", ~textAlign =  "center", () )) onClick=(_event => self.send(Upvote))>
+        <button style = (ReactDOMRe.Style.make(~backgroundColor = "A52A2A", ~fontSize = "25px", ~textAlign =  "center", () )) class = "down" onClick=(_event => self.send(Upvote))>
           (ReasonReact.stringToElement(message))
         </button>
 
