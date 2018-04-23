@@ -31,6 +31,7 @@ let () = App.empty
          |> middleware (Middleware.static ~local_path:"./my-react-app/public" ~uri_prefix:"/public")
          |> middleware (Middleware.static ~local_path:"./my-react-app/build" ~uri_prefix:"/build")
          |> listen my_state
+         |> vote
          |> index
          |> App.run_command
          |> ignore
