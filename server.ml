@@ -6,8 +6,8 @@ let listen st = get "/:id/:text" begin fun req ->
     `String ( param req "id" )|> respond'
 end
 
-let front st = get "/" begin fun req ->
-    `String ("Front page! Our state is: " ^
+let front st = get "/state" begin fun req ->
+    `String ("State page! Our state is: " ^
              (get_curr_state st)) |> respond'
 end
 
@@ -20,8 +20,8 @@ let index = get "/" begin fun req ->
   respond' ~headers:location ~code:`Found (`String "")
 end
 
-let vote = post "/" begin fun req ->
-  print_string "post request";
+let vote st = post "/" begin fun req ->
+  update_curr_state st "upvoted";
   `String ("blah") |> respond'
 end
 
@@ -31,7 +31,8 @@ let () = App.empty
          |> middleware (Middleware.static ~local_path:"./my-react-app/public" ~uri_prefix:"/public")
          |> middleware (Middleware.static ~local_path:"./my-react-app/build" ~uri_prefix:"/build")
          |> listen my_state
-         |> vote
+         |> front my_state
+         |> vote my_state
          |> index
          |> App.run_command
          |> ignore
