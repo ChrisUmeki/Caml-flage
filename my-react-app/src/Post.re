@@ -30,9 +30,10 @@ type state = {
       switch (action) {
       | Upvote => 
         Js.Promise.(
-        Axios.post("/")
+        Axios.postData("/vote", {{"direction": "up"}})
         |> then_((response) => resolve(Js.log(response##data)))
         |> catch((error) => resolve(Js.log(error)))
+        |> ignore
       );
       ReasonReact.Update({...state, count: state.count + 1});
       | Downvote => ReasonReact.Update({...state, count: state.count - 1})

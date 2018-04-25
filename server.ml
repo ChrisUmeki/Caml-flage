@@ -20,9 +20,16 @@ let index = get "/" begin fun req ->
   respond' ~headers:location ~code:`Found (`String "")
 end
 
-let vote st = post "/" begin fun req ->
-  update_curr_state st "upvoted";
-  `String ("blah") |> respond'
+let vote st = post "/vote" begin fun req ->
+  App.string_of_body_exn req
+  |> Lwt.poll
+  |> (fun b -> match b with
+      | Some s -> s
+      | None -> "None string"
+      )
+  |> update_curr_state st;
+  `String "Blah" |> respond'
+  
 end
 
 let my_state = init_state

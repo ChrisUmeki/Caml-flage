@@ -52,7 +52,9 @@ function make(greeting, _) {
                             /* show */state[/* show */1]
                           ]]);
               } else {
-                Axios.post("/").then((function (response) {
+                Axios.post("/vote", {
+                          direction: "up"
+                        }).then((function (response) {
                           return Promise.resolve((console.log(response.data), /* () */0));
                         })).catch((function (error) {
                         return Promise.resolve((console.log(error), /* () */0));
