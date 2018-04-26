@@ -3,13 +3,11 @@
 
 var ReactDOMRe = require("reason-react/src/ReactDOMRe.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var Post$ReactTemplate = require("./Post.bs.js");
 var Title$ReactTemplate = require("./Title.bs.js");
+var AllPosts$ReactTemplate = require("./AllPosts.bs.js");
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Title$ReactTemplate.make("Welcome to Caml-flage", /* array */[])), "index1");
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Post$ReactTemplate.make("HELLOOOO", /* array */[])), "index2");
-
-ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Post$ReactTemplate.make("camels are the coolest", /* array */[])), "index3");
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(/* array */[])), "posts");
 
 /*  Not a pure module */
