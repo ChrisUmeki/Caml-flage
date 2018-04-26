@@ -21,15 +21,11 @@ let index = get "/" begin fun req ->
 end
 
 let vote st = post "/vote" begin fun req ->
-  App.string_of_body_exn req
-  |> Lwt.poll
-  |> (fun b -> match b with
-      | Some s -> s
-      | None -> "None string"
-      )
-  |> update_curr_state st;
+  let s = App.string_of_body_exn req in
+  let f = fun x -> update_curr_state st x |> Lwt.return in
+  Lwt.bind s f |> ignore;
   `String "Blah" |> respond'
-  
+
 end
 
 let my_state = init_state
