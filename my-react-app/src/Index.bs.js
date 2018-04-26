@@ -6,7 +6,7 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Title$ReactTemplate = require("./Title.bs.js");
 var AllPosts$ReactTemplate = require("./AllPosts.bs.js");
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Title$ReactTemplate.make("Welcome to Caml-flage", /* array */[])), "index1");
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Title$ReactTemplate.make("Welcome to Caml-flage", /* array */[])), "title");
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(/* array */[])), "posts");
 

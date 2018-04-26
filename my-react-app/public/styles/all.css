@@ -1,4 +1,4 @@
-#index1 {
+#title {
     background-color: brown;
     font-size: 16px;
 }
@@ -56,7 +56,7 @@ text-align: center;
 margin: 50px;
 }
 
-#index2 {
+#posts {
     margin-top: 12px;
 }
 

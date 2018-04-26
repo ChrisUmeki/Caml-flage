@@ -21,7 +21,7 @@ function make(greeting, _) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
-              var message3 = String(self[/* state */2][/* count */0]);
+              var count = String(self[/* state */2][/* count */0]);
               return React.createElement("div", undefined, React.createElement("div", {
                               id: "one"
                             }, React.createElement("div", {
@@ -36,7 +36,7 @@ function make(greeting, _) {
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Downvote */1);
                                     })
-                                }, "Downvote"), React.createElement("div", undefined, "number of camels: " + message3)));
+                                }, "Downvote"), React.createElement("div", undefined, "number of camels: " + count)));
             }),
           /* initialState */(function () {
               return /* record */[
