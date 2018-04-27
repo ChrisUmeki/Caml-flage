@@ -2,18 +2,20 @@ open Entry
 open User
 open Tag
 
-type server_state
+type t
 
-val init_state : server_state
+val init_state : t
 
-val get_curr_state : server_state -> string
+val state_of_json : string -> t
 
-val update_curr_state : server_state -> string -> unit
+val get_curr_state : t -> string
 
-val update_users : server_state -> User.t -> unit
+val update_curr_state : t -> string -> unit
 
-val update_posts : server_state -> Post.t -> unit
+val update_users : t -> User.t -> unit
 
-val update_tags : server_state -> Tag.t -> unit
+val update_posts : t -> Post.t -> unit
 
-val upcamel : server_state -> Post.t -> unit
+val update_tags : t -> Tag.t -> unit
+
+val upcamel : t -> Post.t -> unit

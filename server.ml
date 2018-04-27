@@ -26,7 +26,7 @@ let vote st = post "/vote" begin fun req ->
   `String "Vote received" |> respond'
 end
 
-let my_state = init_state
+let my_state = state_of_json "ServerState.json"
 
 let () = App.empty
          |> middleware (Middleware.static ~local_path:"./my-react-app/public" ~uri_prefix:"/public")

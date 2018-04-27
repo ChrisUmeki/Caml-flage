@@ -2,7 +2,7 @@ open Entry
 open User
 open Tag
 
-type server_state = {
+type t = {
   mutable curr_state : string;
   mutable users : User.t list;
   mutable posts : Post.t list;
