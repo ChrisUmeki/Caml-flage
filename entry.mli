@@ -29,6 +29,8 @@ module type Entry = sig
 
   val get_id : t -> int
 
+  val to_json_f : t -> Ezjsonm.t
+
 end
 
 module Comment : Entry
