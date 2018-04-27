@@ -10,6 +10,7 @@ module type Entry = sig
   val get_score : t -> int
   val get_id : t -> int
   val to_json_f : t -> (string * Ezjsonm.value) list
+  val posts_of_json : Ezjsonm.value -> t list
 end
 
 module Comment : Entry = struct
@@ -56,6 +57,9 @@ module Comment : Entry = struct
   let to_json_f a = 
     failwith "Not used"
 
+  let posts_of_json j =
+    failwith "Not used"
+
 end
 
 module Post : Entry = struct
@@ -96,11 +100,28 @@ module Post : Entry = struct
   let get_score a =
     a.score
 
+  let post_from_val o =
+    {
+      id = Ezjsonm.find o ["post_id"] |> Ezjsonm.get_int;
+      score = Ezjsonm.find o ["score"] |> Ezjsonm.get_int;
+      title = Ezjsonm.find o ["title"] |> Ezjsonm.get_string;
+      text = "";
+      has_url = false;
+      url = None;
+      user = "";
+      children = [];
+      tag = "";
+  }
+  
+  let posts_of_json j = match j with
+  | `A j' -> List.map (fun o -> post_from_val o) j'
+  | _ -> raise (Failure "bad json")
+
   let to_json_f a = 
     [("id",Ezjsonm.int a.id); 
                   ("title", `String a.title); 
                   ("text", `String a.text); 
-                  ("score", `Float (float_of_int a.score));
+                  ("`score`", `Float (float_of_int a.score));
                   ("num_comments", `Float (float_of_int (List.length a.children)));
                   ("tag", `String a.tag);]
 

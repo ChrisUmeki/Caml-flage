@@ -31,6 +31,8 @@ module type Entry = sig
 
   val to_json_f : t -> (string * Ezjsonm.value) list
 
+  val posts_of_json : Ezjsonm.value -> t list
+
 end
 
 module Comment : Entry

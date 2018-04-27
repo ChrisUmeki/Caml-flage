@@ -18,6 +18,16 @@ let init_state = {
   tags = [];
 }
 
+let state_of_json filename = 
+  let j = Ezjsonm.from_channel (open_in filename) in
+    {
+    curr_state = "";
+    users = [];
+    posts = Ezjsonm.find j ["posts"] |> Post.posts_of_json;
+    comments = [];
+    tags = [];
+  }
+
 let get_curr_state t =
   t.curr_state
 
@@ -45,4 +55,4 @@ let upcamel t e =
 
 let get_front_posts s =
   let l = s.posts in
-  Ezjsonm.value (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Entry.Post.to_json_f p)))::j) [] l))
+  Ezjsonm.value (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json_f p)))::j) [] l))
