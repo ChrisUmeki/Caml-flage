@@ -18,11 +18,11 @@ let component = ReasonReact.reducerComponent("Example");
 
 /* message and children are props. `children` isn't used, therefore ignored.
     We ignore it by prepending it with an underscore */
-let make = (~message, _children) => {
+let make = (~message, ~score, _children) => {
   /* spread the other default fields of component here and override a few */
   ...component,
 
-  initialState: () => {count: 0},
+  initialState: () => {count: score},
 
   /* State transitions */
   reducer: (action, state) =>

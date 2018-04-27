@@ -9,7 +9,7 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 
 var component = ReasonReact.reducerComponent("Example");
 
-function make(message, _) {
+function make(message, score, _) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -39,7 +39,7 @@ function make(message, _) {
                                 }, "Downvote"), React.createElement("div", undefined, "number of camels: " + count)));
             }),
           /* initialState */(function () {
-              return /* record */[/* count */0];
+              return /* record */[/* count */score];
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, state) {
