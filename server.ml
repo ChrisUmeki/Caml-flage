@@ -20,9 +20,9 @@ let index = get "/" begin fun req ->
 end
 
 let vote st = post "/vote" begin fun req ->
-  let s = App.string_of_body_exn req in
-  let f = fun x -> update_curr_state st x |> Lwt.return in
-  Lwt.bind s f |> ignore;
+  let j = App.json_of_body_exn req in
+  let f = fun x -> new_vote st x |> Lwt.return in
+  Lwt.bind j f |> ignore;
   `String "Vote received" |> respond'
 end
 

@@ -18,6 +18,14 @@ let init_state = {
   tags = [];
 }
 
+let new_vote st j = 
+  let j' = Ezjsonm.value j in
+  let i = Ezjsonm.find j' ["post_id"] |> Ezjsonm.get_int in
+  match Ezjsonm.find j' ["direction"] with
+  | `String "up" -> List.find (fun x -> Post.get_id x = i) st.posts |> Post.up_camel
+  | `String "down" -> List.find (fun x -> Post.get_id x = i) st.posts |> Post.down_camel
+  | _ -> ()
+
 let state_of_json filename = 
   let j = Ezjsonm.from_channel (open_in filename) in
     {

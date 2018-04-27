@@ -12,6 +12,8 @@ val get_curr_state : t -> string
 
 val update_curr_state : t -> string -> unit
 
+val new_vote : t -> Ezjsonm.t -> unit
+
 val update_users : t -> User.t -> unit
 
 val update_posts : t -> Post.t -> unit

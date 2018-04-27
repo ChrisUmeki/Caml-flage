@@ -41,7 +41,7 @@ let make = (_children) => {
       switch (self.state.postsData) {
       | Some(postdata) => ReasonReact.arrayToElement(
           Array.map(
-            (frontposts: PostsData.frontposts) => <Post message=frontposts.text score=frontposts.score />,
+            (frontposts: PostsData.frontposts) => <Post message=frontposts.text score=frontposts.score post_id=frontposts.post_id/>,
             postdata
           )
         )

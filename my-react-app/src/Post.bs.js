@@ -9,7 +9,7 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 
 var component = ReasonReact.reducerComponent("Post");
 
-function make(message, score, _) {
+function make(message, score, post_id, _) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -47,6 +47,7 @@ function make(message, score, _) {
                 Axios.post("/vote", {
                           direction: "down",
                           user_id: 0,
+                          post_id: post_id,
                           entry_type: "post"
                         }).then((function (response) {
                           return Promise.resolve((console.log(response.data), /* () */0));
@@ -58,6 +59,7 @@ function make(message, score, _) {
                 Axios.post("/vote", {
                           direction: "up",
                           user_id: 0,
+                          post_id: post_id,
                           entry_type: "post"
                         }).then((function (response) {
                           return Promise.resolve((console.log(response.data), /* () */0));
