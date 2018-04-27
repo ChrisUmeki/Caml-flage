@@ -58,6 +58,7 @@ function make(initialText, _) {
           /* reducer */(function (action) {
               if (action.tag) {
                 var newText = action[0];
+                console.log(newText);
                 return (function (state) {
                     return /* Update */Block.__(0, [/* record */[
                                 /* text */newText,
@@ -66,6 +67,7 @@ function make(initialText, _) {
                   });
               } else {
                 var newText$1 = action[0];
+                console.log(newText$1);
                 return (function (state) {
                     return /* Update */Block.__(0, [/* record */[
                                 /* text */newText$1,

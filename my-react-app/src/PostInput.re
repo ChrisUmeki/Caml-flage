@@ -29,11 +29,11 @@ let make = (~initialText, _) => {
   }, */
   reducer: (action) => 
     switch (action){
-    | Submit(newText) => (
-        state => 
+    | Submit(newText) => Js.log(newText);(
+        state =>
         ReasonReact.Update ({...state, text:newText})
         )
-    | Change(newText) => (
+    | Change(newText) => Js.log(newText);(
          state => 
         ReasonReact.Update ({...state, text:newText})
       )
