@@ -7,7 +7,7 @@ var Axios = require("axios");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 
-var component = ReasonReact.reducerComponent("Example");
+var component = ReasonReact.reducerComponent("Post");
 
 function make(message, score, _) {
   return /* record */[

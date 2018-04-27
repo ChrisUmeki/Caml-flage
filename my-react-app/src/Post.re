@@ -14,7 +14,7 @@ type action =
   
 /* Component template declaration.
     Needs to be **after** state and action declarations! */
-let component = ReasonReact.reducerComponent("Example");
+let component = ReasonReact.reducerComponent("Post");
 
 /* message and children are props. `children` isn't used, therefore ignored.
     We ignore it by prepending it with an underscore */
