@@ -17,7 +17,7 @@ let parseFrontPostsJson = (json : Js.Json.t) : frontposts =>
 let parseFrontPostsResponseJson = json =>
 Json.Decode.field("posts", Json.Decode.array(parseFrontPostsJson), json);
 
-let postsUrl = "/public/SampleFrontPosts.json";
+let postsUrl = "/state.json";
 
 let fetchPosts = () =>
   Js.Promise.(

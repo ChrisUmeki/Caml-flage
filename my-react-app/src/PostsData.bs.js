@@ -18,7 +18,7 @@ function parseFrontPostsResponseJson(json) {
               }), json);
 }
 
-var postsUrl = "/public/SampleFrontPosts.json";
+var postsUrl = "/state.json";
 
 function fetchPosts() {
   return fetch(postsUrl).then((function (prim) {

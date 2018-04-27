@@ -118,11 +118,9 @@ module Post : Entry = struct
   | _ -> raise (Failure "bad json")
 
   let to_json_f a = 
-    [("id",Ezjsonm.int a.id); 
-                  ("title", `String a.title); 
-                  ("text", `String a.text); 
-                  ("`score`", `Float (float_of_int a.score));
-                  ("num_comments", `Float (float_of_int (List.length a.children)));
-                  ("tag", `String a.tag);]
+    [("post_id",Ezjsonm.int a.id);
+    ("text", `String a.text); 
+    ("score", `Float (float_of_int a.score));
+    ("num_comments", `Float (float_of_int (List.length a.children)));]
 
 end

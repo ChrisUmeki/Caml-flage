@@ -55,4 +55,4 @@ let upcamel t e =
 
 let get_front_posts s =
   let l = s.posts in
-  Ezjsonm.value (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json_f p)))::j) [] l))
+  `O [("posts", (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json_f p)))::j) [] l)))]

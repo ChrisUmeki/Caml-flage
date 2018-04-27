@@ -6,8 +6,8 @@ let listen st = get "/:id/:text" begin fun req ->
   `String ( param req "id" )|> respond'
 end
 
-let front st = get "/state" begin fun req ->
-  `String (Ezjsonm.to_string ~minify:false (Ezjsonm.wrap (get_front_posts st))) |> respond'
+let state st = get "/state.json" begin fun req ->
+  `Json (get_front_posts st) |> respond'
 end
 
 let not_found = get "/*" begin fun req ->
@@ -32,7 +32,7 @@ let () = App.empty
          |> middleware (Middleware.static ~local_path:"./my-react-app/public" ~uri_prefix:"/public")
          |> middleware (Middleware.static ~local_path:"./my-react-app/build" ~uri_prefix:"/build")
          |> listen my_state
-         |> front my_state
+         |> state my_state
          |> vote my_state
          |> index
          |> App.run_command
