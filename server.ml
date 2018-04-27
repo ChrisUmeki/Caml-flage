@@ -7,7 +7,7 @@ let listen st = get "/:id/:text" begin fun req ->
 end
 
 let front st = get "/state" begin fun req ->
-  `String ("State page! Our state is: " ^ (get_curr_state st)) |> respond'
+  `String (Ezjsonm.to_string ~minify:false (Ezjsonm.wrap (get_front_posts st))) |> respond'
 end
 
 let not_found = get "/*" begin fun req ->

@@ -19,3 +19,5 @@ val update_posts : t -> Post.t -> unit
 val update_tags : t -> Tag.t -> unit
 
 val upcamel : t -> Post.t -> unit
+
+val get_front_posts : t -> Ezjsonm.value
