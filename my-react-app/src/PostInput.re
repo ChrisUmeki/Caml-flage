@@ -1,9 +1,11 @@
-type state = {
+/* type state = {
   text:string, 
   inputElement: ref (option(Dom.element))
 };
 
-  
+type action = 
+  | Submit; 
+
  let valueFromEvent = (evt) : string => (
   evt
   |> ReactEventRe.Form.target
@@ -15,21 +17,28 @@ let component = ReasonReact.reducerComponent("EditField");
 let setInputElement = (theRef, {ReasonReact.state}) => 
 state.inputElement := Js.toOption(theRef);
  
-let make = (~initialText, ~onSubmit, _) => {
+let make = (~initialText, _) => {
   ...component,
   initialState: () => {text:initialText, inputElement: ref(None)}, 
-  reducer: (newText, state) => ReasonReact.Update ({...state, text: newText}),
+
+  reducer: (newText, state) => 
+  switch (action){
+   | Submit => ReasonReact.Update ({...state, text: newText})
+  },
+
   render: ({state: {text}, reduce, handle}) =>
+  <form>
     <input
       value=text
       _type="text"
       ref=(handle(setInputElement))
-      placeholder="Todo description"
+      placeholder="Write a message"
       onChange=(reduce((evt) => valueFromEvent(evt)))
       onKeyDown=(
         (evt) =>
           if (ReactEventRe.Keyboard.key(evt) == "Enter") {
-            onSubmit(text);
+            /* onSubmit(text); */
+            onSubmit = (_event => self.send(Submit));
             (reduce(() => ""))()
           } else if (ReactEventRe.Keyboard.key(evt) == "Escape") {
             onSubmit(initialText);
@@ -37,27 +46,6 @@ let make = (~initialText, ~onSubmit, _) => {
           }
       )
     />
-};
-
-/*
-module Input = {
-  type state = string;
-  let component = ReasonReact.reducerComponent("Input");
-  let make = (~onSubmit, _) => {
-    ...component,
-    initialState: () => "",
-    reducer: (newText, _text) => ReasonReact.Update(newText),
-    render: ({state: text, reduce}) =>
-      <input
-        value=text
-        _type="text"
-        placeholder="Write something to do"
-        onChange=(reduce((evt) => valueFromEvent(evt)))
-        onKeyDown=((evt) =>
-          if (ReactEventRe.Keyboard.key(evt) == "Enter") {
-            onSubmit(text);
-            (reduce(() => ""))()
-          }
-        )
-      />
-  }; */
+    </form>
+   
+}; */
