@@ -29,7 +29,7 @@ module type Entry = sig
 
   val get_id : t -> int
 
-  val to_json_f : t -> Ezjsonm.t
+  val to_json_f : t -> (string * Ezjsonm.value) list
 
 end
 

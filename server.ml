@@ -2,17 +2,16 @@ open Opium.Std
 open Server_state
 
 let listen st = get "/:id/:text" begin fun req ->
-    update_curr_state st (param req "text");
-    `String ( param req "id" )|> respond'
+  update_curr_state st (param req "text");
+  `String ( param req "id" )|> respond'
 end
 
 let front st = get "/state" begin fun req ->
-    `String ("State page! Our state is: " ^
-             (get_curr_state st)) |> respond'
+  `String ("State page! Our state is: " ^ (get_curr_state st)) |> respond'
 end
 
 let not_found = get "/*" begin fun req ->
-    `String ("Not found") |> respond'
+  `String ("Not found") |> respond'
 end
 
 let index = get "/" begin fun req ->
@@ -24,8 +23,7 @@ let vote st = post "/vote" begin fun req ->
   let s = App.string_of_body_exn req in
   let f = fun x -> update_curr_state st x |> Lwt.return in
   Lwt.bind s f |> ignore;
-  `String "Blah" |> respond'
-
+  `String "Vote received" |> respond'
 end
 
 let my_state = init_state

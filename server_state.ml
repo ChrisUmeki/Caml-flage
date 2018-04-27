@@ -43,5 +43,6 @@ let update_tags t (new_tag : Tag.t) =
 let upcamel t e =
   failwith "unimplemented"
 
-let get_front_posts t = 
-  t.posts 
+let get_front_posts s =
+  let l = s.posts in
+  Ezjsonm.value (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Entry.Post.to_json_f p)))::j) [] l))

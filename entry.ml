@@ -9,7 +9,7 @@ module type Entry = sig
   val down_camel : t -> unit
   val get_score : t -> int
   val get_id : t -> int
-  val to_json_f : t -> Ezjsonm.t
+  val to_json_f : t -> (string * Ezjsonm.value) list
 end
 
 module Comment : Entry = struct
@@ -97,7 +97,7 @@ module Post : Entry = struct
     a.score
 
   let to_json_f a = 
-    Ezjsonm.dict [("id",Ezjsonm.int a.id); 
+    [("id",Ezjsonm.int a.id); 
                   ("title", `String a.title); 
                   ("text", `String a.text); 
                   ("score", `Float (float_of_int a.score));
