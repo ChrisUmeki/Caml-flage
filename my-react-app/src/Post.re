@@ -5,7 +5,6 @@ open Js.Promise;
 /* State declaration */
 type state = {
     count: int,
-    show: bool,
   };
   
 /* Action declaration */
@@ -17,26 +16,34 @@ type action =
     Needs to be **after** state and action declarations! */
 let component = ReasonReact.reducerComponent("Example");
 
-/* greeting and children are props. `children` isn't used, therefore ignored.
+/* message and children are props. `children` isn't used, therefore ignored.
     We ignore it by prepending it with an underscore */
-let make = (~greeting, _children) => {
+let make = (~message, ~score, _children) => {
   /* spread the other default fields of component here and override a few */
   ...component,
 
-  initialState: () => {count: 0, show: true},
+  initialState: () => {count: score},
 
   /* State transitions */
   reducer: (action, state) =>
     switch (action) {
     | Upvote => 
       Js.Promise.(
-      Axios.postData("/vote", {{"direction": "up"}})
+      Axios.postData("/vote", {{"direction": "up", "user_id": 0, "entry_type": "post"}})
       |> then_((response) => resolve(Js.log(response##data)))
       |> catch((error) => resolve(Js.log(error)))
       |> ignore
     );
     ReasonReact.Update({...state, count: state.count + 1});
-    | Downvote => ReasonReact.Update({...state, count: state.count - 1})
+
+    | Downvote => 
+    Js.Promise.(
+      Axios.postData("/vote", {{"direction": "down", "user_id": 0, "entry_type": "post"}})
+      |> then_((response) => resolve(Js.log(response##data)))
+      |> catch((error) => resolve(Js.log(error)))
+      |> ignore
+    );
+    ReasonReact.Update({...state, count: state.count - 1});
     },
 
   render: self => {
@@ -46,7 +53,7 @@ let make = (~greeting, _children) => {
     <div>
       <div id = "one">
         <div id = "gr">
-          (ReasonReact.stringToElement(greeting))
+          (ReasonReact.stringToElement(message))
         </div>
 
         <button className = "up" onClick=(_event => self.send(Upvote))>

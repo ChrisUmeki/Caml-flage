@@ -19,7 +19,9 @@
   "namespace": true,
   "bs-dependencies": [
     "reason-react",
-    "bs-axios"
+    "bs-axios",
+    "bs-fetch",
+    "@glennsl/bs-json"
   ],
   "refmt": 3,
   "warnings": {

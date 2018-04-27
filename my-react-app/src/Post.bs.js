@@ -9,7 +9,7 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 
 var component = ReasonReact.reducerComponent("Example");
 
-function make(greeting, _) {
+function make(message, score, _) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -26,7 +26,7 @@ function make(greeting, _) {
                               id: "one"
                             }, React.createElement("div", {
                                   id: "gr"
-                                }, greeting), React.createElement("button", {
+                                }, message), React.createElement("button", {
                                   className: "up",
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Upvote */0);
@@ -39,30 +39,32 @@ function make(greeting, _) {
                                 }, "Downvote"), React.createElement("div", undefined, "number of camels: " + count)));
             }),
           /* initialState */(function () {
-              return /* record */[
-                      /* count */0,
-                      /* show */true
-                    ];
+              return /* record */[/* count */score];
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, state) {
               if (action) {
-                return /* Update */Block.__(0, [/* record */[
-                            /* count */state[/* count */0] - 1 | 0,
-                            /* show */state[/* show */1]
-                          ]]);
-              } else {
                 Axios.post("/vote", {
-                          direction: "up"
+                          direction: "down",
+                          user_id: 0,
+                          entry_type: "post"
                         }).then((function (response) {
                           return Promise.resolve((console.log(response.data), /* () */0));
                         })).catch((function (error) {
                         return Promise.resolve((console.log(error), /* () */0));
                       }));
-                return /* Update */Block.__(0, [/* record */[
-                            /* count */state[/* count */0] + 1 | 0,
-                            /* show */state[/* show */1]
-                          ]]);
+                return /* Update */Block.__(0, [/* record */[/* count */state[/* count */0] - 1 | 0]]);
+              } else {
+                Axios.post("/vote", {
+                          direction: "up",
+                          user_id: 0,
+                          entry_type: "post"
+                        }).then((function (response) {
+                          return Promise.resolve((console.log(response.data), /* () */0));
+                        })).catch((function (error) {
+                        return Promise.resolve((console.log(error), /* () */0));
+                      }));
+                return /* Update */Block.__(0, [/* record */[/* count */state[/* count */0] + 1 | 0]]);
               }
             }),
           /* subscriptions */component[/* subscriptions */13],
