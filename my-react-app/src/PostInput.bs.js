@@ -3,6 +3,7 @@
 
 var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
+var Axios = require("axios");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 
@@ -57,20 +58,25 @@ function make(initialText, _) {
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action) {
               if (action.tag) {
+                Axios.post("/post", {
+                          title: action[0]
+                        }).then((function (response) {
+                          return Promise.resolve((console.log(response.data), /* () */0));
+                        })).catch((function (error) {
+                        return Promise.resolve((console.log(error), /* () */0));
+                      }));
+                return (function (state) {
+                    return /* Update */Block.__(0, [/* record */[
+                                /* text */"Post made!",
+                                /* inputElement */state[/* inputElement */1]
+                              ]]);
+                  });
+              } else {
                 var newText = action[0];
                 console.log(newText);
                 return (function (state) {
                     return /* Update */Block.__(0, [/* record */[
                                 /* text */newText,
-                                /* inputElement */state[/* inputElement */1]
-                              ]]);
-                  });
-              } else {
-                var newText$1 = action[0];
-                console.log(newText$1);
-                return (function (state) {
-                    return /* Update */Block.__(0, [/* record */[
-                                /* text */newText$1,
                                 /* inputElement */state[/* inputElement */1]
                               ]]);
                   });

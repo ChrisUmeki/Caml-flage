@@ -29,10 +29,16 @@ let make = (~initialText, _) => {
   }, */
   reducer: (action) => 
     switch (action){
-    | Submit(newText) => Js.log(newText);(
-        state =>
-        ReasonReact.Update ({...state, text:newText})
-        )
+    | Submit(newText) => 
+      Js.Promise.(
+        Axios.postData("/post", {{"title": newText}})
+        |> then_((response) => resolve(Js.log(response##data)))
+        |> catch((error) => resolve(Js.log(error)))
+        |> ignore
+      );(
+        state => 
+       ReasonReact.Update ({...state, text:"Post made!"})
+     )
     | Change(newText) => Js.log(newText);(
          state => 
         ReasonReact.Update ({...state, text:newText})

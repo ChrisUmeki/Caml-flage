@@ -34,6 +34,13 @@ let vote st = post "/vote" begin fun req ->
   `String "Vote received" |> respond'
 end
 
+let new_post st = post "/post" begin fun req ->
+  let j = App.json_of_body_exn req in
+  let f = fun x -> update_posts st (Entry.Post.post_from_new (Ezjsonm.value x)) |> Lwt.return in
+  Lwt.bind j f |> ignore;
+  `String "Post made" |> respond'
+end
+
 let my_state = state_of_json "ServerState.json"
 
 let () = App.empty
@@ -42,6 +49,7 @@ let () = App.empty
          |> listen my_state
          |> state my_state
          |> vote my_state
+         |> new_post my_state
          |> index
          |> App.run_command
          |> ignore

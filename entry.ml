@@ -11,6 +11,7 @@ module type Entry = sig
   val get_id : t -> int
   val to_json_f : t -> (string * Ezjsonm.value) list
   val posts_of_json : Ezjsonm.value -> t list
+  val post_from_new : Ezjsonm.value -> t
 end
 
 module Comment : Entry = struct
@@ -60,6 +61,9 @@ module Comment : Entry = struct
   let posts_of_json j =
     failwith "Not used"
 
+  let post_from_new o = 
+    failwith "Not yet"
+
 end
 
 module Post : Entry = struct
@@ -104,6 +108,20 @@ module Post : Entry = struct
     {
       id = Ezjsonm.find o ["post_id"] |> Ezjsonm.get_int;
       score = Ezjsonm.find o ["score"] |> Ezjsonm.get_int;
+      title = Ezjsonm.find o ["title"] |> Ezjsonm.get_string;
+      text = "";
+      has_url = false;
+      url = None;
+      user = "";
+      children = [];
+      tag = "";
+  }
+
+(* TODO: Generate unique IDs *)
+  let post_from_new o =
+    {
+      id = 9;
+      score = 1;
       title = Ezjsonm.find o ["title"] |> Ezjsonm.get_string;
       text = "";
       has_url = false;
