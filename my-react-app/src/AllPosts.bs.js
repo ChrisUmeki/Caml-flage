@@ -34,8 +34,8 @@ function make() {
           /* render */(function (self) {
               var match = self[/* state */2][/* postsData */0];
               var posts = match ? $$Array.map((function (frontposts) {
-                        return ReasonReact.element(/* None */0, /* None */0, Post$ReactTemplate.make(frontposts[/* text */1], frontposts[/* score */2], frontposts[/* post_id */0], /* array */[]));
-                      }), match[0]) : "blah";
+                        return ReasonReact.element(/* None */0, /* None */0, Post$ReactTemplate.make(frontposts[/* title */1], frontposts[/* text */2], frontposts[/* score */3], frontposts[/* post_id */0], /* array */[]));
+                      }), match[0]) : "Loading...";
               return React.createElement("div", {
                           className: "display"
                         }, posts);

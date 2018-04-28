@@ -41,11 +41,12 @@ let make = (_children) => {
       switch (self.state.postsData) {
       | Some(postdata) => ReasonReact.arrayToElement(
           Array.map(
-            (frontposts: PostsData.frontposts) => <Post message=frontposts.text score=frontposts.score post_id=frontposts.post_id/>,
+            (frontposts: PostsData.frontposts) => 
+            <Post title=frontposts.title text=frontposts.text score=frontposts.score post_id=frontposts.post_id/>,
             postdata
           )
         )
-      | None => ReasonReact.stringToElement("blah")
+      | None => ReasonReact.stringToElement("Loading...")
       };
 
       <div className="display">
@@ -53,17 +54,5 @@ let make = (_children) => {
       {posts}
     </div>
   }
-
-
-
-
-
-  /* render: (self) =>
-    <div className="display">
-      <Post message="HELLOOOO" />
-      <Post message="HELLOOOO2" />
-      <Post message="HELLOOOO3" />
-      <Post message="HELLOOOO3" />
-    </div> */
 
 };

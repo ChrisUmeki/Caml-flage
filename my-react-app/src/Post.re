@@ -1,6 +1,3 @@
-/* import React from 'react';
-import "./all.css"; */
-open Js.Promise;
 
 /* State declaration */
 type state = {
@@ -18,7 +15,7 @@ let component = ReasonReact.reducerComponent("Post");
 
 /* message and children are props. `children` isn't used, therefore ignored.
     We ignore it by prepending it with an underscore */
-let make = (~message, ~score, ~post_id, _children) => {
+let make = (~title, ~text, ~score, ~post_id, _children) => {
   /* spread the other default fields of component here and override a few */
   ...component,
 
@@ -53,7 +50,8 @@ let make = (~message, ~score, ~post_id, _children) => {
     <div>
       <div id = "one">
         <div id = "gr">
-          (ReasonReact.stringToElement(message))
+          <h4>(ReasonReact.stringToElement(title))</h4>
+          <p>(ReasonReact.stringToElement(text))</p>
         </div>
 
         <button className = "up" onClick=(_event => self.send(Upvote))>

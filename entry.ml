@@ -137,6 +137,7 @@ module Post : Entry = struct
 
   let to_json_f a = 
     [("post_id",Ezjsonm.int a.id);
+    ("title", `String a.title); 
     ("text", `String a.text); 
     ("score", `Float (float_of_int a.score));
     ("num_comments", `Float (float_of_int (List.length a.children)));]

@@ -9,7 +9,7 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 
 var component = ReasonReact.reducerComponent("Post");
 
-function make(message, score, post_id, _) {
+function make(title, text, score, post_id, _) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -26,7 +26,7 @@ function make(message, score, post_id, _) {
                               id: "one"
                             }, React.createElement("div", {
                                   id: "gr"
-                                }, message), React.createElement("button", {
+                                }, React.createElement("h4", undefined, title), React.createElement("p", undefined, text)), React.createElement("button", {
                                   className: "up",
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Upvote */0);
