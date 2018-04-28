@@ -23,7 +23,7 @@ let not_found = get "/*" begin fun req ->
 end
 
 let index = get "/" begin fun req ->
-  let s = filepath_to_string "my-react-app/public/index.html" in
+  let s = filepath_to_string "my-react-app/index.html" in
   `String s |> respond'
 end
 
