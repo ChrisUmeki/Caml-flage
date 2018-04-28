@@ -1,6 +1,14 @@
 open Opium.Std
 open Server_state
 
+let filepath_to_string f =
+  let ic = open_in f in
+  let n = in_channel_length ic in
+  let s = Bytes.create n in
+  really_input ic s 0 n;
+  close_in ic;
+  Bytes.to_string s
+
 let listen st = get "/:id/:text" begin fun req ->
   update_curr_state st (param req "text");
   `String ( param req "id" )|> respond'
@@ -15,8 +23,8 @@ let not_found = get "/*" begin fun req ->
 end
 
 let index = get "/" begin fun req ->
-  let location = Cohttp.Header.init_with "Location" "/public/index.html" in
-  respond' ~headers:location ~code:`Found (`String "")
+  let s = filepath_to_string "my-react-app/public/index.html" in
+  `String s |> respond'
 end
 
 let vote st = post "/vote" begin fun req ->
