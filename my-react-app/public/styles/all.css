@@ -1,5 +1,5 @@
 #title {
-    background-color: brown;
+    background-color: #bc6a0d;
     font-size: 16px;
 }
 
@@ -31,26 +31,6 @@
     margin-left: 150px;
     margin-right: 150px;
 }
-/* 
-  li {
-      display:inline; 
-      background-color: #bc6a0d;
-      font-size:25px;
-
-  }
-
-  li a {
-      text-decoration: none;
-      color: white;
-      margin-left:150px;
-      margin-right: 150px;
-      padding: 30px 35px;
-      text-align: center;
-      
-
-  } */
-
-  
 
   .dropdown {
         float: left;
@@ -72,7 +52,6 @@
     .dropdown-menu {
         background-color: #bc6a0d;
         display:none;
-        /* position: relative; */
         position: absolute;
         width:250px;
         height: 250px;
@@ -85,13 +64,12 @@
         text-decoration-style: none;
         text-align: center;
         margin: 30px;
-        /* float: right; */
         display:block;
     }
-/* 
+
     .dropdown:hover .dropdown-menu {
         display: block;
-    } */
+    }
 
     #one {
         border-style: solid;
