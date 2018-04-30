@@ -13,7 +13,7 @@ let parseCommentsJson = (json : Js.Json.t) : comment =>
 
 /* comments is name of array */
 let parseCommentsResponseJson = json =>
-Json.Decode.field("comments", Json.Decode.array(parseCommentsJson), json);
+Json.Decode.field("comment_list", Json.Decode.array(parseCommentsJson), json);
 
 let postsUrl = "/state.json";
 

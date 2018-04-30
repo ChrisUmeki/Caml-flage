@@ -8,7 +8,8 @@ type action =
 
 let component = ReasonReact.reducerComponent("AllPosts");
 
-let make = (_children) => {
+
+let make = (~postsUrl, _children) => {
   ...component,
   initialState: () => {
     postsData: None
@@ -19,7 +20,7 @@ let make = (_children) => {
     let handlePostsLoaded = self.reduce(postsData => Loaded(postsData));
     
     /* loading the data */
-    PostsData.fetchPosts()
+    PostsData.fetchPosts(postsUrl)
       |> Js.Promise.then_(postsData => {
           handlePostsLoaded(postsData);
           Js.Promise.resolve();

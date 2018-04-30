@@ -12,7 +12,9 @@ ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, T
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, PostInput$ReactTemplate.make("Create a new post here!", /* array */[])), "input");
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(/* array */[])), "posts");
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make("/state.json", /* array */[])), "posts");
+
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make("/poststate.json", /* array */[])), "post");
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(/* array */[])), "comments");
 

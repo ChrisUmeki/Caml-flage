@@ -19,9 +19,7 @@ function parseFrontPostsResponseJson(json) {
               }), json);
 }
 
-var postsUrl = "/state.json";
-
-function fetchPosts() {
+function fetchPosts(postsUrl) {
   return fetch(postsUrl).then((function (prim) {
                   return prim.text();
                 })).then((function (jsonText) {
@@ -31,6 +29,5 @@ function fetchPosts() {
 
 exports.parseFrontPostsJson = parseFrontPostsJson;
 exports.parseFrontPostsResponseJson = parseFrontPostsResponseJson;
-exports.postsUrl = postsUrl;
 exports.fetchPosts = fetchPosts;
 /* No side effect */

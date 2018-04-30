@@ -11,7 +11,7 @@ var PostsData$ReactTemplate = require("./PostsData.bs.js");
 
 var component = ReasonReact.reducerComponent("AllPosts");
 
-function make() {
+function make(postsUrl, _) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -21,7 +21,7 @@ function make() {
               var handlePostsLoaded = Curry._1(self[/* reduce */1], (function (postsData) {
                       return /* Loaded */[postsData];
                     }));
-              PostsData$ReactTemplate.fetchPosts(/* () */0).then((function (postsData) {
+              PostsData$ReactTemplate.fetchPosts(postsUrl).then((function (postsData) {
                       Curry._1(handlePostsLoaded, postsData);
                       return Promise.resolve(/* () */0);
                     }));
