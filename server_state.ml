@@ -36,12 +36,12 @@ let state_of_json filename =
     tags = [];
   }
 
-let json_of_state filename st = 
+let json_of_state st = 
   let j = `O [("users", `A []); 
   ("posts", (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json p)))::j) [] st.posts)));
   ("comments", `A []);
   ("tags", `A [])] in
-  Ezjsonm.to_channel ~minify:false (open_out filename) j
+  j
 
 let get_curr_state t =
   t.curr_state
