@@ -11,6 +11,7 @@ module type Entry = sig
   val get_id : t -> int
   val posts_of_json : Ezjsonm.value -> t list
   val post_from_new : Ezjsonm.value -> int -> t
+  val to_json_front : t -> (string * Ezjsonm.value) list
   val to_json : t -> (string * Ezjsonm.value) list
 end
 
@@ -60,6 +61,9 @@ module Comment : Entry = struct
 
   let post_from_new o = 
     failwith "Not yet"
+
+  let to_json_front a = 
+    failwith "Not used"
 
   let to_json a = 
     failwith "Not used"
@@ -138,10 +142,22 @@ let posts_of_json j = match j with
 | `A j' -> List.map (fun o -> post_from_val o) j'
 | _ -> raise (Failure "bad json")
 
-let to_json a = 
+(* [to_json_front a] extracts only the data that is needed to display a post
+* on the front page to a json
+*)
+let to_json_front a = 
   [("post_id", Ezjsonm.int a.id);
   ("title", `String a.title); 
   ("text", `String a.text); 
+  ("score", `Float (float_of_int a.score));
+  ("num_comments", `Float (float_of_int (List.length a.children)));]
+
+(* [to_json a] extracts all the data of a post to json
+*)
+let to_json a = 
+  [("post_id", Ezjsonm.int a.id);
+  ("title", `String a.title); 
+  ("text", `String a.text);
   ("score", `Float (float_of_int a.score));
   ("num_comments", `Float (float_of_int (List.length a.children)));]
 

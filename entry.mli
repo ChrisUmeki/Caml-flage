@@ -33,6 +33,8 @@ module type Entry = sig
 
   val post_from_new : Ezjsonm.value -> int -> t
 
+  val to_json_front : t -> (string * Ezjsonm.value) list
+
   val to_json : t -> (string * Ezjsonm.value) list
 
 end
