@@ -65,6 +65,10 @@ let get_front_posts s =
   let l = s.posts in
   `O [("posts", (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json_f p)))::j) [] l)))]
 
-let get_next_id s =
+let get_next_post_id s =
   (List.length s.posts) + 1
+
+let get_next_comment_id s =
+  (List.length s.comments) + 1
+
 

@@ -24,4 +24,6 @@ val upcamel : t -> Post.t -> unit
 
 val get_front_posts : t -> Ezjsonm.t
 
-val get_next_id : t -> int
+val get_next_post_id : t -> int
+
+val get_next_comment_id : t -> int
