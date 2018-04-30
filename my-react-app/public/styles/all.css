@@ -16,13 +16,13 @@
     background-color: #bc6a0d;
 }
 
-  .navbar a {
-    display: inline;
+  .navlink {
+    display: inline-block;
     background-color:  #bc6a0d;
     font-size: 25px;
     text-decoration: none;
     color: white;
-    margin-left: 350px;
+    margin-left: 150px;
     margin-right: 150px;
 }
 
