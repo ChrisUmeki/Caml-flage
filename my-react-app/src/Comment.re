@@ -2,7 +2,6 @@ type state = {
     count: int,
   };
   
-
 type action =
   | Upvote
   | Downvote;
@@ -55,7 +54,7 @@ let make = (~text, ~score, ~comment_id, _children) => {
         <button className = "down" onClick=(_event => self.send(Downvote))>
           (ReasonReact.stringToElement(down))
         </button>
-        
+
         <div>
           (ReasonReact.stringToElement("number of camels: " ++ count))
         </div>

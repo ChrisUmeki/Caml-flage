@@ -44,8 +44,8 @@ let make = (~title, ~text, ~score, ~post_id, _children) => {
     },
 
   render: self => {
-    let up ="Upvote";
-    let down = "Downvote";
+    let up ="UpCaml";
+    let down = "DownCaml";
     let count = string_of_int(self.state.count);
     <div>
       <div id = "one">

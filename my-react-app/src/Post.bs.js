@@ -31,12 +31,12 @@ function make(title, text, score, post_id, _) {
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Upvote */0);
                                     })
-                                }, "Upvote"), React.createElement("button", {
+                                }, "UpCaml"), React.createElement("button", {
                                   className: "down",
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Downvote */1);
                                     })
-                                }, "Downvote"), React.createElement("div", undefined, "number of camels: " + count)));
+                                }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count)));
             }),
           /* initialState */(function () {
               return /* record */[/* count */score];
