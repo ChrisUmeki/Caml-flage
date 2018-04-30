@@ -78,6 +78,7 @@ module Post : Entry = struct
       user: string;
       mutable children: t list;
       tag: string;
+      timestamp: float;
   }
 
   let get_id a =
@@ -115,6 +116,7 @@ module Post : Entry = struct
       user = "";
       children = [];
       tag = "";
+      timestamp = Unix.time ();
   }
 
 (* TODO: Generate unique IDs *)
@@ -129,6 +131,7 @@ module Post : Entry = struct
       user = "";
       children = [];
       tag = "";
+      timestamp = Ezjsonm.find o ["timestamp"] |> Ezjsonm.get_float;
   }
   
   let posts_of_json j = match j with
