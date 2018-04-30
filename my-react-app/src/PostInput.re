@@ -1,11 +1,13 @@
 type state = {
-  text:string, 
+  title: string, 
+  text: string,
   inputElement: ref (option(Dom.element))
 };
 
 type action = 
-  | Change(string)
-  | Submit(string); 
+  | ChangeTitle(string)
+  | ChangeText(string)
+  | Submit(string, string); 
 
  let valueFromEvent = (evt) : string => (
   evt
@@ -20,7 +22,7 @@ state.inputElement := Js.toOption(theRef);
  
 let make = (~initialText, _) => {
   ...component,
-  initialState: () => {text:initialText, inputElement: ref(None)}, 
+  initialState: () => {title: "Title", text:initialText, inputElement: ref(None)}, 
 
   /* reducer: (newText, state) => ReasonReact.Update({...state, text: newText}), */
   /* reducer: (action, newText, state) => 
@@ -29,59 +31,77 @@ let make = (~initialText, _) => {
   }, */
   reducer: (action) => 
     switch (action){
-    | Submit(newText) => 
+    | Submit(newTitle, newText) => 
       Js.Promise.(
-        Axios.postData("/post", {{"title": newText}})
+        Axios.postData("/post", {{"title": newTitle, "text": newText}})
         |> then_((response) => resolve(Js.log(response##data)))
         |> catch((error) => resolve(Js.log(error)))
         |> ignore
       );(
         state => 
-       ReasonReact.Update ({...state, text:"Post made!"})
+       ReasonReact.Update ({...state, title: "Post made!", text:""})
      )
-    | Change(newText) => Js.log(newText);(
+    | ChangeTitle(newTitle) => Js.log(newTitle);(
          state => 
-        ReasonReact.Update ({...state, text:newText})
+        ReasonReact.Update ({...state, title: newTitle})
       )
+    | ChangeText(newText) => Js.log(newText);(
+      state => 
+     ReasonReact.Update ({...state, text: newText})
+   )
     },
 
-  render: ({state: {text}, send, handle}) => {
-  /* <div>
-    (ReasonReact.stringToElement("new post"))
-  </div>  */
+  render: ({state: {title, text}, send, handle}) => {
   <div> 
+
     <div>
-    (ReasonReact.stringToElement("new post"))
+    (ReasonReact.stringToElement("Create a new post"))
     </div>
 
     <div> 
     <input
-      value=text
+      value=title
       _type="text"
       ref=(handle(setInputElement))
-      placeholder="Write a message"
 
       onChange = (
           (evt) =>
             send(
-                Change(
+                ChangeTitle(
                     valueFromEvent(evt)
                 ),
             )
         )
-      
-      onKeyDown=(
-          (evt) =>
-          if (ReactEventRe.Keyboard.key(evt) == "Enter") {
-          send(Submit(text))
-        } 
-
-      )
     />
+    <input
+      value=text
+      _type="text"
+      ref=(handle(setInputElement))
+
+      onChange = (
+          (evt) =>
+            send(
+                ChangeText(
+                    valueFromEvent(evt)
+                ),
+            )
+        )
+    />
+    <button onClick=(_event => send(Submit(title, text)))> 
+        (ReasonReact.stringToElement("Submit"))
+    </button>
+
     </div>
    </div>;
   },
 }; 
+
+/* onKeyDown=(
+          (evt) =>
+          if (ReactEventRe.Keyboard.key(evt) == "Enter") {
+          send(Submit(text))
+        } 
+      ) */
 
 /* onChange= (reduce((evt) => valueFromEvent(evt))) */
 

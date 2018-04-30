@@ -14,7 +14,7 @@ function valueFromEvent(evt) {
 var component = ReasonReact.reducerComponent("EditField");
 
 function setInputElement(theRef, param) {
-  param[/* state */2][/* inputElement */1][0] = (theRef == null) ? /* None */0 : [theRef];
+  param[/* state */2][/* inputElement */2][0] = (theRef == null) ? /* None */0 : [theRef];
   return /* () */0;
 }
 
@@ -31,55 +31,80 @@ function make(initialText, _) {
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (param) {
               var send = param[/* send */4];
-              var text = param[/* state */2][/* text */0];
-              return React.createElement("div", undefined, React.createElement("div", undefined, "new post"), React.createElement("div", undefined, React.createElement("input", {
-                                  ref: Curry._1(param[/* handle */0], setInputElement),
-                                  placeholder: "Write a message",
+              var match = param[/* state */2];
+              var text = match[/* text */1];
+              var title = match[/* title */0];
+              var handle = param[/* handle */0];
+              return React.createElement("div", undefined, React.createElement("div", undefined, "Create a new post"), React.createElement("div", undefined, React.createElement("input", {
+                                  ref: Curry._1(handle, setInputElement),
+                                  type: "text",
+                                  value: title,
+                                  onChange: (function (evt) {
+                                      return Curry._1(send, /* ChangeTitle */Block.__(0, [evt.target.value]));
+                                    })
+                                }), React.createElement("input", {
+                                  ref: Curry._1(handle, setInputElement),
                                   type: "text",
                                   value: text,
-                                  onKeyDown: (function (evt) {
-                                      if (evt.key === "Enter") {
-                                        return Curry._1(send, /* Submit */Block.__(1, [text]));
-                                      } else {
-                                        return 0;
-                                      }
-                                    }),
                                   onChange: (function (evt) {
-                                      return Curry._1(send, /* Change */Block.__(0, [evt.target.value]));
+                                      return Curry._1(send, /* ChangeText */Block.__(1, [evt.target.value]));
                                     })
-                                })));
+                                }), React.createElement("button", {
+                                  onClick: (function () {
+                                      return Curry._1(send, /* Submit */Block.__(2, [
+                                                    title,
+                                                    text
+                                                  ]));
+                                    })
+                                }, "Submit")));
             }),
           /* initialState */(function () {
               return /* record */[
+                      /* title */"Title",
                       /* text */initialText,
                       /* inputElement */[/* None */0]
                     ];
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action) {
-              if (action.tag) {
-                Axios.post("/post", {
-                          title: action[0]
-                        }).then((function (response) {
-                          return Promise.resolve((console.log(response.data), /* () */0));
-                        })).catch((function (error) {
-                        return Promise.resolve((console.log(error), /* () */0));
-                      }));
-                return (function (state) {
-                    return /* Update */Block.__(0, [/* record */[
-                                /* text */"Post made!",
-                                /* inputElement */state[/* inputElement */1]
-                              ]]);
-                  });
-              } else {
-                var newText = action[0];
-                console.log(newText);
-                return (function (state) {
-                    return /* Update */Block.__(0, [/* record */[
-                                /* text */newText,
-                                /* inputElement */state[/* inputElement */1]
-                              ]]);
-                  });
+              switch (action.tag | 0) {
+                case 0 : 
+                    var newTitle = action[0];
+                    console.log(newTitle);
+                    return (function (state) {
+                        return /* Update */Block.__(0, [/* record */[
+                                    /* title */newTitle,
+                                    /* text */state[/* text */1],
+                                    /* inputElement */state[/* inputElement */2]
+                                  ]]);
+                      });
+                case 1 : 
+                    var newText = action[0];
+                    console.log(newText);
+                    return (function (state) {
+                        return /* Update */Block.__(0, [/* record */[
+                                    /* title */state[/* title */0],
+                                    /* text */newText,
+                                    /* inputElement */state[/* inputElement */2]
+                                  ]]);
+                      });
+                case 2 : 
+                    Axios.post("/post", {
+                              title: action[0],
+                              text: action[1]
+                            }).then((function (response) {
+                              return Promise.resolve((console.log(response.data), /* () */0));
+                            })).catch((function (error) {
+                            return Promise.resolve((console.log(error), /* () */0));
+                          }));
+                    return (function (state) {
+                        return /* Update */Block.__(0, [/* record */[
+                                    /* title */"Post made!",
+                                    /* text */"",
+                                    /* inputElement */state[/* inputElement */2]
+                                  ]]);
+                      });
+                
               }
             }),
           /* subscriptions */component[/* subscriptions */13],
