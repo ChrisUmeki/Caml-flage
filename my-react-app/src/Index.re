@@ -4,3 +4,4 @@ ReactDOMRe.renderToElementWithId (<PostInput initialText ="Create a new post her
 
 ReactDOMRe.renderToElementWithId(<AllPosts/>, "posts");
 
+ReactDOMRe.renderToElementWithId(<AllComments/>, "comments");

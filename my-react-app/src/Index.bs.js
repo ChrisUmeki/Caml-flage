@@ -6,11 +6,14 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Title$ReactTemplate = require("./Title.bs.js");
 var AllPosts$ReactTemplate = require("./AllPosts.bs.js");
 var PostInput$ReactTemplate = require("./PostInput.bs.js");
+var AllComments$ReactTemplate = require("./AllComments.bs.js");
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Title$ReactTemplate.make("Welcome to Caml-flage", /* array */[])), "title");
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, PostInput$ReactTemplate.make("Create a new post here!", /* array */[])), "input");
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(/* array */[])), "posts");
+
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(/* array */[])), "comments");
 
 /*  Not a pure module */
