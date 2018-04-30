@@ -9,10 +9,9 @@ module type Entry = sig
   val down_camel : t -> unit
   val get_score : t -> int
   val get_id : t -> int
+  val posts_of_json : Ezjsonm.value -> t list
   val post_from_new : Ezjsonm.value -> int -> t
   val to_json : t -> (string * Ezjsonm.value) list
-  val posts_of_json : Ezjsonm.value -> t list
-  
 end
 
 module Comment : Entry = struct
@@ -145,10 +144,6 @@ let to_json a =
   ("text", `String a.text); 
   ("score", `Float (float_of_int a.score));
   ("num_comments", `Float (float_of_int (List.length a.children)));]
-
-let rec json_of_posts l = match l with
-  |[] -> []
-  |h::t -> to_json h::json_of_posts t
 
 let get_hot_score a = 
   let t = a.timestamp -. 1134028003. in 
