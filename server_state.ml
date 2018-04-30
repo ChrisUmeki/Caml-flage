@@ -36,6 +36,14 @@ let state_of_json filename =
     tags = [];
   }
 
+let json_of_state filename st = 
+  let u = `O [("users", [])] in
+  let p = `O [("posts", (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json p)))::j) [] st.posts)))] in
+  let c = `O [("comments", [])] in
+  let t = `O [("tags", [])] in
+  let j = u::p::c::t in
+  Ezjsonm.to_channel ~minify:false (open_out filename) j
+
 let get_curr_state t =
   t.curr_state
 
@@ -63,12 +71,13 @@ let upcamel t e =
 
 let get_front_posts s =
   let l = s.posts in
-  `O [("posts", (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json_f p)))::j) [] l)))]
+  `O [("posts", (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json p)))::j) [] l)))]
 
 let get_next_post_id s =
   (List.length s.posts) + 1
 
 let get_next_comment_id s =
   (List.length s.comments) + 1
+
 
 

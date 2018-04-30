@@ -8,6 +8,8 @@ val init_state : t
 
 val state_of_json : string -> t
 
+val json_of_state : string -> t -> unit
+
 val get_curr_state : t -> string
 
 val update_curr_state : t -> string -> unit

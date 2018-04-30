@@ -29,11 +29,15 @@ module type Entry = sig
 
   val get_id : t -> int
 
-  val to_json_f : t -> (string * Ezjsonm.value) list
-
   val posts_of_json : Ezjsonm.value -> t list
 
   val post_from_new : Ezjsonm.value -> int -> t
+
+  val posts_of_json : [> `A of Ezjsonm.value list ] -> t list
+
+  val to_json : t -> (string * Ezjsonm.value) list
+
+  val json_of_posts : t list -> (string * Ezjsonm.value) list list
 
 end
 

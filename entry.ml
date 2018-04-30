@@ -9,9 +9,10 @@ module type Entry = sig
   val down_camel : t -> unit
   val get_score : t -> int
   val get_id : t -> int
-  val to_json_f : t -> (string * Ezjsonm.value) list
-  val posts_of_json : Ezjsonm.value -> t list
   val post_from_new : Ezjsonm.value -> int -> t
+  val to_json : t -> (string * Ezjsonm.value) list
+  val posts_of_json : Ezjsonm.value -> t list
+  
 end
 
 module Comment : Entry = struct
@@ -55,14 +56,14 @@ module Comment : Entry = struct
       add_reply par reply;
       reply
 
-  let to_json_f a = 
-    failwith "Not used"
-
   let posts_of_json j =
     failwith "Not used"
 
   let post_from_new o = 
     failwith "Not yet"
+
+  let to_json a = 
+    failwith "Not used"
 
 end
 
@@ -120,29 +121,43 @@ module Post : Entry = struct
   }
 
 (* TODO: Generate unique IDs *)
-  let post_from_new o i =
-    {
-      id = i;
-      score = 1;
-      title = Ezjsonm.find o ["title"] |> Ezjsonm.get_string;
-      text = Ezjsonm.find o ["text"] |> Ezjsonm.get_string;
-      has_url = false;
-      url = None;
-      user = "";
-      children = [];
-      tag = "";
-      timestamp = Unix.time ();
-  }
-  
-  let posts_of_json j = match j with
-  | `A j' -> List.map (fun o -> post_from_val o) j'
-  | _ -> raise (Failure "bad json")
+let post_from_new o i =
+  {
+    id = i;
+    score = 1;
+    title = Ezjsonm.find o ["title"] |> Ezjsonm.get_string;
+    text = Ezjsonm.find o ["text"] |> Ezjsonm.get_string;
+    has_url = false;
+    url = None;
+    user = "";
+    children = [];
+    tag = "";
+    timestamp = Unix.time ();
+}
 
-  let to_json_f a = 
-    [("post_id",Ezjsonm.int a.id);
-    ("title", `String a.title); 
-    ("text", `String a.text); 
-    ("score", `Float (float_of_int a.score));
-    ("num_comments", `Float (float_of_int (List.length a.children)));]
+let posts_of_json j = match j with
+| `A j' -> List.map (fun o -> post_from_val o) j'
+| _ -> raise (Failure "bad json")
+
+let to_json a = 
+  [("post_id", Ezjsonm.int a.id);
+  ("title", `String a.title); 
+  ("text", `String a.text); 
+  ("score", `Float (float_of_int a.score));
+  ("num_comments", `Float (float_of_int (List.length a.children)));]
+
+let rec json_of_posts l = match l with
+  |[] -> []
+  |h::t -> to_json h::json_of_posts t
+
+let get_hot_score a = 
+  let t = a.timestamp -. 1134028003. in 
+    let y = if a.score > 0 then 1 
+            else if a.score = 0 then 0 
+            else -1 in 
+      let x = abs a.score in
+        let z = if x > 1 then x else 1 in
+          int_of_float (log10 (float_of_int z)) + (y*(int_of_float t)/45000)
+
 
 end
