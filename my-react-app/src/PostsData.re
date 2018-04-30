@@ -1,3 +1,5 @@
+
+
 type frontpost = {
     post_id: int, 
     title: string, 
@@ -5,6 +7,9 @@ type frontpost = {
     score: int,
     num_comments: int,
   };
+
+/* let postsUrl = "/state.json"; */
+
    
 let parseFrontPostsJson = (json : Js.Json.t) : frontpost => 
     Json.Decode.{
@@ -16,13 +21,14 @@ let parseFrontPostsJson = (json : Js.Json.t) : frontpost =>
     
     };
 
+    /* field ("comment_list", list ({comment_id: field("comment_id",int, json), text: field( "text", string, json), score:field("score", int,json)}), json),
+       */
+
 /* posts is name of array */
 let parseFrontPostsResponseJson = json =>
 Json.Decode.field("posts", Json.Decode.array(parseFrontPostsJson), json);
 
-let postsUrl = "/state.json";
-
-let fetchPosts = () =>
+let fetchPosts = (postsUrl: string) =>
   Js.Promise.(
     Bs_fetch.fetch(postsUrl)
       |> then_(Bs_fetch.Response.text)

@@ -50,7 +50,7 @@ let make = (~title, ~text, ~score, ~post_id, _children) => {
     <div>
       <div id = "one">
         <div id = "gr">
-          <h4>(ReasonReact.stringToElement(title))</h4>
+          <a className = "titlelink" href = "my-react-app/comments.html"><h4>(ReasonReact.stringToElement(title))</h4></a>
           <p>(ReasonReact.stringToElement(text))</p>
         </div>
 

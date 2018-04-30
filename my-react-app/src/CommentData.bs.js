@@ -12,7 +12,7 @@ function parseCommentsJson(json) {
 }
 
 function parseCommentsResponseJson(json) {
-  return Json_decode.field("comments", (function (param) {
+  return Json_decode.field("comment_list", (function (param) {
                 return Json_decode.array(parseCommentsJson, param);
               }), json);
 }

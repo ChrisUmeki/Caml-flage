@@ -26,7 +26,10 @@ function make(title, text, score, post_id, _) {
                               id: "one"
                             }, React.createElement("div", {
                                   id: "gr"
-                                }, React.createElement("h4", undefined, title), React.createElement("p", undefined, text)), React.createElement("button", {
+                                }, React.createElement("a", {
+                                      className: "titlelink",
+                                      href: "my-react-app/comments.html"
+                                    }, React.createElement("h4", undefined, title)), React.createElement("p", undefined, text)), React.createElement("button", {
                                   className: "up",
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Upvote */0);

@@ -1,7 +1,7 @@
 type state = {
     count: int,
   };
-  
+
 type action =
   | Upvote
   | Downvote;
