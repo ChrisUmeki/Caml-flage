@@ -36,7 +36,7 @@ end
 
 let new_post st = post "/post" begin fun req ->
   let j = App.json_of_body_exn req in
-  let f = fun x -> update_posts st (Entry.Post.post_from_new (Ezjsonm.value x)) |> Lwt.return in
+  let f = fun x -> update_posts st (Entry.Post.post_from_new (Ezjsonm.value x) (Server_state.get_next_id st)) |> Lwt.return in
   Lwt.bind j f |> ignore;
   `String "Post made" |> respond'
 end

@@ -11,7 +11,7 @@ module type Entry = sig
   val get_id : t -> int
   val to_json_f : t -> (string * Ezjsonm.value) list
   val posts_of_json : Ezjsonm.value -> t list
-  val post_from_new : Ezjsonm.value -> t
+  val post_from_new : Ezjsonm.value -> int -> t
 end
 
 module Comment : Entry = struct
@@ -78,6 +78,7 @@ module Post : Entry = struct
       user: string;
       mutable children: t list;
       tag: string;
+      timestamp: float;
   }
 
   let get_id a =
@@ -115,12 +116,13 @@ module Post : Entry = struct
       user = "";
       children = [];
       tag = "";
+      timestamp = Unix.time ();
   }
 
 (* TODO: Generate unique IDs *)
-  let post_from_new o =
+  let post_from_new o i =
     {
-      id = 9;
+      id = i;
       score = 1;
       title = Ezjsonm.find o ["title"] |> Ezjsonm.get_string;
       text = "";
@@ -129,6 +131,7 @@ module Post : Entry = struct
       user = "";
       children = [];
       tag = "";
+      timestamp = Ezjsonm.find o ["timestamp"] |> Ezjsonm.get_float;
   }
   
   let posts_of_json j = match j with
