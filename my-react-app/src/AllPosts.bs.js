@@ -33,8 +33,8 @@ function make() {
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
               var match = self[/* state */2][/* postsData */0];
-              var posts = match ? $$Array.map((function (frontposts) {
-                        return ReasonReact.element(/* None */0, /* None */0, Post$ReactTemplate.make(frontposts[/* title */1], frontposts[/* text */2], frontposts[/* score */3], frontposts[/* post_id */0], /* array */[]));
+              var posts = match ? $$Array.map((function (frontpost) {
+                        return ReasonReact.element(/* None */0, /* None */0, Post$ReactTemplate.make(frontpost[/* title */1], frontpost[/* text */2], frontpost[/* score */3], frontpost[/* post_id */0], /* array */[]));
                       }), match[0]) : "Loading...";
               return React.createElement("div", {
                           className: "display"

@@ -1,10 +1,10 @@
-type comments = {
+type comment = {
     comment_id: int, 
     text: string, 
     score: int,
   };
    
-let parseCommentsJson = (json : Js.Json.t) : comments => 
+let parseCommentsJson = (json : Js.Json.t) : comment => 
     Json.Decode.{
       comment_id: field("comment_id", int, json),
       text: field("text", string, json), 

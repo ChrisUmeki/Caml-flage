@@ -1,10 +1,10 @@
 
 type state = {
-  postsData: option(array(PostsData.frontposts)),
+  postsData: option(array(PostsData.frontpost)),
 };
 
 type action =
- | Loaded(array(PostsData.frontposts));
+ | Loaded(array(PostsData.frontpost));
 
 let component = ReasonReact.reducerComponent("AllPosts");
 
@@ -41,8 +41,8 @@ let make = (_children) => {
       switch (self.state.postsData) {
       | Some(postdata) => ReasonReact.arrayToElement(
           Array.map(
-            (frontposts: PostsData.frontposts) => 
-            <Post title=frontposts.title text=frontposts.text score=frontposts.score post_id=frontposts.post_id/>,
+            (frontpost: PostsData.frontpost) => 
+            <Post title=frontpost.title text=frontpost.text score=frontpost.score post_id=frontpost.post_id/>,
             postdata
           )
         )

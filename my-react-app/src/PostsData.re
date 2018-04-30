@@ -1,4 +1,4 @@
-type frontposts = {
+type frontpost = {
     post_id: int, 
     title: string, 
     text: string, 
@@ -6,13 +6,14 @@ type frontposts = {
     num_comments: int,
   };
    
-let parseFrontPostsJson = (json : Js.Json.t) : frontposts => 
+let parseFrontPostsJson = (json : Js.Json.t) : frontpost => 
     Json.Decode.{
       post_id: field("post_id", int, json),
       title: field("title", string, json),
       text: field("text", string, json), 
       score: field("score", int, json),
       num_comments: field("num_comments", int, json)
+    
     };
 
 /* posts is name of array */

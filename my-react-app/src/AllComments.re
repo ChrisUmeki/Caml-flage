@@ -1,9 +1,9 @@
 type state = {
-    commentsData: option(array(CommentData.comments)),
+    commentsData: option(array(CommentData.comment)),
   };
   
   type action =
-   | Loaded(array(CommentData.comments));
+   | Loaded(array(CommentData.comment));
   
   let component = ReasonReact.reducerComponent("AllComments");
   
@@ -40,8 +40,8 @@ type state = {
         switch (self.state.commentsData) {
         | Some(commentdata) => ReasonReact.arrayToElement(
             Array.map(
-              (comments: CommentData.comments) => 
-              <Comment text=comments.text score=comments.score comment_id=comments.comment_id/>,
+              (comment: CommentData.comment) => 
+              <Comment text=comment.text score=comment.score comment_id=comment.comment_id/>,
               commentdata
             )
           )
