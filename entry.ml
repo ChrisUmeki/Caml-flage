@@ -116,7 +116,7 @@ module Post : Entry = struct
       user = "";
       children = [];
       tag = "";
-      timestamp = Unix.time ();
+      timestamp = Ezjsonm.find o ["timestamp"] |> Ezjsonm.get_float;
   }
 
 (* TODO: Generate unique IDs *)
@@ -125,13 +125,13 @@ module Post : Entry = struct
       id = i;
       score = 1;
       title = Ezjsonm.find o ["title"] |> Ezjsonm.get_string;
-      text = "";
+      text = Ezjsonm.find o ["text"] |> Ezjsonm.get_string;
       has_url = false;
       url = None;
       user = "";
       children = [];
       tag = "";
-      timestamp = Ezjsonm.find o ["timestamp"] |> Ezjsonm.get_float;
+      timestamp = Unix.time ();
   }
   
   let posts_of_json j = match j with
