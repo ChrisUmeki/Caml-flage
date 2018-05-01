@@ -4,7 +4,12 @@ ReactDOMRe.renderToElementWithId (<PostInput initialText ="Create a new post her
 
 ReactDOMRe.renderToElementWithId(<AllPosts postsUrl="/state.json"/>, "posts");
 
-ReactDOMRe.renderToElementWithId(<AllPosts postsUrl="/post/1/poststate.json"/>, "onepost");
+let url = ReasonReact.Router.dangerouslyGetInitialUrl ();
+let lst = url.path;
+let post_id = List.nth(lst, List.length(lst) - 1);
+let myurl = "/post/"++post_id++"/poststate.json";
 
-ReactDOMRe.renderToElementWithId(<AllComments postsUrl="/post/1/poststate.json"/>, "comments");
+ReactDOMRe.renderToElementWithId(<AllPosts postsUrl={myurl}/>, "onepost");
+
+ReactDOMRe.renderToElementWithId(<AllComments postsUrl={myurl}/>, "comments");
 
