@@ -16,7 +16,9 @@ end
 
 let save_state st = get "/savethestate" begin fun req ->
   let j = json_of_state st in
-  Ezjsonm.to_channel ~minify:false (open_out "savedstate.json") j;
+  let out_file = open_out "savedstate.json" in
+  Ezjsonm.to_channel ~minify:false out_file j;
+  flush out_file;
   `String (Ezjsonm.to_string ~minify:false j) |> respond'
 end
 
