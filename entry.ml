@@ -13,6 +13,7 @@ module type Entry = sig
   val post_from_new : Ezjsonm.value -> int -> t
   val to_json_front : t -> (string * Ezjsonm.value) list
   val to_json : t -> (string * Ezjsonm.value) list
+  val get_children : t -> t list
 end
 
 module Comment : Entry = struct
@@ -67,6 +68,8 @@ module Comment : Entry = struct
 
   let to_json a = 
     failwith "Not used"
+
+  let get_children a = a.children
 
 end
 
@@ -171,4 +174,6 @@ let get_hot_score a =
           int_of_float (log10 (float_of_int z)) + (y*(int_of_float t)/45000)
 
 
+  let get_children a = a.children
+  
 end

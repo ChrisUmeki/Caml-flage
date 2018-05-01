@@ -12,6 +12,8 @@ val json_of_state : t -> Ezjsonm.t
 
 val get_curr_state : t -> string
 
+val get_comments : t -> int -> Ezjsonm.t
+
 val update_curr_state : t -> string -> unit
 
 val new_vote : t -> Ezjsonm.t -> unit

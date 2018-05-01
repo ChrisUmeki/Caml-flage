@@ -8,8 +8,8 @@ let front_state st = get "/state.json" begin fun req ->
 end
 
 let post_state st = get "/post/:id/poststate.json" begin fun req ->
-  let id = param req "id" in
-  `String ("Unimplemented " ^ id) |> respond'
+  let id = param req "id" |> int_of_string in
+  `Json (get_comments st id) |> respond'
 end
 
 let save_state st = get "/savethestate" begin fun req ->
@@ -35,7 +35,7 @@ let front_serve = get "/" begin fun req ->
 end
 
 let post_serve = get "/post/:id" begin fun req ->
-  let s = filepath_to_string "****SOME PAGE TO DISPLAY POST PAGE****" in
+  let s = filepath_to_string "my-react-app/comments.html" in
   `String s |> respond'
 end
 
