@@ -34,3 +34,5 @@ designdoc.pdf
 */node_modules/
 */build/
 */lib/
+
+savedstate.json
