@@ -28,7 +28,7 @@ function make(title, text, score, post_id, _) {
                                   id: "gr"
                                 }, React.createElement("a", {
                                       className: "titlelink",
-                                      href: "my-react-app/comments.html"
+                                      href: "/post/" + (String(post_id) + "/")
                                     }, React.createElement("h4", undefined, title)), React.createElement("p", undefined, text)), React.createElement("button", {
                                   className: "up",
                                   onClick: (function () {

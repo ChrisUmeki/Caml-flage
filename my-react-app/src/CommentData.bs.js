@@ -17,7 +17,7 @@ function parseCommentsResponseJson(json) {
               }), json);
 }
 
-var postsUrl = "/state.json";
+var postsUrl = "/poststate.json";
 
 function fetchComments() {
   return fetch(postsUrl).then((function (prim) {

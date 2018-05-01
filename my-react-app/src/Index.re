@@ -4,7 +4,7 @@ ReactDOMRe.renderToElementWithId (<PostInput initialText ="Create a new post her
 
 ReactDOMRe.renderToElementWithId(<AllPosts postsUrl="/state.json"/>, "posts");
 
-ReactDOMRe.renderToElementWithId(<AllPosts postsUrl="/poststate.json"/>, "post");
+ReactDOMRe.renderToElementWithId(<AllPosts postsUrl="/post/1/poststate.json"/>, "onepost");
 
 ReactDOMRe.renderToElementWithId(<AllComments/>, "comments");
 
