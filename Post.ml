@@ -79,18 +79,23 @@ let posts_of_json j = match j with
 let to_json_front a = 
   [("post_id", Ezjsonm.int a.id);
   ("title", `String a.title); 
-  ("text", `String a.text); 
+  ("text", `String a.text);
   ("score", `Float (float_of_int a.score));
   ("num_comments", `Float (float_of_int (List.length a.children)));]
 
 (* [to_json a] extracts all the data of a post to json
 *)
 let to_json a = 
-  [("post_id", Ezjsonm.int a.id);
-  ("title", `String a.title); 
-  ("text", `String a.text);
+  [("id", Ezjsonm.int a.id);
   ("score", `Float (float_of_int a.score));
-  ("num_comments", `Float (float_of_int (List.length a.children)));]
+  ("title", `String a.title); 
+  ("text", `String a.text); 
+  ("has_url", `Bool a.has_url); 
+  ("url", match a.url with | None -> `Null | Some x -> `String x); 
+  ("user", `String a.user); 
+  ("children", `A []); (* IMPLEMENT LATER *)
+  ("tag", `String a.tag); 
+  ("timestamp", `Float a.timestamp);]
 
 let get_hot_score a = 
   let t = a.timestamp -. 1134028003. in 
