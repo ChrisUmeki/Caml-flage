@@ -1,4 +1,4 @@
-open Entry
+open Post
 
 type t = {
   name: string;

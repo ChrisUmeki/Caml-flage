@@ -40,9 +40,3 @@ module type Entry = sig
   val get_children : t -> t list
 
 end
-
-module Comment : Entry
-
-module Post : Entry
-
-
