@@ -53,7 +53,7 @@ let get_comments st i =
     (`A (List.fold_left (fun j c -> (Ezjsonm.value (`O (Comment.to_json c))) :: j) [] (Post.get_children p)))
     (* TODO:Post.get_children *)
   in
-  `O [("post", `O post); ("comment_list", comment_list)]
+  `O [("posts", `A ([Ezjsonm.value (`O post)])); ("comment_list", comment_list)]
 
 let get_curr_state t =
   t.curr_state
