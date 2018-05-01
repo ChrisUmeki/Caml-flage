@@ -86,7 +86,7 @@ let to_json_front a =
 (* [to_json a] extracts all the data of a post to json
 *)
 let to_json a = 
-  [("id", Ezjsonm.int a.id);
+  [("post_id", Ezjsonm.int a.id);
   ("score", `Float (float_of_int a.score));
   ("title", `String a.title); 
   ("text", `String a.text); 
