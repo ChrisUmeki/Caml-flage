@@ -23,20 +23,20 @@ function make(text, score, comment_id, _) {
           /* render */(function (self) {
               var count = String(self[/* state */2][/* count */0]);
               return React.createElement("div", undefined, React.createElement("div", {
-                              id: "one"
+                              className: "one"
                             }, React.createElement("div", {
-                                  id: "gr"
+                                  className: "gr"
                                 }, React.createElement("p", undefined, text)), React.createElement("button", {
                                   className: "up",
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Upvote */0);
                                     })
-                                }, "Upvote"), React.createElement("button", {
+                                }, "UpCaml"), React.createElement("button", {
                                   className: "down",
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Downvote */1);
                                     })
-                                }, "Downvote"), React.createElement("div", undefined, "number of camels: " + count)));
+                                }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count)));
             }),
           /* initialState */(function () {
               return /* record */[/* count */score];

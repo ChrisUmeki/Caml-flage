@@ -26,7 +26,12 @@ let parseFrontPostsJson = (json : Js.Json.t) : frontpost =>
 
 /* posts is name of array */
 let parseFrontPostsResponseJson = json =>
-Json.Decode.field("posts", Json.Decode.array(parseFrontPostsJson), json);
+  Json.Decode.field("posts", Json.Decode.array(parseFrontPostsJson), json);
+
+/* let parseFrontPostsResponseJson = json => {
+  let onepost = 
+    Json.Decode(json |> (optional(field("post", Json.Decode.array(parseFrontPostsJson))));
+} */
 
 let fetchPosts = (postsUrl: string) =>
   Js.Promise.(

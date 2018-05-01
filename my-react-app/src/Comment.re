@@ -38,12 +38,12 @@ let make = (~text, ~score, ~comment_id, _children) => {
     },
 
   render: self => {
-    let up ="Upvote";
-    let down = "Downvote";
+    let up ="UpCaml";
+    let down = "DownCaml";
     let count = string_of_int(self.state.count);
     <div>
-      <div id = "one">
-        <div id = "gr">
+      <div className="one">
+        <div className = "gr">
           <p>(ReasonReact.stringToElement(text))</p>
         </div>
 

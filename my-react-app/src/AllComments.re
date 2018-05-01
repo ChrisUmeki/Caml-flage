@@ -7,7 +7,7 @@ type state = {
   
   let component = ReasonReact.reducerComponent("AllComments");
   
-  let make = (_children) => {
+  let make = (~postsUrl, _children) => {
     ...component,
     initialState: () => {
       commentsData: None
@@ -18,7 +18,7 @@ type state = {
       let handleCommentsLoaded = self.reduce(commentsData => Loaded(commentsData));
       
       /* loading the data */
-      CommentData.fetchComments()
+      CommentData.fetchComments(postsUrl)
         |> Js.Promise.then_(commentsData => {
             handleCommentsLoaded(commentsData);
             Js.Promise.resolve();

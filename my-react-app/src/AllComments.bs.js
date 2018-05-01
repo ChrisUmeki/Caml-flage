@@ -11,7 +11,7 @@ var CommentData$ReactTemplate = require("./CommentData.bs.js");
 
 var component = ReasonReact.reducerComponent("AllComments");
 
-function make() {
+function make(postsUrl, _) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -21,7 +21,7 @@ function make() {
               var handleCommentsLoaded = Curry._1(self[/* reduce */1], (function (commentsData) {
                       return /* Loaded */[commentsData];
                     }));
-              CommentData$ReactTemplate.fetchComments(/* () */0).then((function (commentsData) {
+              CommentData$ReactTemplate.fetchComments(postsUrl).then((function (commentsData) {
                       Curry._1(handleCommentsLoaded, commentsData);
                       return Promise.resolve(/* () */0);
                     }));

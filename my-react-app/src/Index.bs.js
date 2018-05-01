@@ -16,6 +16,6 @@ ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, A
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make("/post/1/poststate.json", /* array */[])), "onepost");
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(/* array */[])), "comments");
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make("/post/1/poststate.json", /* array */[])), "comments");
 
 /*  Not a pure module */

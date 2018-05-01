@@ -51,9 +51,8 @@ let make = (~postsUrl, _children) => {
       };
 
       <div className="display">
-      /* <h1>{ReasonReact.stringToElement("Reason Projects")}</h1> */
       {posts}
-    </div>
+      </div>
   }
 
 };

@@ -17,9 +17,7 @@ function parseCommentsResponseJson(json) {
               }), json);
 }
 
-var postsUrl = "/poststate.json";
-
-function fetchComments() {
+function fetchComments(postsUrl) {
   return fetch(postsUrl).then((function (prim) {
                   return prim.text();
                 })).then((function (jsonText) {
@@ -29,6 +27,5 @@ function fetchComments() {
 
 exports.parseCommentsJson = parseCommentsJson;
 exports.parseCommentsResponseJson = parseCommentsResponseJson;
-exports.postsUrl = postsUrl;
 exports.fetchComments = fetchComments;
 /* No side effect */

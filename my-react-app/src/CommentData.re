@@ -15,9 +15,7 @@ let parseCommentsJson = (json : Js.Json.t) : comment =>
 let parseCommentsResponseJson = json =>
 Json.Decode.field("comment_list", Json.Decode.array(parseCommentsJson), json);
 
-let postsUrl = "/poststate.json";
-
-let fetchComments = () =>
+let fetchComments = (postsUrl:string) =>
   Js.Promise.(
     Bs_fetch.fetch(postsUrl)
       |> then_(Bs_fetch.Response.text)

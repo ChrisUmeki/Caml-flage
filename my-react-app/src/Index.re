@@ -6,5 +6,5 @@ ReactDOMRe.renderToElementWithId(<AllPosts postsUrl="/state.json"/>, "posts");
 
 ReactDOMRe.renderToElementWithId(<AllPosts postsUrl="/post/1/poststate.json"/>, "onepost");
 
-ReactDOMRe.renderToElementWithId(<AllComments/>, "comments");
+ReactDOMRe.renderToElementWithId(<AllComments postsUrl="/post/1/poststate.json"/>, "comments");
 

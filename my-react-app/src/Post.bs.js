@@ -23,9 +23,9 @@ function make(title, text, score, post_id, _) {
           /* render */(function (self) {
               var count = String(self[/* state */2][/* count */0]);
               return React.createElement("div", undefined, React.createElement("div", {
-                              id: "one"
+                              className: "one"
                             }, React.createElement("div", {
-                                  id: "gr"
+                                  className: "gr"
                                 }, React.createElement("a", {
                                       className: "titlelink",
                                       href: "/post/" + (String(post_id) + "/")

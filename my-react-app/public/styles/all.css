@@ -10,13 +10,13 @@
     background-color: rgba(255, 196, 0, 0.37);
 }
 
-  .navbar {
+.navbar {
     overflow: hidden;
     padding: 20px; 
     background-color: #bc6a0d;
 }
 
-  .navlink {
+.navlink {
     display: inline-block;
     background-color:  #bc6a0d;
     font-size: 25px;
@@ -26,63 +26,66 @@
     margin-right: 150px;
 }
 
-  .dropdown {
-        float: left;
-        overflow: hidden;
-    
-    }
+.dropdown {
+    float: left;
+    overflow: hidden;    
+}
 
-    .dropdown .dropbtn {
-        border: none;
-        outline: none;
-        color: white;
-        padding: 14px 16px;
-        background-color: inherit;
-        font-family: inherit;
-        margin:0;
-      }
+.dropdown .dropbtn {
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin:0;
+}
       
   
-    .dropdown-menu {
-        background-color: #bc6a0d;
-        display:none;
-        position: absolute;
-        width: 20%;
-        height: 250px;
-        box-shadow: 0px 8px 16px 0px;
+.dropdown-menu {
+    background-color: #bc6a0d;
+    display:none;
+    position: absolute;
+    width: 20%;
+    height: 250px;
+    box-shadow: 0px 8px 16px 0px;
     
-    }
-
-    .dropdown-menu a {
-        color: white;
-        text-decoration: none;
-        position: relative;
-        margin-top: 30px;
-        text-align: center;
-        display:block;
-    }
-
-    .dropdown:hover .dropdown-menu {
-        display: block;
-    }
-
-    #one {
-        border-style: solid;
-        border-color: black;
-        text-align: center;
 }
 
-    #gr {
-       font-size: 25px;
-       text-align: center;
-       margin: 50px;
+.dropdown-menu a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    margin-top: 30px;
+    text-align: center;
+    display:block;
 }
 
-    #posts {
-       margin-top: 12px;
+.dropdown:hover .dropdown-menu {
+    display: block;
 }
 
-    #input{
-       margin-top: 20px; 
+.one {
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+}
+
+.gr {
+    font-size: 25px;
+    text-align: center;
+    margin: 50px;
+}
+
+#posts {
+    margin-top: 12px;
+}
+
+#input{
+    margin-top: 20px; 
+}
+
+.hide{
+    display: none;
 }
 

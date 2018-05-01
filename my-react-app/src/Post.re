@@ -48,8 +48,8 @@ let make = (~title, ~text, ~score, ~post_id, _children) => {
     let down = "DownCaml";
     let count = string_of_int(self.state.count);
     <div>
-      <div id = "one">
-        <div id = "gr">
+      <div className = "one">
+        <div className = "gr">
           <a className = "titlelink" href = {"/post/" ++ string_of_int(post_id) ++ "/"}><h4>
           (ReasonReact.stringToElement(title))</h4></a>
           <p>(ReasonReact.stringToElement(text))</p>
