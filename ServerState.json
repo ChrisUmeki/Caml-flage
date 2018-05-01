@@ -10,7 +10,13 @@
       "has_url" : false,
       "user" : "fakeuser42",
       "score": 42,
-      "children": [],
+      "children": [
+        {
+          "comment_id": 1,
+          "text": "wow what a great first post keep up the good work",
+          "score": 100000000000
+        }
+      ],
       "num_comments": 0,
       "timestamp": 1525047920
     },

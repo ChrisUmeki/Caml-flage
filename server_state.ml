@@ -1,4 +1,5 @@
-open Entry
+open Post
+open Comment
 open User
 open Tag
 
@@ -49,7 +50,7 @@ let get_comments st i =
   let p = List.find (fun x -> i = Post.get_id x) st.posts in
   let post = Post.to_json p in
   let comment_list =
-    (`A (List.fold_left (fun j c -> (Ezjsonm.value (`O (Comment.to_json c))) :: j) [] ([])))
+    (`A (List.fold_left (fun j c -> (Ezjsonm.value (`O (Comment.to_json c))) :: j) [] (Post.get_children p)))
     (* TODO:Post.get_children *)
   in
   `O [("post", `O post); ("comment_list", comment_list)]

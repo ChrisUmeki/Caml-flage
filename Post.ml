@@ -1,79 +1,7 @@
-open Ezjsonm 
+open Ezjsonm
+open Comment
 
-module type Entry = sig
-  type t
-  val make_post : string -> string option -> string -> string -> t
-  val make_comment : string -> string -> t -> t
-  val add_reply : t -> t -> unit
-  val up_camel : t -> unit
-  val down_camel : t -> unit
-  val get_score : t -> int
-  val get_id : t -> int
-  val posts_of_json : Ezjsonm.value -> t list
-  val post_from_new : Ezjsonm.value -> int -> t
-  val to_json_front : t -> (string * Ezjsonm.value) list
-  val to_json : t -> (string * Ezjsonm.value) list
-  val get_children : t -> t list
-end
-
-module Comment : Entry = struct
-
-  type t = {
-    id: int;
-    mutable score: int;
-    text: string;
-    user: string;
-    mutable children: t list;
-    parent_id: int;
-  }
-
-  let get_id a =
-    a.id
-
-  let up_camel a =
-    a.score <- a.score + 1
-
-  let down_camel a =
-    a.score <- a.score - 1
-
-  let get_score a =
-    a.score
-
-  let make_post a b c d =
-    failwith "Not a post"
-
-  let add_reply par reply =
-    par.children <- reply::par.children
-
-  let make_comment txt usr par =
-    let reply = {
-      id = 0;
-      score = 0;
-      text = txt;
-      user = usr;
-      children = [];
-      parent_id = get_id par;
-    } in
-      add_reply par reply;
-      reply
-
-  let posts_of_json j =
-    failwith "Not used"
-
-  let post_from_new o = 
-    failwith "Not yet"
-
-  let to_json_front a = 
-    failwith "Not used"
-
-  let to_json a = 
-    failwith "Not used"
-
-  let get_children a = a.children
-
-end
-
-module Post : Entry = struct
+module Post = struct
 
   type t = {
       id: int;
@@ -83,7 +11,7 @@ module Post : Entry = struct
       has_url: bool;
       url: string option;
       user: string;
-      mutable children: t list;
+      mutable children: Comment.t list;
       tag: string;
       timestamp: float;
   }
@@ -121,7 +49,7 @@ module Post : Entry = struct
       has_url = false;
       url = None;
       user = "";
-      children = [];
+      children = Ezjsonm.find o ["children"] |> Comment.posts_of_json;
       tag = "";
       timestamp = Ezjsonm.find o ["timestamp"] |> Ezjsonm.get_float;
   }

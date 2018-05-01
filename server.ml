@@ -1,5 +1,7 @@
 open Opium.Std
 open Server_state
+open Post
+open Comment
 
 
 
@@ -39,6 +41,11 @@ let post_serve = get "/post/:id" begin fun req ->
   `String s |> respond'
 end
 
+let post_serve2 = get "/post/:id/" begin fun req ->
+  let s = filepath_to_string "my-react-app/comments.html" in
+  `String s |> respond'
+end
+
 
 let vote_listen st = post "/vote" begin fun req ->
   let j = App.json_of_body_exn req in
@@ -49,7 +56,7 @@ end
 
 let post_listen st = post "/post" begin fun req ->
   let j = App.json_of_body_exn req in
-  let f = fun x -> update_posts st (Entry.Post.post_from_new (Ezjsonm.value x) (Server_state.get_next_post_id st)) |> Lwt.return in
+  let f = fun x -> update_posts st (Post.post_from_new (Ezjsonm.value x) (Server_state.get_next_post_id st)) |> Lwt.return in
   Lwt.bind j f |> ignore;
   `String "Post made" |> respond'
 end
@@ -68,6 +75,7 @@ let () = App.empty
          |> save_state my_state
          |> front_serve
          |> post_serve
+         |> post_serve2
          |> vote_listen my_state
          |> post_listen my_state
          |> App.run_command

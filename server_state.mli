@@ -1,4 +1,5 @@
-open Entry
+open Post
+open Comment
 open User
 open Tag
 
