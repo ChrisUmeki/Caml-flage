@@ -48,7 +48,7 @@ let json_of_state st =
 *)
 let get_comments st i =
   let p = List.find (fun x -> i = Post.get_id x) st.posts in
-  let post = Post.to_json p in
+  let post = Post.to_json_front p in
   let comment_list =
     (`A (List.fold_left (fun j c -> (Ezjsonm.value (`O (Comment.to_json c))) :: j) [] (Post.get_children p)))
     (* TODO:Post.get_children *)
@@ -82,7 +82,7 @@ let upcamel t e =
 
 let get_front_posts s =
   let l = s.posts in
-  `O [("posts", (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json p)))::j) [] l)))]
+  `O [("posts", (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json_front p)))::j) [] l)))]
 
 let get_next_post_id s =
   (List.length s.posts) + 1
