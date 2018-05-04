@@ -23,6 +23,8 @@ val update_users : t -> User.t -> unit
 
 val update_posts : t -> Post.t -> unit
 
+val update_comments : t -> Comment.t -> unit
+
 val update_tags : t -> Tag.t -> unit
 
 val upcamel : t -> Post.t -> unit

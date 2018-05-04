@@ -5,6 +5,7 @@ var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var Axios = require("axios");
 var React = require("react");
+var Caml_format = require("bs-platform/lib/js/caml_format.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 
 function valueFromEvent(evt) {
@@ -64,7 +65,7 @@ function make(post_id, initialText, _) {
               if (action.tag) {
                 Axios.post("/comment", {
                           user_id: "",
-                          post_id: post_id,
+                          post_id: Caml_format.caml_int_of_string(post_id),
                           text: action[0]
                         }).then((function (response) {
                           return Promise.resolve((console.log(response.data), /* () */0));

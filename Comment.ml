@@ -23,6 +23,8 @@ module Comment = struct
   let get_score a =
     a.score
 
+  let get_par a = a.parent_id
+
   let make_post a b c d =
     failwith "Not a post"
 
@@ -49,6 +51,16 @@ module Comment = struct
       user = "";
       children = [];
       parent_id = 0;
+    }
+
+  let comment_from_new o i =
+    {
+      id = i;
+      score = 1;
+      text = Ezjsonm.find o ["text"] |> Ezjsonm.get_string;
+      user = Ezjsonm.find o ["user_id"] |> Ezjsonm.get_string;
+      children = [];
+      parent_id = Ezjsonm.find o ["post_id"] |> Ezjsonm.get_int;
     }
   
 

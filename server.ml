@@ -63,6 +63,13 @@ let post_listen st = post "/post" begin fun req ->
   `String "Post made" |> respond'
 end
 
+let comment_listen st = post "/comment" begin fun req ->
+  let j = App.json_of_body_exn req in
+  let f = fun x -> update_comments st (Comment.comment_from_new (Ezjsonm.value x) (Server_state.get_next_post_id st)) |> Lwt.return in
+  Lwt.bind j f |> ignore;
+  `String "Comment made" |> respond'
+end
+
 let not_found = get "/*" begin fun req ->
   `String ("Not found") |> respond'
 end
@@ -80,5 +87,6 @@ let () = App.empty
          |> post_serve2
          |> vote_listen my_state
          |> post_listen my_state
+         |> comment_listen my_state
          |> App.run_command
          |> ignore

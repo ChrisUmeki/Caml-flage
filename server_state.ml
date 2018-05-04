@@ -70,8 +70,10 @@ let update_posts t (new_post : Post.t) =
     t.posts <- new_post::t.posts
     
 let update_comments t (new_comment : Comment.t) =
-  if not (List.mem new_comment t.comments) then
-    t.comments <- new_comment::t.comments
+  let f = (fun x -> Post.get_id x = Comment.get_par new_comment) in
+  if (List.exists f t.posts) then
+    let p = List.find f t.posts in
+    Post.add_reply p new_comment
     
 let update_tags t (new_tag : Tag.t) =
   if not (List.mem new_tag t.tags) then
