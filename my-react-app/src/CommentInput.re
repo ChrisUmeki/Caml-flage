@@ -31,7 +31,7 @@ type state = {
       switch (action){
       | Submit(newText) => 
         Js.Promise.(
-          Axios.postData("/comment", {{"text": newText}})
+          Axios.postData("/comment", {{"user_id": "", "text": newText}})
           |> then_((response) => resolve(Js.log(response##data)))
           |> catch((error) => resolve(Js.log(error)))
           |> ignore

@@ -63,6 +63,7 @@ function make(initialText, _) {
           /* reducer */(function (action) {
               if (action.tag) {
                 Axios.post("/comment", {
+                          user_id: "",
                           text: action[0]
                         }).then((function (response) {
                           return Promise.resolve((console.log(response.data), /* () */0));

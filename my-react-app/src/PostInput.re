@@ -33,7 +33,7 @@ let make = (~initialText, _) => {
     switch (action){
     | Submit(newTitle, newText) => 
       Js.Promise.(
-        Axios.postData("/post", {{"title": newTitle, "text": newText}})
+        Axios.postData("/post", {{"user_id": "", "title": newTitle, "text": newText}})
         |> then_((response) => resolve(Js.log(response##data)))
         |> catch((error) => resolve(Js.log(error)))
         |> ignore

@@ -90,6 +90,7 @@ function make(initialText, _) {
                       });
                 case 2 : 
                     Axios.post("/post", {
+                              user_id: "",
                               title: action[0],
                               text: action[1]
                             }).then((function (response) {
