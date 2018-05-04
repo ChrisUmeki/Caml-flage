@@ -18,7 +18,7 @@ type state = {
   let setInputElement = (theRef, {ReasonReact.state}) => 
   state.inputElement := Js.toOption(theRef);
    
-  let make = (~initialText, _) => {
+  let make = (~post_id, ~initialText, _) => {
     ...component,
     initialState: () => {text:initialText, inputElement: ref(None)}, 
   
@@ -31,7 +31,7 @@ type state = {
       switch (action){
       | Submit(newText) => 
         Js.Promise.(
-          Axios.postData("/comment", {{"user_id": "", "text": newText}})
+          Axios.postData("/comment", {{"user_id": "", "post_id": post_id, "text": newText}})
           |> then_((response) => resolve(Js.log(response##data)))
           |> catch((error) => resolve(Js.log(error)))
           |> ignore

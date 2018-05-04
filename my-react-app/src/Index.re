@@ -13,5 +13,5 @@ ReactDOMRe.renderToElementWithId(<AllPosts postsUrl={myurl}/>, "onepost");
 
 ReactDOMRe.renderToElementWithId(<AllComments postsUrl={myurl}/>, "comments");
 
-ReactDOMRe.renderToElementWithId(<CommentInput initialText="Write a comment"/>, "comment_input");
+ReactDOMRe.renderToElementWithId(<CommentInput post_id=post_id initialText="Write a comment"/>, "comment_input");
 

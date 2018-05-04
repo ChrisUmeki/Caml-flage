@@ -18,7 +18,7 @@ function setInputElement(theRef, param) {
   return /* () */0;
 }
 
-function make(initialText, _) {
+function make(post_id, initialText, _) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -64,6 +64,7 @@ function make(initialText, _) {
               if (action.tag) {
                 Axios.post("/comment", {
                           user_id: "",
+                          post_id: post_id,
                           text: action[0]
                         }).then((function (response) {
                           return Promise.resolve((console.log(response.data), /* () */0));

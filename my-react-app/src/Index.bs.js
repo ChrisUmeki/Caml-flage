@@ -28,7 +28,7 @@ ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, A
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(myurl, /* array */[])), "comments");
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make("Write a comment", /* array */[])), "comment_input");
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(post_id, "Write a comment", /* array */[])), "comment_input");
 
 exports.url = url;
 exports.lst = lst;
