@@ -51,7 +51,7 @@ type state = {
     </div>  */
     <div> 
       <div>
-      (ReasonReact.stringToElement("new comment"))
+      (ReasonReact.stringToElement("New comment"))
       </div>
   
       <div> 
@@ -78,6 +78,10 @@ type state = {
   
         )
       />
+
+      <button onClick=(_event => send(Submit(text)))> 
+        (ReasonReact.stringToElement("Submit"))
+      </button>
       </div>
      </div>;
     },

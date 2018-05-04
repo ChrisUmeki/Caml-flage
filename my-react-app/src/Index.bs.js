@@ -8,6 +8,7 @@ var Title$ReactTemplate = require("./Title.bs.js");
 var AllPosts$ReactTemplate = require("./AllPosts.bs.js");
 var PostInput$ReactTemplate = require("./PostInput.bs.js");
 var AllComments$ReactTemplate = require("./AllComments.bs.js");
+var CommentInput$ReactTemplate = require("./CommentInput.bs.js");
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Title$ReactTemplate.make("Welcome to Caml-flage", /* array */[])), "title");
 
@@ -26,6 +27,8 @@ var myurl = "/post/" + (post_id + "/poststate.json");
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(myurl, /* array */[])), "onepost");
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(myurl, /* array */[])), "comments");
+
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make("Write a comment", /* array */[])), "comment_input");
 
 exports.url = url;
 exports.lst = lst;

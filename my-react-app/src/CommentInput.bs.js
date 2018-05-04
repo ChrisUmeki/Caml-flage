@@ -32,7 +32,7 @@ function make(initialText, _) {
           /* render */(function (param) {
               var send = param[/* send */4];
               var text = param[/* state */2][/* text */0];
-              return React.createElement("div", undefined, React.createElement("div", undefined, "new comment"), React.createElement("div", undefined, React.createElement("input", {
+              return React.createElement("div", undefined, React.createElement("div", undefined, "New comment"), React.createElement("div", undefined, React.createElement("input", {
                                   ref: Curry._1(param[/* handle */0], setInputElement),
                                   placeholder: "Write a comment",
                                   type: "text",
@@ -47,7 +47,11 @@ function make(initialText, _) {
                                   onChange: (function (evt) {
                                       return Curry._1(send, /* Change */Block.__(0, [evt.target.value]));
                                     })
-                                })));
+                                }), React.createElement("button", {
+                                  onClick: (function () {
+                                      return Curry._1(send, /* Submit */Block.__(1, [text]));
+                                    })
+                                }, "Submit")));
             }),
           /* initialState */(function () {
               return /* record */[
