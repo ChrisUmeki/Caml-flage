@@ -11,11 +11,7 @@ val state_of_json : string -> t
 
 val json_of_state : t -> Ezjsonm.t
 
-val get_curr_state : t -> string
-
 val get_comments : t -> int -> Ezjsonm.t
-
-val update_curr_state : t -> string -> unit
 
 val new_vote : t -> Ezjsonm.t -> unit
 
@@ -26,8 +22,6 @@ val update_posts : t -> Post.t -> unit
 val update_comments : t -> Comment.t -> unit
 
 val update_tags : t -> Tag.t -> unit
-
-val upcamel : t -> Post.t -> unit
 
 val get_front_posts : t -> Ezjsonm.t
 

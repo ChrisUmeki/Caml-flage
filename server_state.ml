@@ -4,7 +4,6 @@ open User
 open Tag
 
 type t = {
-  mutable curr_state : string;
   mutable users : User.t list;
   mutable posts : Post.t list;
   mutable comments : Comment.t list;
@@ -12,7 +11,6 @@ type t = {
 }
 
 let init_state = {
-  curr_state = "state";
   users = [];
   posts = [];
   comments = [];
@@ -32,8 +30,7 @@ let new_vote st j =
 (* [state_of_json filename] loads a state from a local json with filename *)
 let state_of_json filename = 
   let j = Ezjsonm.from_channel (open_in filename) in
-    {
-    curr_state = "";
+  {
     users = [];
     posts = Ezjsonm.find j ["posts"] |> Post.posts_of_json;
     comments = [];
@@ -42,7 +39,8 @@ let state_of_json filename =
 
 (* [json_of_state st] writes the current state to a json *)
 let json_of_state st = 
-  let j = `O [("users", `A []); 
+  let j = `O [
+  ("users", `A []); 
   ("posts", (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json p)))::j) [] st.posts)));
   ("comments", `A []);
   ("tags", `A [])] in
@@ -53,17 +51,12 @@ let json_of_state st =
 let get_comments st i =
   let p = List.find (fun x -> i = Post.get_id x) st.posts in
   let post = Post.to_json_front p in
-  let comment_list =
-    (`A (List.fold_left (fun j c -> (Ezjsonm.value (`O (Comment.to_json c))) :: j) [] (Post.get_children p)))
-    (* TODO:Post.get_children *)
-  in
-  `O [("posts", `A ([Ezjsonm.value (`O post)])); ("comment_list", comment_list)]
-
-let get_curr_state t =
-  t.curr_state
-
-let update_curr_state t new_state =
-  t.curr_state <- new_state
+  let f j c = (Ezjsonm.value (`O (Comment.to_json c))) :: j in
+  let comment_list = (`A (List.fold_left f [] (Post.get_children p))) in
+  `O [
+      ("posts", `A ([Ezjsonm.value (`O post)]));
+      ("comment_list", comment_list)
+     ]
 
 let update_users t (new_user : User.t) =
   if not (List.mem new_user t.users) then
@@ -85,12 +78,12 @@ let update_tags t (new_tag : Tag.t) =
   if not (List.mem new_tag t.tags) then
     t.tags <- new_tag::t.tags
 
-let upcamel t e =
-  failwith "unimplemented"
-
 let get_front_posts s =
   let l = s.posts in
-  `O [("posts", (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json_front p)))::j) [] l)))]
+  let f j p = (Ezjsonm.value (`O (Post.to_json_front p)))::j in
+  `O [
+    ("posts", (`A (List.fold_left f [] l)))
+    ]
 
 let get_next_post_id s =
   (List.length s.posts) + 1

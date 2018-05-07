@@ -54,7 +54,6 @@ module Post = struct
       timestamp = Ezjsonm.find o ["timestamp"] |> Ezjsonm.get_float;
   }
 
-(* TODO: Generate unique IDs *)
 let post_from_new o i =
   {
     id = i;
