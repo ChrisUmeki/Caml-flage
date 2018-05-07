@@ -12,4 +12,3 @@ type clientOptions = {
 };
 
 [@bs.module "auth0-js"] [@bs.new]  external createClient : (clientOptions => generatedAuth0Client) = "WebAuth";
-
