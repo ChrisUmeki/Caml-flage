@@ -4,11 +4,12 @@ open Post
 open Comment
 
 
-
+(* [front_state st] serves json data for the front page *)
 let front_state st = get "/state.json" begin fun req ->
   `Json (get_front_posts st) |> respond'
 end
 
+(* [post_state st] serves json data for the post at /post/:id *)
 let post_state st = get "/post/:id/poststate.json" begin fun req ->
   let id = param req "id" |> int_of_string in
   `Json (get_comments st id) |> respond'
@@ -33,22 +34,26 @@ let filepath_to_string f =
   close_in ic;
   Bytes.to_string s
 
+(* [front_serve] serves the front page *)
 let front_serve = get "/" begin fun req ->
   let s = filepath_to_string "my-react-app/index.html" in
   `String s |> respond'
 end
 
+(* [post_serve] serves the post with [id] with its comments. The data itself is requested by the client
+ and is served by [post_state st] *)
 let post_serve = get "/post/:id" begin fun req ->
   let s = filepath_to_string "my-react-app/comments.html" in
   `String s |> respond'
 end
 
+(* [post_serve2] serves the post with [id] with its comments but when an [/] is appended *)
 let post_serve2 = get "/post/:id/" begin fun req ->
   let s = filepath_to_string "my-react-app/comments.html" in
   `String s |> respond'
 end
 
-
+(* [vote_listen st] updates scores in [st] in response to incoming POST requests *)
 let vote_listen st = post "/vote" begin fun req ->
   let j = App.json_of_body_exn req in
   let f = fun x -> new_vote st x |> Lwt.return in
@@ -56,6 +61,7 @@ let vote_listen st = post "/vote" begin fun req ->
   `String "Vote received" |> respond'
 end
 
+(* [post_listen st] adds new posts to [st] in response to incoming POST requests *)
 let post_listen st = post "/post" begin fun req ->
   let j = App.json_of_body_exn req in
   let f = fun x -> update_posts st (Post.post_from_new (Ezjsonm.value x) (Server_state.get_next_post_id st)) |> Lwt.return in
@@ -63,6 +69,7 @@ let post_listen st = post "/post" begin fun req ->
   `String "Post made" |> respond'
 end
 
+(* [comment_listen st] adds new posts to [st] in response to incoming POST requests *)
 let comment_listen st = post "/comment" begin fun req ->
   let j = App.json_of_body_exn req in
   let f = fun x -> update_comments st (Comment.comment_from_new (Ezjsonm.value x) (Server_state.get_next_post_id st)) |> Lwt.return in
