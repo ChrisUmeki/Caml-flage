@@ -5,6 +5,6 @@ type t = {
   posts: Post.t list;
 }
 
-let posts_list tag = tag.posts
+let posts_list t = t.posts
 
-let tag_name tag = tag.name
+let tag_name t = t.name

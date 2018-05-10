@@ -39,7 +39,7 @@ let post_from_val o =
     url = None;
     user = "";
     children = Ezjsonm.find o ["children"] |> Comment.posts_of_json;
-    tag = "";
+    tag = Ezjsonm.find o ["tag"] |> Ezjsonm.get_string;
     timestamp = Ezjsonm.find o ["timestamp"] |> Ezjsonm.get_float;
   }
 
@@ -53,7 +53,7 @@ let post_from_new o i =
     url = None;
     user = "";
     children = [];
-    tag = "";
+    tag = Ezjsonm.find o ["tag"] |> Ezjsonm.get_string;
     timestamp = Unix.time ();
 }
 
