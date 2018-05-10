@@ -107,10 +107,13 @@ let () = App.empty
          |> middleware (Middleware.static ~local_path:"./my-react-app/build" ~uri_prefix:"/build")
          |> front_state my_state
          |> post_state my_state
+         |> tag_state my_state
          |> save_state my_state
          |> front_serve
          |> post_serve
          |> post_serve2
+         |> tag_serve
+         |> tag_serve2
          |> vote_listen my_state
          |> post_listen my_state
          |> comment_listen my_state
