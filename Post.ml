@@ -1,57 +1,46 @@
 open Ezjsonm
 open Comment
 
-module Post = struct
+type t = {
+    id: int;
+    mutable score: int;
+    title: string;
+    text: string;
+    has_url: bool;
+    url: string option;
+    user: string;
+    mutable children: Comment.t list;
+    tag: string;
+    timestamp: float;
+}
 
-  type t = {
-      id: int;
-      mutable score: int;
-      title: string;
-      text: string;
-      has_url: bool;
-      url: string option;
-      user: string;
-      mutable children: Comment.t list;
-      tag: string;
-      timestamp: float;
-  }
+let get_id a =
+  a.id
 
-  let get_id a =
-    a.id
+let add_reply par reply =
+  par.children <- reply::par.children
 
-  let add_reply par reply =
-    par.children <- reply::par.children
+let up_camel a =
+  a.score <- a.score + 1
 
-  let make_post a b c d =
-    failwith "Unimplemented"
+let down_camel a =
+  a.score <- a.score - 1
 
-  let make_comment txt usr par =
-    failwith "Not a comment"
+let get_score a =
+  a.score
 
-  let add_reply par reply =
-    par.children <- reply::par.children
-
-  let up_camel a =
-    a.score <- a.score + 1
-
-  let down_camel a =
-    a.score <- a.score - 1
-
-  let get_score a =
-    a.score
-
-  let post_from_val o =
-    {
-      id = Ezjsonm.find o ["post_id"] |> Ezjsonm.get_int;
-      score = Ezjsonm.find o ["score"] |> Ezjsonm.get_int;
-      title = Ezjsonm.find o ["title"] |> Ezjsonm.get_string;
-      text = Ezjsonm.find o ["text"] |> Ezjsonm.get_string;
-      has_url = false;
-      url = None;
-      user = "";
-      children = Ezjsonm.find o ["children"] |> Comment.posts_of_json;
-      tag = "";
-      timestamp = Ezjsonm.find o ["timestamp"] |> Ezjsonm.get_float;
+let post_from_val o =
+  {
+    id = Ezjsonm.find o ["post_id"] |> Ezjsonm.get_int;
+    score = Ezjsonm.find o ["score"] |> Ezjsonm.get_int;
+    title = Ezjsonm.find o ["title"] |> Ezjsonm.get_string;
+    text = Ezjsonm.find o ["text"] |> Ezjsonm.get_string;
+    has_url = false;
+    url = None;
+    user = "";
+    children = Ezjsonm.find o ["children"] |> Comment.posts_of_json;
+    tag = "";
+    timestamp = Ezjsonm.find o ["timestamp"] |> Ezjsonm.get_float;
   }
 
 let post_from_new o i =
@@ -106,6 +95,4 @@ let get_hot_score a =
           int_of_float (log10 (float_of_int z)) + (y*(int_of_float t)/45000)
 
 
-  let get_children a = a.children
-  
-end
+let get_children a = a.children
