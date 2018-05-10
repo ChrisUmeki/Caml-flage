@@ -14,7 +14,7 @@ function valueFromEvent(evt) {
 var component = ReasonReact.reducerComponent("EditField");
 
 function setInputElement(theRef, param) {
-  param[/* state */2][/* inputElement */2][0] = (theRef == null) ? /* None */0 : [theRef];
+  param[/* state */2][/* inputElement */3][0] = (theRef == null) ? /* None */0 : [theRef];
   return /* () */0;
 }
 
@@ -32,6 +32,7 @@ function make(initialText, _) {
           /* render */(function (param) {
               var send = param[/* send */4];
               var match = param[/* state */2];
+              var tag = match[/* tag */2];
               var text = match[/* text */1];
               var title = match[/* title */0];
               var handle = param[/* handle */0];
@@ -49,11 +50,19 @@ function make(initialText, _) {
                                   onChange: (function (evt) {
                                       return Curry._1(send, /* ChangeText */Block.__(1, [evt.target.value]));
                                     })
+                                }), React.createElement("input", {
+                                  ref: Curry._1(handle, setInputElement),
+                                  type: "text",
+                                  value: tag,
+                                  onChange: (function (evt) {
+                                      return Curry._1(send, /* ChangeTag */Block.__(2, [evt.target.value]));
+                                    })
                                 }), React.createElement("button", {
                                   onClick: (function () {
-                                      return Curry._1(send, /* Submit */Block.__(2, [
+                                      return Curry._1(send, /* Submit */Block.__(3, [
                                                     title,
-                                                    text
+                                                    text,
+                                                    tag
                                                   ]));
                                     })
                                 }, "Submit")));
@@ -62,6 +71,7 @@ function make(initialText, _) {
               return /* record */[
                       /* title */"Title",
                       /* text */initialText,
+                      /* tag */"Tag",
                       /* inputElement */[/* None */0]
                     ];
             }),
@@ -75,7 +85,8 @@ function make(initialText, _) {
                         return /* Update */Block.__(0, [/* record */[
                                     /* title */newTitle,
                                     /* text */state[/* text */1],
-                                    /* inputElement */state[/* inputElement */2]
+                                    /* tag */state[/* tag */2],
+                                    /* inputElement */state[/* inputElement */3]
                                   ]]);
                       });
                 case 1 : 
@@ -85,14 +96,27 @@ function make(initialText, _) {
                         return /* Update */Block.__(0, [/* record */[
                                     /* title */state[/* title */0],
                                     /* text */newText,
-                                    /* inputElement */state[/* inputElement */2]
+                                    /* tag */state[/* tag */2],
+                                    /* inputElement */state[/* inputElement */3]
                                   ]]);
                       });
                 case 2 : 
+                    var newTag = action[0];
+                    console.log(newTag);
+                    return (function (state) {
+                        return /* Update */Block.__(0, [/* record */[
+                                    /* title */state[/* title */0],
+                                    /* text */state[/* text */1],
+                                    /* tag */newTag,
+                                    /* inputElement */state[/* inputElement */3]
+                                  ]]);
+                      });
+                case 3 : 
                     Axios.post("/post", {
                               user_id: "",
                               title: action[0],
-                              text: action[1]
+                              text: action[1],
+                              tag: action[2]
                             }).then((function (response) {
                               return Promise.resolve((console.log(response.data), /* () */0));
                             })).catch((function (error) {
@@ -102,7 +126,8 @@ function make(initialText, _) {
                         return /* Update */Block.__(0, [/* record */[
                                     /* title */"Post made!",
                                     /* text */"",
-                                    /* inputElement */state[/* inputElement */2]
+                                    /* tag */"",
+                                    /* inputElement */state[/* inputElement */3]
                                   ]]);
                       });
                 

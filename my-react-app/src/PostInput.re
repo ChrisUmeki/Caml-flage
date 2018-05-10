@@ -1,13 +1,15 @@
 type state = {
   title: string, 
   text: string,
+  tag: string,
   inputElement: ref (option(Dom.element))
 };
 
 type action = 
   | ChangeTitle(string)
   | ChangeText(string)
-  | Submit(string, string); 
+  | ChangeTag(string)
+  | Submit(string, string, string); 
 
  let valueFromEvent = (evt) : string => (
   evt
@@ -22,36 +24,35 @@ state.inputElement := Js.toOption(theRef);
  
 let make = (~initialText, _) => {
   ...component,
-  initialState: () => {title: "Title", text:initialText, inputElement: ref(None)}, 
+  initialState: () => {title: "Title", text:initialText, tag:"Tag", inputElement: ref(None)}, 
 
-  /* reducer: (newText, state) => ReasonReact.Update({...state, text: newText}), */
-  /* reducer: (action, newText, state) => 
-  switch (action){
-   | Submit => ReasonReact.Update ({...state, text: newText})
-  }, */
   reducer: (action) => 
     switch (action){
-    | Submit(newTitle, newText) => 
+    | Submit(newTitle, newText, newTag) => 
       Js.Promise.(
-        Axios.postData("/post", {{"user_id": "", "title": newTitle, "text": newText}})
+        Axios.postData("/post", {{"user_id": "", "title": newTitle, "text": newText, "tag":newTag}})
         |> then_((response) => resolve(Js.log(response##data)))
         |> catch((error) => resolve(Js.log(error)))
         |> ignore
       );(
         state => 
-       ReasonReact.Update ({...state, title: "Post made!", text:""})
+       ReasonReact.Update ({...state, title: "Post made!", text:"", tag:""})
      )
     | ChangeTitle(newTitle) => Js.log(newTitle);(
          state => 
         ReasonReact.Update ({...state, title: newTitle})
       )
+    | ChangeTag(newTag) => Js.log(newTag);(
+         state => 
+        ReasonReact.Update ({...state, tag: newTag})
+      )
     | ChangeText(newText) => Js.log(newText);(
-      state => 
-     ReasonReact.Update ({...state, text: newText})
-   )
+         state => 
+        ReasonReact.Update ({...state, text: newText})
+      )
     },
 
-  render: ({state: {title, text}, send, handle}) => {
+  render: ({state: {title, text, tag}, send, handle}) => {
   <div> 
 
     <div>
@@ -73,6 +74,7 @@ let make = (~initialText, _) => {
             )
         )
     />
+
     <input
       value=text
       _type="text"
@@ -87,7 +89,23 @@ let make = (~initialText, _) => {
             )
         )
     />
-    <button onClick=(_event => send(Submit(title, text)))> 
+
+    <input
+      value=tag
+      _type="text"
+      ref=(handle(setInputElement))
+
+      onChange = (
+          (evt) =>
+            send(
+                ChangeTag(
+                    valueFromEvent(evt)
+                ),
+            )
+        )
+    />
+
+    <button onClick=(_event => send(Submit(title, text, tag)))> 
         (ReasonReact.stringToElement("Submit"))
     </button>
 
