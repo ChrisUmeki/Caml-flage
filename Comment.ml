@@ -1,7 +1,5 @@
 open Ezjsonm 
 
-module Comment = struct
-
   type t = {
     id: int;
     mutable score: int;
@@ -80,5 +78,3 @@ module Comment = struct
     ("score", `Float (float_of_int a.score));]
 
   let get_children a = a.children
-
-end
