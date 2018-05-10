@@ -85,6 +85,10 @@ let get_front_posts s =
     ("posts", (`A (List.fold_left f [] l)))
     ]
 
+(* TODO: show only posts with tag id *)
+let get_tag_posts s id =
+  get_front_posts s
+
 let get_next_post_id s =
   (List.length s.posts) + 1
 

@@ -27,4 +27,6 @@ val get_front_posts : t -> Ezjsonm.t
 
 val get_next_post_id : t -> int
 
+val get_tag_posts : t -> string -> Ezjsonm.t
+
 val get_next_comment_id : t -> int
