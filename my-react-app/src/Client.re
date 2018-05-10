@@ -1,6 +1,6 @@
 let authOptions = {
-    "domain": "yourdomain.com",
-    "clientID": "yourClientID",
+    "domain": "caml-flage.auth0.com",
+    "clientID": "NEI3vWpag1sFz5z1IoJV7U52op6HKPxb",
     "redirectUri": "http://localhost:3000/callback",
     "responseType": "token id_token",
     "scope": "openid"
