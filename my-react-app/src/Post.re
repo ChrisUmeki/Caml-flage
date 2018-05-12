@@ -49,13 +49,18 @@ let make = (~title, ~tag, ~text, ~score, ~post_id, _children) => {
     let count = string_of_int(self.state.count);
     <div>
       <div className = "one">
+
         <div className = "gr">
           <a className = "titlelink" href = {"/post/" ++ string_of_int(post_id) ++ "/"}><h4>
           (ReasonReact.stringToElement(title))</h4></a>
           <p>(ReasonReact.stringToElement(text))</p>
         </div>
-          <a className = "taglink" href = {"/tag/" ++ tag ++ "/"}> 
+
+        <div>
+        <a className = "taglink" href = {"/tag/" ++ tag ++ "/"}> 
            (ReasonReact.stringToElement("#" ++ tag)) </a>
+        </div>
+
         <button className = "up" onClick=(_event => self.send(Upvote))>
           (ReasonReact.stringToElement(up))
         </button>

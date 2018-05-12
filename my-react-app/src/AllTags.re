@@ -1,4 +1,4 @@
-/* type state = {
+type state = {
     tagsData: option(array(TagsData.tag)),
   };
   
@@ -50,9 +50,9 @@
         };
   
         <div className="display">
-        {posts}
+        {tags}
         </div>
     }
   
-  }; */
+  };
   

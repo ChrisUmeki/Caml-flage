@@ -29,10 +29,10 @@ function make(title, tag, text, score, post_id, _) {
                                 }, React.createElement("a", {
                                       className: "titlelink",
                                       href: "/post/" + (String(post_id) + "/")
-                                    }, React.createElement("h4", undefined, title)), React.createElement("p", undefined, text)), React.createElement("a", {
-                                  className: "taglink",
-                                  href: "/tag/" + (tag + "/")
-                                }, "#" + tag), React.createElement("button", {
+                                    }, React.createElement("h4", undefined, title)), React.createElement("p", undefined, text)), React.createElement("div", undefined, React.createElement("a", {
+                                      className: "taglink",
+                                      href: "/tag/" + (tag + "/")
+                                    }, "#" + tag)), React.createElement("button", {
                                   className: "up",
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Upvote */0);

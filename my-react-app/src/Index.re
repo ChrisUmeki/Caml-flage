@@ -15,3 +15,5 @@ ReactDOMRe.renderToElementWithId(<AllComments postsUrl={myurl}/>, "comments");
 
 ReactDOMRe.renderToElementWithId(<CommentInput post_id=post_id initialText="Write a comment"/>, "comment_input");
 
+ReactDOMRe.renderToElementWithId(<AllTags tagsUrl="/state.json"/>, "tags");
+

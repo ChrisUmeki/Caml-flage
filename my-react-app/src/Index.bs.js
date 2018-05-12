@@ -5,6 +5,7 @@ var List = require("bs-platform/lib/js/list.js");
 var ReactDOMRe = require("reason-react/src/ReactDOMRe.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Title$ReactTemplate = require("./Title.bs.js");
+var AllTags$ReactTemplate = require("./AllTags.bs.js");
 var AllPosts$ReactTemplate = require("./AllPosts.bs.js");
 var PostInput$ReactTemplate = require("./PostInput.bs.js");
 var AllComments$ReactTemplate = require("./AllComments.bs.js");
@@ -29,6 +30,8 @@ ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, A
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(myurl, /* array */[])), "comments");
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(post_id, "Write a comment", /* array */[])), "comment_input");
+
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllTags$ReactTemplate.make("/state.json", /* array */[])), "tags");
 
 exports.url = url;
 exports.lst = lst;
