@@ -7,6 +7,7 @@ function parseFrontPostsJson(json) {
   return /* record */[
           /* post_id */Json_decode.field("post_id", Json_decode.$$int, json),
           /* title */Json_decode.field("title", Json_decode.string, json),
+          /* tag */Json_decode.field("tag", Json_decode.string, json),
           /* text */Json_decode.field("text", Json_decode.string, json),
           /* score */Json_decode.field("score", Json_decode.$$int, json),
           /* num_comments */Json_decode.field("num_comments", Json_decode.$$int, json)

@@ -3,6 +3,7 @@
 type frontpost = {
     post_id: int, 
     title: string, 
+    tag: string,
     text: string, 
     score: int,
     num_comments: int,
@@ -12,6 +13,7 @@ let parseFrontPostsJson = (json : Js.Json.t) : frontpost =>
     Json.Decode.{
       post_id: field("post_id", int, json),
       title: field("title", string, json),
+      tag: field("tag", string, json),
       text: field("text", string, json), 
       score: field("score", int, json),
       num_comments: field("num_comments", int, json)

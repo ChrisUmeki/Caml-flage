@@ -43,7 +43,7 @@ let make = (~postsUrl, _children) => {
       | Some(postdata) => ReasonReact.arrayToElement(
           Array.map(
             (frontpost: PostsData.frontpost) => 
-            <Post title=frontpost.title text=frontpost.text score=frontpost.score post_id=frontpost.post_id/>,
+            <Post title=frontpost.title tag=frontpost.tag text=frontpost.text score=frontpost.score post_id=frontpost.post_id/>,
             postdata
           )
         )

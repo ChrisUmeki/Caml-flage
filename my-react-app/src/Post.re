@@ -15,7 +15,7 @@ let component = ReasonReact.reducerComponent("Post");
 
 /* message and children are props. `children` isn't used, therefore ignored.
     We ignore it by prepending it with an underscore */
-let make = (~title, ~text, ~score, ~post_id, _children) => {
+let make = (~title, ~tag, ~text, ~score, ~post_id, _children) => {
   /* spread the other default fields of component here and override a few */
   ...component,
 
@@ -54,7 +54,8 @@ let make = (~title, ~text, ~score, ~post_id, _children) => {
           (ReasonReact.stringToElement(title))</h4></a>
           <p>(ReasonReact.stringToElement(text))</p>
         </div>
-
+          <a className = "taglink" href = {"/tag/" ++ tag ++ "/"}> 
+          (ReasonReact.stringToElement(tag)) </a>
         <button className = "up" onClick=(_event => self.send(Upvote))>
           (ReasonReact.stringToElement(up))
         </button>
