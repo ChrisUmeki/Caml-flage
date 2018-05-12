@@ -33,11 +33,24 @@
       "has_url": false,
       "url": null,
       "user": "",
-      "children": [],
+      "children": [
+        {
+          "comment_id": 1,
+          "text": "wow what a great first post keep up the good work",
+          "score": 100,
+          "user": "coolguy4",
+          "children": [],
+          "parent_id": 1
+        }
+      ],
       "tag": "fun",
       "timestamp": 1525047920
     }
   ],
   "comments": [],
-  "tags": []
+  "tags": [
+    "test",
+    "jedi",
+    "fun"
+  ]
 }

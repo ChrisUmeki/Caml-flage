@@ -2,6 +2,7 @@ open Opium.Std
 open Server_state
 open Post
 open Comment
+open Tag
 
 
 (* [front_state st] serves json data for the front page *)
@@ -45,6 +46,11 @@ let front_serve = get "/" begin fun req ->
   let s = filepath_to_string "my-react-app/index.html" in
   `String s |> respond'
 end
+
+let all_tags = get "/" begin fun req ->
+  let s = filepath_to_string "my-react-app/tags.html" in
+  `String s |> respond'
+ end
 
 (* [post_serve] serves the post with [id] with its comments. The data itself is requested by the client
  and is served by [post_state st] *)
