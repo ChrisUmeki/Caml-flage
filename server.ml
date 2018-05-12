@@ -16,9 +16,9 @@ let post_state st = get "/post/:id/poststate.json" begin fun req ->
 end
 
 (* [tag_state st] serves json data for the tags at /tag/:tag *)
-let tag_state st = get "/tag/:id/tagstate.json" begin fun req ->
-  let id = param req "id" in
-  `Json (get_tag_posts st id) |> respond'
+let tag_state st = get "/tag/:tagid/tagstate.json" begin fun req ->
+  let tagid = param req "tagid" in
+  `Json (get_tag_posts st tagid) |> respond'
 end
 
 let save_state st = get "/savethestate" begin fun req ->
@@ -59,15 +59,15 @@ let post_serve2 = get "/post/:id/" begin fun req ->
   `String s |> respond'
 end
 
-(* [tag_serve] serves the post with [id] with its comments. The data itself is requested by the client
+(* [tag_serve] serves the posts associated with [tag]. The data itself is requested by the client
  and is served by [post_state st] *)
-let tag_serve = get "/tag/:id" begin fun req ->
+let tag_serve = get "/tag/:tag" begin fun req ->
   let s = filepath_to_string "my-react-app/tags.html" in
   `String s |> respond'
 end
 
-(* [tag_serve2] serves the post with [id] with its comments but when an [/] is appended *)
-let tag_serve2 = get "/tag/:id/" begin fun req ->
+(* [tag_serve2] serves the posts associated with [tag] but when an [/] is appended *)
+let tag_serve2 = get "/tag/:tag/" begin fun req ->
   let s = filepath_to_string "my-react-app/tags.html" in
   `String s |> respond'
 end
