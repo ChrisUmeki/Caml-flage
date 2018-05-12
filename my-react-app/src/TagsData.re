@@ -1,13 +1,10 @@
-/* type tag = string;
+type tag = string;
 
-/* let parseTagsJson = (json : Js.Json.t) : tag => 
-    Json.Decode.{ 
-      tag: field("tag", string, json),
-    }; */
-
+let parseTagsJson = (json : Js.Json.t) : tag => 
+    Json.Decode.string(json);
 
 let parseTagsResponseJson = json =>
-  Json.Decode.field("tags", Json.Decode.(array string), json);
+  Json.Decode.field("tags", Json.Decode.array(parseTagsJson), json);
 
 let fetchTags = (tagsUrl: string) =>
   Js.Promise.(
@@ -17,4 +14,4 @@ let fetchTags = (tagsUrl: string) =>
         jsonText =>
           resolve(parseTagsResponseJson(Js.Json.parseExn(jsonText)))
       )
-  ); */
+  );

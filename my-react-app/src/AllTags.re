@@ -19,7 +19,7 @@
       let handlePostsLoaded = self.reduce(tagsData => Loaded(tagsData));
       
       /* loading the data */
-      TagsData.fetchPosts(tagsUrl)
+      TagsData.fetchTags(tagsUrl)
         |> Js.Promise.then_(tagsData => {
             handlePostsLoaded(tagsData);
             Js.Promise.resolve();
@@ -42,8 +42,8 @@
         | Some(tagdata) => ReasonReact.arrayToElement(
             Array.map(
               (tag: TagsData.tag) => 
-              <Post title=frontpost.title tag=frontpost.tag text=frontpost.text score=frontpost.score post_id=frontpost.post_id/>,
-              postdata
+              <Tag tag=tag/>,
+              tagdata
             )
           )
         | None => ReasonReact.stringToElement("Loading...")
@@ -54,5 +54,5 @@
         </div>
     }
   
-  };
-   */
+  }; */
+  
