@@ -55,7 +55,7 @@ let make = (~title, ~tag, ~text, ~score, ~post_id, _children) => {
           <p>(ReasonReact.stringToElement(text))</p>
         </div>
           <a className = "taglink" href = {"/tag/" ++ tag ++ "/"}> 
-          (ReasonReact.stringToElement(tag)) </a>
+           (ReasonReact.stringToElement("#" ++ tag)) </a>
         <button className = "up" onClick=(_event => self.send(Upvote))>
           (ReasonReact.stringToElement(up))
         </button>

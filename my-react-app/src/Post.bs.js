@@ -32,7 +32,7 @@ function make(title, tag, text, score, post_id, _) {
                                     }, React.createElement("h4", undefined, title)), React.createElement("p", undefined, text)), React.createElement("a", {
                                   className: "taglink",
                                   href: "/tag/" + (tag + "/")
-                                }, tag), React.createElement("button", {
+                                }, "#" + tag), React.createElement("button", {
                                   className: "up",
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Upvote */0);
