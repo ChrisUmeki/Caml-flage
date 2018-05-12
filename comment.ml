@@ -72,9 +72,14 @@ open Ezjsonm
   let to_json_front a = 
     failwith "Not used"
 
-  let to_json a = 
+  let rec helper_c c = Ezjsonm.value (`O (to_json c))
+
+  and to_json a = 
     [("comment_id", Ezjsonm.int a.id);
     ("text", `String a.text); 
-    ("score", `Float (float_of_int a.score));]
+    ("score", `Float (float_of_int a.score));
+    ("user", Ezjsonm.string a.user);
+    ("children", `A (List.map helper_c a.children));
+    ("comment_id", Ezjsonm.int a.parent_id);]
 
   let get_children a = a.children
