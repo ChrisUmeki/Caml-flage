@@ -18,6 +18,7 @@
         }
       ],
       "num_comments": 0,
+      "tag": "fun",
       "timestamp": 1525047920
     },
     {
@@ -28,6 +29,7 @@
       "user" : "fakeuser42",
       "score": 42,
       "children": [],
+      "tag": "jedi",
       "num_comments": 0,
       "timestamp": 1525047930
     },
@@ -39,12 +41,11 @@
       "user" : "fakeuser42",
       "score": -200,
       "children": [],
+      "tag": "test",
       "num_comments": 4,
       "timestamp": 1525047990
     }
   ],
-  "tags" : [
-
-  ]
+  "tags" : ["test", "jedi", "fun"]
 
 }
