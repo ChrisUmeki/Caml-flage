@@ -23,33 +23,8 @@ open Ezjsonm
 
   let get_par a = a.parent_id
 
-  let make_post a b c d =
-    failwith "Not a post"
-
   let add_reply par reply =
     par.children <- reply::par.children
-
-  let make_comment txt usr par =
-    let reply = {
-      id = 0;
-      score = 0;
-      text = txt;
-      user = usr;
-      children = [];
-      parent_id = get_id par;
-    } in
-      add_reply par reply;
-      reply
-
-  let comment_from_val o =
-    {
-      id = Ezjsonm.find o ["comment_id"] |> Ezjsonm.get_int;
-      score = Ezjsonm.find o ["score"] |> Ezjsonm.get_int;
-      text = Ezjsonm.find o ["text"] |> Ezjsonm.get_string;
-      user = "";
-      children = [];
-      parent_id = 0;
-    }
 
   let comment_from_new o i =
     {
@@ -60,17 +35,20 @@ open Ezjsonm
       children = [];
       parent_id = Ezjsonm.find o ["post_id"] |> Ezjsonm.get_int;
     }
-  
 
-  let posts_of_json j = match j with
+  let comment_from_val o =
+    {
+      id = Ezjsonm.find o ["comment_id"] |> Ezjsonm.get_int;
+      score = Ezjsonm.find o ["score"] |> Ezjsonm.get_int;
+      text = Ezjsonm.find o ["text"] |> Ezjsonm.get_string;
+      user = Ezjsonm.find o ["user"] |> Ezjsonm.get_string;
+      children = []; (* IMPLEMENT COMMENTS ON COMMENTS *)
+      parent_id = Ezjsonm.find o ["parent_id"] |> Ezjsonm.get_int;
+    }
+
+  let comments_of_json j = match j with
 | `A j' -> List.map (fun o -> comment_from_val o) j'
 | _ -> raise (Failure "bad json")
-
-  let post_from_new o = 
-    failwith "Not yet"
-
-  let to_json_front a = 
-    failwith "Not used"
 
   let rec helper_c c = Ezjsonm.value (`O (to_json c))
 
@@ -80,6 +58,6 @@ open Ezjsonm
     ("score", `Float (float_of_int a.score));
     ("user", Ezjsonm.string a.user);
     ("children", `A (List.map helper_c a.children));
-    ("comment_id", Ezjsonm.int a.parent_id);]
+    ("parent_id", Ezjsonm.int a.parent_id);]
 
   let get_children a = a.children

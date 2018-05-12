@@ -38,7 +38,7 @@ let post_from_val o =
     has_url = false;
     url = None;
     user = "";
-    children = Ezjsonm.find o ["children"] |> Comment.posts_of_json;
+    children = Ezjsonm.find o ["children"] |> comments_of_json;
     tag = Ezjsonm.find o ["tag"] |> Ezjsonm.get_string;
     timestamp = Ezjsonm.find o ["timestamp"] |> Ezjsonm.get_float;
   }
@@ -72,6 +72,8 @@ let to_json_front a =
   ("num_comments", `Float (float_of_int (List.length a.children)));
   ("tag", `String a.tag)]
 
+let helper_c c = Ezjsonm.value (`O (Comment.to_json c))
+
 (* [to_json a] extracts all the data of a post to json
 *)
 let to_json a = 
@@ -82,7 +84,7 @@ let to_json a =
   ("has_url", `Bool a.has_url); 
   ("url", match a.url with | None -> `Null | Some x -> `String x); 
   ("user", `String a.user); 
-  ("children", `A []); (* IMPLEMENT LATER *)
+  ("children", `A (List.map helper_c a.children)); (* IMPLEMENT LATER *)
   ("tag", `String a.tag); 
   ("timestamp", `Float a.timestamp);]
 
