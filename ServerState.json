@@ -14,7 +14,10 @@
         {
           "comment_id": 1,
           "text": "wow what a great first post keep up the good work",
-          "score": 100
+          "score": 100,
+          "user": "coolguy4",
+          "children": [],
+          "parent_id": 1
         }
       ],
       "num_comments": 0,
