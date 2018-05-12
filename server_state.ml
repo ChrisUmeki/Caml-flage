@@ -82,7 +82,8 @@ let get_front_posts s =
   let l = s.posts in
   let f j p = (Ezjsonm.value (`O (Post.to_json_front p)))::j in
   `O [
-    ("posts", (`A (List.fold_left f [] l)))
+    ("posts", (`A (List.fold_left f [] l)));
+    ("tags", (`A []))
     ]
 
 (* TODO: show only posts with tag id *)

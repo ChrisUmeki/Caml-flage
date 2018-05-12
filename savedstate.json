@@ -1,0 +1,43 @@
+{
+  "users": [],
+  "posts": [
+    {
+      "post_id": 3,
+      "score": -200,
+      "title": "zaaaaaaardoz",
+      "text": "sample text",
+      "has_url": false,
+      "url": null,
+      "user": "",
+      "children": [],
+      "tag": "test",
+      "timestamp": 1525047990
+    },
+    {
+      "post_id": 2,
+      "score": 42,
+      "title": "I thought not. It's not a story the Jedi would tell you. It's a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life... He had such a knowledge of the dark side that he could even keep the ones he cared about from dying. The dark side of the Force is a pathway to many abilities some consider to be unnatural. He became so powerful... the only thing he was afraid of was losing his power, which eventually, of course, he did. Unfortunately, he taught his apprentice everything he knew, then his apprentice killed him in his sleep. Ironic, he could save others from death, but not himself.",
+      "text": "sample text",
+      "has_url": false,
+      "url": null,
+      "user": "",
+      "children": [],
+      "tag": "jedi",
+      "timestamp": 1525047930
+    },
+    {
+      "post_id": 1,
+      "score": 42,
+      "title": "first post!",
+      "text": "sample text",
+      "has_url": false,
+      "url": null,
+      "user": "",
+      "children": [],
+      "tag": "fun",
+      "timestamp": 1525047920
+    }
+  ],
+  "comments": [],
+  "tags": []
+}

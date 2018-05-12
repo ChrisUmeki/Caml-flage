@@ -69,7 +69,8 @@ let to_json_front a =
   ("title", `String a.title); 
   ("text", `String a.text);
   ("score", `Float (float_of_int a.score));
-  ("num_comments", `Float (float_of_int (List.length a.children)));]
+  ("num_comments", `Float (float_of_int (List.length a.children)));
+  ("tag", `String a.tag)]
 
 (* [to_json a] extracts all the data of a post to json
 *)
