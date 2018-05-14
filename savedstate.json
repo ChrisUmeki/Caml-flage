@@ -45,12 +45,41 @@
       ],
       "tag": "fun",
       "timestamp": 1525047920
+    },
+    {
+      "post_id": 4,
+      "score": 1,
+      "title": "Post number 4",
+      "text": "this time we're saving the state",
+      "has_url": false,
+      "url": null,
+      "user": "",
+      "children": [
+        {
+          "comment_id": 3,
+          "text": "another one",
+          "score": 1,
+          "user": "",
+          "children": [],
+          "parent_id": 4
+        },
+        {
+          "comment_id": 2,
+          "text": "with comments too",
+          "score": 1,
+          "user": "",
+          "children": [],
+          "parent_id": 4
+        }
+      ],
+      "tag": "fun",
+      "timestamp": 1526257153
     }
   ],
-  "comments": [],
   "tags": [
     "test",
     "jedi",
     "fun"
-  ]
+  ],
+  "numcomments": 3
 }

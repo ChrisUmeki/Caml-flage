@@ -6,15 +6,15 @@ open Tag
 type t = {
   mutable users : User.t list;
   mutable posts : Post.t list;
-  mutable comments : Comment.t list;
   mutable tags : Tag.t list;
+  numcomments : int ref;
 }
 
-let init_state = {
+let empty_state = {
   users = [];
   posts = [];
-  comments = [];
   tags = [];
+  numcomments = ref 0;
 }
 
 (* [new_vote st j] updates the state by incrementing or decrementing a Post score
@@ -38,8 +38,8 @@ let state_of_json filename =
   {
     users = [];
     posts = Ezjsonm.find j ["posts"] |> Post.posts_of_json;
-    comments = [];
     tags = Ezjsonm.find j ["tags"] |> build_tags;
+    numcomments = Ezjsonm.find j ["numcomments"] |> Ezjsonm.get_int |> ref;
   }
 
 (* [json_of_state st] writes the current state to a json *)
@@ -47,8 +47,8 @@ let json_of_state st =
   let j = `O [
   ("users", `A []); 
   ("posts", (`A (List.fold_left (fun j p -> (Ezjsonm.value (`O (Post.to_json p)))::j) [] st.posts)));
-  ("comments", `A []);
-  ("tags", `A (List.map (fun tag -> `String (tag_name tag)) st.tags))] in
+  ("tags", `A (List.map (fun tag -> `String (tag_name tag)) st.tags));
+  ("numcomments", Ezjsonm.int !(st.numcomments))] in
   j
 
 (* [get_comments st i] extracts from st all the information to display a page for post i
@@ -77,6 +77,7 @@ let update_comments st (c : Comment.t) =
   let f = (fun x -> Post.get_id x = Comment.get_par c) in
   if (List.exists f st.posts) then
     let p = List.find f st.posts in
+    incr st.numcomments;
     Post.add_reply p c
     
 let update_tags t (new_tag : Tag.t) =
@@ -99,7 +100,7 @@ let get_next_post_id s =
   (List.length s.posts) + 1
 
 let get_next_comment_id s =
-  (List.length s.comments) + 1
+  !(s.numcomments) + 1
 
 
 

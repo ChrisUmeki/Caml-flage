@@ -22,6 +22,8 @@ let tag_state st = get "/tag/:tagid/tagstate.json" begin fun req ->
   `Json (get_tag_posts st tagid) |> respond'
 end
 
+(* [save_state st] saves the data in st as a json and also displays it to the client
+  (for debugging/testing purposes) *)
 let save_state st = get "/savethestate" begin fun req ->
   let j = json_of_state st in
   let out_file = open_out "savedstate.json" in
@@ -97,7 +99,7 @@ end
 (* [comment_listen st] adds new posts to [st] in response to incoming POST requests *)
 let comment_listen st = post "/comment" begin fun req ->
   let j = App.json_of_body_exn req in
-  let f = fun x -> update_comments st (Comment.comment_from_new (Ezjsonm.value x) (Server_state.get_next_post_id st)) |> Lwt.return in
+  let f = fun x -> update_comments st (Comment.comment_from_new (Ezjsonm.value x) (Server_state.get_next_comment_id st)) |> Lwt.return in
   Lwt.bind j f |> ignore;
   `String "Comment made" |> respond'
 end
@@ -106,7 +108,7 @@ let not_found = get "/*" begin fun req ->
   `String ("Not found") |> respond'
 end
 
-let my_state = state_of_json "ServerState.json"
+let my_state = state_of_json "savedstate.json"
 
 let () = App.empty
          |> middleware (Middleware.static ~local_path:"./my-react-app/public" ~uri_prefix:"/public")

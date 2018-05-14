@@ -5,7 +5,7 @@ open Tag
 
 type t
 
-val init_state : t
+val empty_state : t
 
 val state_of_json : string -> t
 
