@@ -2,6 +2,7 @@ open Post
 open Comment
 open User
 open Tag
+open Ezjsonm
 
 type t = {
   mutable users : User.t list;

@@ -43,13 +43,15 @@ open Ezjsonm
       parent_id = Ezjsonm.find o ["post_id"] |> Ezjsonm.get_int;
     }
 
-  let comment_from_val o =
+  let rec comment_from_val o =
+    let f v = comment_from_val v in
+    let childrenlst = Ezjsonm.find o ["children"] |> Ezjsonm.get_list comment_from_val in
     {
       id = Ezjsonm.find o ["comment_id"] |> Ezjsonm.get_int;
       score = Ezjsonm.find o ["score"] |> Ezjsonm.get_int;
       text = Ezjsonm.find o ["text"] |> Ezjsonm.get_string;
       user = Ezjsonm.find o ["user"] |> Ezjsonm.get_string;
-      children = []; (* IMPLEMENT COMMENTS ON COMMENTS *)
+      children = childrenlst;
       parent_id = Ezjsonm.find o ["parent_id"] |> Ezjsonm.get_int;
     }
 

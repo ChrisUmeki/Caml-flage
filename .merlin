@@ -1,4 +1,4 @@
-PKG opium, ounit
+PKG opium, ounit, ezjsonm
 
 B _build/
 S *
