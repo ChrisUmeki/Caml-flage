@@ -7,27 +7,36 @@ ReactDOMRe.renderToElementWithId(<AllPosts postsUrl="/state.json"/>, "posts");
 let url = ReasonReact.Router.dangerouslyGetInitialUrl ();
 let lst = url.path;
 
+let post_id = List.nth(lst, List.length(lst) - 1);
+
+let renderToElement = (posttype, myurl) => {
+    if (posttype == "post") {
+
+    ReactDOMRe.renderToElementWithId(<AllPosts postsUrl={myurl}/>, "onepost");
+
+    ReactDOMRe.renderToElementWithId(<AllComments postsUrl={myurl}/>, "comments"); 
+
+    ReactDOMRe.renderToElementWithId(<CommentInput post_id=post_id initialText="Write a comment"/>, "comment_input");
+
+    } else {
+
+    ReactDOMRe.renderToElementWithId(<AllPosts postsUrl={myurl}/>, "poststag");
+
+    }
+};
+
+
 let geturl = url => {
     switch (url) {
-    | ["post", id] => "/post/"++id++"/poststate.json"
-    | ["tag", id] => "/tag/"++id++"/tagstate.json"
-    | _ => "invalidurl"
+    | ["post", id] => renderToElement("post", "/post/"++id++"/poststate.json")
+    | ["tag", id] => renderToElement("tag", "/tag/"++id++"/tagstate.json")
+    | _ => ()
     }
 };
 
 let myurl = geturl(lst);
 
-let post_id = List.nth(lst, List.length(lst) - 1);
-
-ReactDOMRe.renderToElementWithId(<AllPosts postsUrl={myurl}/>, "onepost");
-
-ReactDOMRe.renderToElementWithId(<AllComments postsUrl={myurl}/>, "comments"); 
-
-ReactDOMRe.renderToElementWithId(<CommentInput post_id=post_id initialText="Write a comment"/>, "comment_input");
-
 ReactDOMRe.renderToElementWithId(<AllTags tagsUrl="/state.json"/>, "tags");
-
-ReactDOMRe.renderToElementWithId(<AllPosts postsUrl={myurl}/>, "poststag");
 
 /* let tagsurl = ReasonReact.Router.dangerouslyGetInitialUrl (); 
 let lst2 = tagsurl.path; 
