@@ -97,8 +97,7 @@ let posts_of_json j = match j with
 | _ -> raise (Failure "bad json")
 
 (* [to_json_front a] extracts only the data that is needed to display a post
-* on the front page to a json
-*)
+* on the front page to a json *)
 let to_json_front a = 
   [("post_id", Ezjsonm.int a.id);
   ("title", `String a.title); 
@@ -107,10 +106,11 @@ let to_json_front a =
   ("num_comments", `Float (float_of_int (List.length a.children)));
   ("tag", `String a.tag)]
 
+(* [helper_c c] is a helper function used in to_json to allow for easy conversion from type comment to Ezjsonm.value, 
+  * so that a list of Ezjsonm value objects representing the children of a post can be saved to JSON. *)
 let helper_c c = Ezjsonm.value (`O (Comment.to_json c))
 
-(* [to_json a] extracts all the data of a post to json
-*)
+(* [to_json a] extracts all the data of a post to json *)
 let to_json a = 
   [("post_id", Ezjsonm.int a.id);
   ("score", `Float (float_of_int a.score));
@@ -119,7 +119,7 @@ let to_json a =
   ("has_url", `Bool a.has_url); 
   ("url", match a.url with | None -> `Null | Some x -> `String x); 
   ("user", `String a.user); 
-  ("children", `A (List.map helper_c a.children)); (* IMPLEMENT LATER *)
+  ("children", `A (List.map helper_c a.children)); 
   ("tag", `String a.tag); 
   ("timestamp", `Float a.timestamp);]
 

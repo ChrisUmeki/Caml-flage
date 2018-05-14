@@ -30,7 +30,7 @@ val get_children : t -> t list
 (* [comment_from_val o] is a comment made from Ezjsonm.value object [o] *)
 val comment_from_val : Ezjsonm.value -> t
 
-(* [comment_from_new o] is a new comment made from Ezjsonm.value object [o] recieved from user, and a unique id [i] *)
+(* [comment_from_new o i] is a new comment made from Ezjsonm.value object [o] recieved from user, and a unique id [i] *)
 val comment_from_new : Ezjsonm.value -> int -> t
 
 (* [comment_from_params i s t u c p] is a new comment made from parameters for each field. It is primarily used for testing. *)
