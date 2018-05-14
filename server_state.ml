@@ -30,17 +30,26 @@ let new_vote st j =
 (* TODO: Fill empty tags with post refs *)
 let build_tags j = 
   let lst = Ezjsonm.get_list (fun s -> match s with `String s' -> s' | _ -> "") j in
-  List.map (fun s -> empty s) lst
+  List.map (fun s -> Tag.empty s) lst
+
+let fill_tags st =
+  let findtag mypost = List.find (fun x -> Post.get_tag mypost = Tag.tag_name x) st.tags in
+  let f mypost = Tag.add_post (findtag mypost) mypost; mypost in
+  List.map f st.posts |> ignore; ()
+
 
 (* [state_of_json filename] loads a state from a local json with filename *)
 let state_of_json filename = 
   let j = Ezjsonm.from_channel (open_in filename) in
+  let st =
   {
     users = [];
     posts = Ezjsonm.find j ["posts"] |> Post.posts_of_json;
     tags = Ezjsonm.find j ["tags"] |> build_tags;
     numcomments = Ezjsonm.find j ["numcomments"] |> Ezjsonm.get_int |> ref;
-  }
+  } in
+  fill_tags st;
+  st
 
 (* [json_of_state st] writes the current state to a json *)
 let json_of_state st = 
@@ -94,7 +103,12 @@ let get_front_posts s =
 
 (* TODO: show only posts with tag id *)
 let get_tag_posts s id =
-  get_front_posts s
+  let mytag = List.find (fun x -> id = Tag.tag_name x) s.tags in
+  let l = Tag.posts_list mytag in
+  let f j p = (Ezjsonm.value (`O (Post.to_json_front p)))::j in
+  `O [
+    ("posts", (`A (List.fold_left f [] l)))
+  ]
 
 let get_next_post_id s =
   (List.length s.posts) + 1

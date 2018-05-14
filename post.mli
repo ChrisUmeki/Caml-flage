@@ -27,5 +27,6 @@ val to_json : t -> (string * Ezjsonm.value) list
 
 val get_hot_score : t -> int
 
-
 val get_children : t -> Comment.t list
+
+val get_tag : t -> string

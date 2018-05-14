@@ -97,5 +97,6 @@ let get_hot_score a =
         let z = if x > 1 then x else 1 in
           int_of_float (log10 (float_of_int z)) + (y*(int_of_float t)/45000)
 
-
 let get_children a = a.children
+
+let get_tag a = a.tag
