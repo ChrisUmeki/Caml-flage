@@ -5,13 +5,14 @@ default:
 	@echo "  make clean.........remove build files"
 
 run:
-	sleep 2 && open "http://localhost:3000" & ocamlbuild -pkg opium server.native && ./server.native;
+	@sleep 2 && open "http://localhost:3000" && echo "" && echo "Press ctrl-c to quit!" &
+	@ocamlbuild -pkg opium server.native && ./server.native
 
 server:
-	ocamlbuild -pkg opium server.native
+	@ocamlbuild -pkg opium server.native
 
 compile:
-	ocamlbuild -pkg opium server.native
+	@ocamlbuild -pkg opium server.native
 
 clean:
-	ocamlbuild -clean
+	@ocamlbuild -clean
