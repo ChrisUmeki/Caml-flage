@@ -1,3 +1,4 @@
+/* Comment.re displays one comment */ 
 type state = {
     count: int,
   };
@@ -10,7 +11,7 @@ let component = ReasonReact.reducerComponent("Comment");
 
 
 let make = (~text, ~score, ~comment_id, _children) => {
-  /* spread the other default fields of component here and override a few */
+
   ...component,
 
   initialState: () => {count: score},

@@ -1,3 +1,5 @@
+/* PostInput.re are several text fields that the user fills out in order to make a post
+and sends the text fields to back end */ 
 type state = {
   title: string, 
   text: string,
@@ -113,26 +115,3 @@ let make = (~initialText, _) => {
    </div>;
   },
 }; 
-
-/* onKeyDown=(
-          (evt) =>
-          if (ReactEventRe.Keyboard.key(evt) == "Enter") {
-          send(Submit(text))
-        } 
-      ) */
-
-/* onChange= (reduce((evt) => valueFromEvent(evt))) */
-
-   /* onKeyDown=(
-        (evt) =>
-          if (ReactEventRe.Keyboard.key(evt) == "Enter") {
-            onSubmit(text); 
-            onSubmit = (_event => self.reduce(Submit)); 
-            (state.reduce(Submit, text))
-            (reduce(() => ""))() 
-          } 
-           } else if (ReactEventRe.Keyboard.key(evt) == "Escape") {
-            onSubmit(initialText);
-            (reduce(() => ""))()
-          } 
-      ) */

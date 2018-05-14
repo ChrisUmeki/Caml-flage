@@ -1,4 +1,4 @@
-
+/* PostsData.re parses the json for posts and stores it in type frontpost */
 
 type frontpost = {
     post_id: int, 
@@ -19,9 +19,6 @@ let parseFrontPostsJson = (json : Js.Json.t) : frontpost =>
       num_comments: field("num_comments", int, json)
     
     };
-
-    /* field ("comment_list", list ({comment_id: field("comment_id",int, json), text: field( "text", string, json), score:field("score", int,json)}), json),
-       */
 
 /* posts is name of array */
 let parseFrontPostsResponseJson = json =>

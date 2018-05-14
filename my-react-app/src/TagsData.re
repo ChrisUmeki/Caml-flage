@@ -1,3 +1,4 @@
+/* TagsData.re parses the json file and creates a type tag */
 type tag = string;
 
 let parseTagsJson = (json : Js.Json.t) : tag => 

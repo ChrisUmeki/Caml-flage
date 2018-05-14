@@ -1,3 +1,4 @@
+/* CommentData parses the json into type comment */ 
 type comment = {
     comment_id: int, 
     text: string, 

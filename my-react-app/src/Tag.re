@@ -1,4 +1,4 @@
-/* This page displays one tag as a link */ 
+/* Tag.re displays one tag as a link */ 
 
 let component = ReasonReact.statelessComponent("Tag");
 

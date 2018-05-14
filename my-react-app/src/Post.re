@@ -1,28 +1,22 @@
-
-/* State declaration */
+/* Post.re creates one post */
 type state = {
     count: int,
   };
   
-/* Action declaration */
 type action =
   | Upvote
   | Downvote;
   
-/* Component template declaration.
-    Needs to be **after** state and action declarations! */
 let component = ReasonReact.reducerComponent("Post");
 
-/* message and children are props. `children` isn't used, therefore ignored.
-    We ignore it by prepending it with an underscore */
 let make = (~title, ~tag, ~text, ~score, ~post_id, _children) => {
-  /* spread the other default fields of component here and override a few */
   ...component,
 
   initialState: () => {count: score},
 
-  /* State transitions */
+  /* The action passed in determines what changes will be made to the state */
   reducer: (action, state) =>
+
     switch (action) {
     | Upvote => 
       Js.Promise.(
@@ -41,12 +35,15 @@ let make = (~title, ~tag, ~text, ~score, ~post_id, _children) => {
       |> ignore
     );
     ReasonReact.Update({...state, count: state.count - 1});
+
     },
 
   render: self => {
+
     let up ="UpCaml";
     let down = "DownCaml";
     let count = string_of_int(self.state.count);
+
     <div>
       <div className = "one">
 
@@ -78,6 +75,7 @@ let make = (~title, ~tag, ~text, ~score, ~post_id, _children) => {
         <div>
           (ReasonReact.stringToElement("number of camels: " ++ count))
         </div>
+
       </div>
     </div>;
   },
