@@ -27,6 +27,8 @@ ReactDOMRe.renderToElementWithId(<CommentInput post_id=post_id initialText="Writ
 
 ReactDOMRe.renderToElementWithId(<AllTags tagsUrl="/state.json"/>, "tags");
 
+ReactDOMRe.renderToElementWithId(<AllPosts postsUrl={myurl}/>, "poststag");
+
 /* let tagsurl = ReasonReact.Router.dangerouslyGetInitialUrl (); 
 let lst2 = tagsurl.path; 
 let tagname = List.nth(lst2, List.length(lst2) - 1); 

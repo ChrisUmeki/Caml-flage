@@ -58,6 +58,8 @@ ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, C
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllTags$ReactTemplate.make("/state.json", /* array */[])), "tags");
 
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(myurl, /* array */[])), "poststag");
+
 exports.url = url;
 exports.lst = lst;
 exports.geturl = geturl;
