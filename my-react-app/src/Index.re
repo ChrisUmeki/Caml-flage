@@ -40,10 +40,3 @@ let myurl = geturl(lst);
 
 ReactDOMRe.renderToElementWithId(<AllTags tagsUrl="/state.json"/>, "tags");
 
-/* let tagsurl = ReasonReact.Router.dangerouslyGetInitialUrl (); 
-let lst2 = tagsurl.path; 
-let tagname = List.nth(lst2, List.length(lst2) - 1); 
-let newtagsurl = "/tag/"++tagname++"/tagstate.json";  */
-
-/* ReactDOMRe.renderToElementWithId(<AllPosts postsUrl = {newtagsurl}/>, "poststag");  */
-
