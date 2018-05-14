@@ -65,6 +65,12 @@ let make = (~title, ~tag, ~text, ~score, ~post_id, _children) => {
           (ReasonReact.stringToElement(up))
         </button>
 
+        <a href= {"/post/" ++ string_of_int(post_id) ++ "/"}> 
+        <button className = "comment">
+          (ReasonReact.stringToElement("Comment"))
+        </button>
+        </a>
+
         <button className = "down" onClick=(_event => self.send(Downvote))>
           (ReasonReact.stringToElement(down))
         </button>

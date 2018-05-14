@@ -37,7 +37,11 @@ function make(title, tag, text, score, post_id, _) {
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Upvote */0);
                                     })
-                                }, "UpCaml"), React.createElement("button", {
+                                }, "UpCaml"), React.createElement("a", {
+                                  href: "/post/" + (String(post_id) + "/")
+                                }, React.createElement("button", {
+                                      className: "comment"
+                                    }, "Comment")), React.createElement("button", {
                                   className: "down",
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Downvote */1);

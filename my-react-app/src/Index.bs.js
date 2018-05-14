@@ -23,12 +23,13 @@ var lst = url[/* path */0];
 
 var post_id = List.nth(lst, List.length(lst) - 1 | 0);
 
-function renderToElement(posttype, myurl) {
+function renderToElement(posttype, myurl, id) {
   if (posttype === "post") {
     ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(myurl, /* array */[])), "onepost");
     ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(myurl, /* array */[])), "comments");
     return ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(post_id, "Write a comment", /* array */[])), "comment_input");
   } else {
+    ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Title$ReactTemplate.make(id, /* array */[])), "tagtitle");
     return ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(myurl, /* array */[])), "poststag");
   }
 }
@@ -39,14 +40,16 @@ function geturl(url) {
       case "post" : 
           var match = url[1];
           if (match && !match[1]) {
-            return renderToElement("post", "/post/" + (match[0] + "/poststate.json"));
+            var id = match[0];
+            return renderToElement("post", "/post/" + (id + "/poststate.json"), id);
           } else {
             return /* () */0;
           }
       case "tag" : 
           var match$1 = url[1];
           if (match$1 && !match$1[1]) {
-            return renderToElement("tag", "/tag/" + (match$1[0] + "/tagstate.json"));
+            var id$1 = match$1[0];
+            return renderToElement("tag", "/tag/" + (id$1 + "/tagstate.json"), id$1);
           } else {
             return /* () */0;
           }

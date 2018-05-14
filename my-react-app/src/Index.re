@@ -9,7 +9,7 @@ let lst = url.path;
 
 let post_id = List.nth(lst, List.length(lst) - 1);
 
-let renderToElement = (posttype, myurl) => {
+let renderToElement = (posttype, myurl, id) => {
     if (posttype == "post") {
 
     ReactDOMRe.renderToElementWithId(<AllPosts postsUrl={myurl}/>, "onepost");
@@ -20,6 +20,8 @@ let renderToElement = (posttype, myurl) => {
 
     } else {
 
+    ReactDOMRe.renderToElementWithId(<Title message=id />, "tagtitle");
+
     ReactDOMRe.renderToElementWithId(<AllPosts postsUrl={myurl}/>, "poststag");
 
     }
@@ -28,8 +30,8 @@ let renderToElement = (posttype, myurl) => {
 
 let geturl = url => {
     switch (url) {
-    | ["post", id] => renderToElement("post", "/post/"++id++"/poststate.json")
-    | ["tag", id] => renderToElement("tag", "/tag/"++id++"/tagstate.json")
+    | ["post", id] => renderToElement("post", "/post/"++id++"/poststate.json", id)
+    | ["tag", id] => renderToElement("tag", "/tag/"++id++"/tagstate.json", id)
     | _ => ()
     }
 };
@@ -37,11 +39,4 @@ let geturl = url => {
 let myurl = geturl(lst);
 
 ReactDOMRe.renderToElementWithId(<AllTags tagsUrl="/state.json"/>, "tags");
-
-/* let tagsurl = ReasonReact.Router.dangerouslyGetInitialUrl (); 
-let lst2 = tagsurl.path; 
-let tagname = List.nth(lst2, List.length(lst2) - 1); 
-let newtagsurl = "/tag/"++tagname++"/tagstate.json";  */
-
-/* ReactDOMRe.renderToElementWithId(<AllPosts postsUrl = {newtagsurl}/>, "poststag");  */
 
