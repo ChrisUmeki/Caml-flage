@@ -22,12 +22,15 @@ val get_par : t -> int
 
 val add_reply : t -> t -> unit
 
+val get_children : t -> t list
+
 val comment_from_val : Ezjsonm.value -> t
 
 val comment_from_new : Ezjsonm.value -> int -> t
+
+val comment_from_params : int -> int -> string -> string -> t list -> int -> t
 
 val comments_of_json : Ezjsonm.value -> t list
 
 val to_json : t -> (string * Ezjsonm.value) list
 
-val get_children : t -> t list

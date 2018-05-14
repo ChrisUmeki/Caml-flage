@@ -46,6 +46,16 @@ open Ezjsonm
       parent_id = Ezjsonm.find o ["parent_id"] |> Ezjsonm.get_int;
     }
 
+  let comment_from_params i s t u c p =
+    {
+      id = i;
+      score = s;
+      text = t;
+      user = u;
+      children = c; 
+      parent_id = p;
+    }
+
   let comments_of_json j = match j with
 | `A j' -> List.map (fun o -> comment_from_val o) j'
 | _ -> raise (Failure "bad json")

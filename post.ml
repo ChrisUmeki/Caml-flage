@@ -29,6 +29,17 @@ let down_camel a =
 let get_score a =
   a.score
 
+let get_children a = a.children
+
+let get_hot_score a = 
+  let t = a.timestamp -. 1134028003. in 
+    let y = if a.score > 0 then 1 
+            else if a.score = 0 then 0 
+            else -1 in 
+      let x = abs a.score in
+        let z = if x > 1 then x else 1 in
+          int_of_float (log10 (float_of_int z)) + (y*(int_of_float t)/45000)
+
 let post_from_val o =
   {
     id = Ezjsonm.find o ["post_id"] |> Ezjsonm.get_int;
@@ -55,6 +66,20 @@ let post_from_new o i =
     children = [];
     tag = Ezjsonm.find o ["tag"] |> Ezjsonm.get_string;
     timestamp = Unix.time ();
+}
+
+let post_from_params i s ti te h url usr chld tag ts =
+  {
+    id = i;
+    score = s;
+    title = ti;
+    text = te;
+    has_url =h;
+    url = url;
+    user = usr;
+    children = chld;
+    tag = tag;
+    timestamp = ts;
 }
 
 let posts_of_json j = match j with
@@ -88,14 +113,5 @@ let to_json a =
   ("tag", `String a.tag); 
   ("timestamp", `Float a.timestamp);]
 
-let get_hot_score a = 
-  let t = a.timestamp -. 1134028003. in 
-    let y = if a.score > 0 then 1 
-            else if a.score = 0 then 0 
-            else -1 in 
-      let x = abs a.score in
-        let z = if x > 1 then x else 1 in
-          int_of_float (log10 (float_of_int z)) + (y*(int_of_float t)/45000)
 
 
-let get_children a = a.children
