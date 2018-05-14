@@ -93,8 +93,12 @@ let update_tags t (new_tag : Tag.t) =
   if not (List.mem new_tag t.tags) then
     t.tags <- new_tag::t.tags
 
+let sort_posts lst =
+  let f a b = Post.get_hot_score a - Post.get_hot_score b in
+  List.sort f lst
+
 let get_front_posts s =
-  let l = s.posts in
+  let l = sort_posts s.posts in
   let f j p = (Ezjsonm.value (`O (Post.to_json_front p)))::j in
   `O [
     ("posts", (`A (List.fold_left f [] l)));
@@ -104,7 +108,7 @@ let get_front_posts s =
 (* TODO: show only posts with tag id *)
 let get_tag_posts s id =
   let mytag = List.find (fun x -> id = Tag.tag_name x) s.tags in
-  let l = Tag.posts_list mytag in
+  let l = Tag.posts_list mytag |> sort_posts in
   let f j p = (Ezjsonm.value (`O (Post.to_json_front p)))::j in
   `O [
     ("posts", (`A (List.fold_left f [] l)))
