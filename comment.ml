@@ -67,6 +67,8 @@ open Ezjsonm
 | `A j' -> List.map (fun o -> comment_from_val o) j'
 | _ -> raise (Failure "bad json")
 
+  (* [helper_c c] is a helper function used in to_json to allow for easy conversion from type comment to Ezjsonm.value, 
+   * so that a list of Ezjsonm value objects representing the children of a comment can be saved to JSON. *)
   let rec helper_c c = Ezjsonm.value (`O (to_json c))
 
   and to_json a = 
