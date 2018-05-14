@@ -49,7 +49,14 @@ let front_serve = get "/" begin fun req ->
   `String s |> respond'
 end
 
-let all_tags = get "/" begin fun req ->
+(* [all_tags] serves a page listing tags *)
+let all_tags = get "/tags" begin fun req ->
+  let s = filepath_to_string "my-react-app/tags.html" in
+  `String s |> respond'
+ end
+
+(* [all_tags2] serves a page listing tags *)
+let all_tags2 = get "/tags/" begin fun req ->
   let s = filepath_to_string "my-react-app/tags.html" in
   `String s |> respond'
  end
@@ -60,7 +67,6 @@ let post_serve = get "/post/:id" begin fun req ->
   let s = filepath_to_string "my-react-app/comments.html" in
   `String s |> respond'
 end
-
 (* [post_serve2] serves the post with [id] with its comments but when an [/] is appended *)
 let post_serve2 = get "/post/:id/" begin fun req ->
   let s = filepath_to_string "my-react-app/comments.html" in
@@ -120,6 +126,8 @@ let () = App.empty
          |> front_serve
          |> post_serve
          |> post_serve2
+         |> all_tags
+         |> all_tags2
          |> tag_serve
          |> tag_serve2
          |> vote_listen my_state
