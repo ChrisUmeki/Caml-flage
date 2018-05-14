@@ -1,7 +1,7 @@
 type tag = string;
 
 let parseTagsJson = (json : Js.Json.t) : tag => 
-    Json.Decode.string(json);
+  Json.Decode.string(json);
 
 let parseTagsResponseJson = json =>
   Json.Decode.field("tags", Json.Decode.array(parseTagsJson), json);

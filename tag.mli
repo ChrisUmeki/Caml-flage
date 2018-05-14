@@ -7,3 +7,7 @@ val posts_list: t -> Post.t list
 val tag_name: t -> string
 
 val to_json: t -> (string * Ezjsonm.value) list
+
+val empty: string -> t
+
+val add_post: t -> Post.t -> unit

@@ -31,4 +31,12 @@ val to_json_front : t -> (string * Ezjsonm.value) list
 *)
 val to_json : t -> (string * Ezjsonm.value) list
 
+<<<<<<< HEAD
 
+=======
+val get_hot_score : t -> int
+
+val get_children : t -> Comment.t list
+
+val get_tag : t -> string
+>>>>>>> 4d72e1a247a2d25cc28a840135aaa45092df5a2a

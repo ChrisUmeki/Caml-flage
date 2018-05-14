@@ -2,6 +2,7 @@ open Opium.Std
 open Server_state
 open Post
 open Comment
+open Tag
 
 
 (* [front_state st] serves json data for the front page *)
@@ -21,6 +22,8 @@ let tag_state st = get "/tag/:tagid/tagstate.json" begin fun req ->
   `Json (get_tag_posts st tagid) |> respond'
 end
 
+(* [save_state st] saves the data in st as a json and also displays it to the client
+  (for debugging/testing purposes) *)
 let save_state st = get "/savethestate" begin fun req ->
   let j = json_of_state st in
   let out_file = open_out "savedstate.json" in
@@ -46,13 +49,24 @@ let front_serve = get "/" begin fun req ->
   `String s |> respond'
 end
 
+(* [all_tags] serves a page listing tags *)
+let all_tags = get "/tags" begin fun req ->
+  let s = filepath_to_string "my-react-app/tags.html" in
+  `String s |> respond'
+ end
+
+(* [all_tags2] serves a page listing tags *)
+let all_tags2 = get "/tags/" begin fun req ->
+  let s = filepath_to_string "my-react-app/tags.html" in
+  `String s |> respond'
+ end
+
 (* [post_serve] serves the post with [id] with its comments. The data itself is requested by the client
  and is served by [post_state st] *)
 let post_serve = get "/post/:id" begin fun req ->
   let s = filepath_to_string "my-react-app/comments.html" in
   `String s |> respond'
 end
-
 (* [post_serve2] serves the post with [id] with its comments but when an [/] is appended *)
 let post_serve2 = get "/post/:id/" begin fun req ->
   let s = filepath_to_string "my-react-app/comments.html" in
@@ -62,13 +76,13 @@ end
 (* [tag_serve] serves the posts associated with [tag]. The data itself is requested by the client
  and is served by [post_state st] *)
 let tag_serve = get "/tag/:tag" begin fun req ->
-  let s = filepath_to_string "my-react-app/tags.html" in
+  let s = filepath_to_string "my-react-app/tagposts.html" in
   `String s |> respond'
 end
 
 (* [tag_serve2] serves the posts associated with [tag] but when an [/] is appended *)
 let tag_serve2 = get "/tag/:tag/" begin fun req ->
-  let s = filepath_to_string "my-react-app/tags.html" in
+  let s = filepath_to_string "my-react-app/tagposts.html" in
   `String s |> respond'
 end
 
@@ -91,7 +105,7 @@ end
 (* [comment_listen st] adds new posts to [st] in response to incoming POST requests *)
 let comment_listen st = post "/comment" begin fun req ->
   let j = App.json_of_body_exn req in
-  let f = fun x -> update_comments st (Comment.comment_from_new (Ezjsonm.value x) (Server_state.get_next_post_id st)) |> Lwt.return in
+  let f = fun x -> update_comments st (Comment.comment_from_new (Ezjsonm.value x) (Server_state.get_next_comment_id st)) |> Lwt.return in
   Lwt.bind j f |> ignore;
   `String "Comment made" |> respond'
 end
@@ -100,7 +114,7 @@ let not_found = get "/*" begin fun req ->
   `String ("Not found") |> respond'
 end
 
-let my_state = state_of_json "ServerState.json"
+let my_state = state_of_json "savedstate.json"
 
 let () = App.empty
          |> middleware (Middleware.static ~local_path:"./my-react-app/public" ~uri_prefix:"/public")
@@ -112,6 +126,8 @@ let () = App.empty
          |> front_serve
          |> post_serve
          |> post_serve2
+         |> all_tags
+         |> all_tags2
          |> tag_serve
          |> tag_serve2
          |> vote_listen my_state

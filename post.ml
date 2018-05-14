@@ -114,4 +114,10 @@ let to_json a =
   ("timestamp", `Float a.timestamp);]
 
 
+<<<<<<< HEAD
 
+=======
+let get_children a = a.children
+
+let get_tag a = a.tag
+>>>>>>> 4d72e1a247a2d25cc28a840135aaa45092df5a2a

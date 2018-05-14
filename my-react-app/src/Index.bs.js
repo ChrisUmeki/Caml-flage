@@ -5,6 +5,7 @@ var List = require("bs-platform/lib/js/list.js");
 var ReactDOMRe = require("reason-react/src/ReactDOMRe.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Title$ReactTemplate = require("./Title.bs.js");
+var AllTags$ReactTemplate = require("./AllTags.bs.js");
 var AllPosts$ReactTemplate = require("./AllPosts.bs.js");
 var PostInput$ReactTemplate = require("./PostInput.bs.js");
 var AllComments$ReactTemplate = require("./AllComments.bs.js");
@@ -22,16 +23,49 @@ var lst = url[/* path */0];
 
 var post_id = List.nth(lst, List.length(lst) - 1 | 0);
 
-var myurl = "/post/" + (post_id + "/poststate.json");
+function renderToElement(posttype, myurl) {
+  if (posttype === "post") {
+    ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(myurl, /* array */[])), "onepost");
+    ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(myurl, /* array */[])), "comments");
+    return ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(post_id, "Write a comment", /* array */[])), "comment_input");
+  } else {
+    return ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(myurl, /* array */[])), "poststag");
+  }
+}
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(myurl, /* array */[])), "onepost");
+function geturl(url) {
+  if (url) {
+    switch (url[0]) {
+      case "post" : 
+          var match = url[1];
+          if (match && !match[1]) {
+            return renderToElement("post", "/post/" + (match[0] + "/poststate.json"));
+          } else {
+            return /* () */0;
+          }
+      case "tag" : 
+          var match$1 = url[1];
+          if (match$1 && !match$1[1]) {
+            return renderToElement("tag", "/tag/" + (match$1[0] + "/tagstate.json"));
+          } else {
+            return /* () */0;
+          }
+      default:
+        return /* () */0;
+    }
+  } else {
+    return /* () */0;
+  }
+}
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(myurl, /* array */[])), "comments");
+var myurl = geturl(lst);
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(post_id, "Write a comment", /* array */[])), "comment_input");
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllTags$ReactTemplate.make("/state.json", /* array */[])), "tags");
 
 exports.url = url;
 exports.lst = lst;
 exports.post_id = post_id;
+exports.renderToElement = renderToElement;
+exports.geturl = geturl;
 exports.myurl = myurl;
 /*  Not a pure module */
