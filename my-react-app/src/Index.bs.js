@@ -21,9 +21,34 @@ var url = ReasonReact.Router[/* dangerouslyGetInitialUrl */3](/* () */0);
 
 var lst = url[/* path */0];
 
-var post_id = List.nth(lst, List.length(lst) - 1 | 0);
+function geturl(url) {
+  if (url) {
+    switch (url[0]) {
+      case "post" : 
+          var match = url[1];
+          if (match && !match[1]) {
+            return "/post/" + (match[0] + "/poststate.json");
+          } else {
+            return "invalidurl";
+          }
+      case "tag" : 
+          var match$1 = url[1];
+          if (match$1 && !match$1[1]) {
+            return "/tag/" + (match$1[0] + "/tagstate.json");
+          } else {
+            return "invalidurl";
+          }
+      default:
+        return "invalidurl";
+    }
+  } else {
+    return "invalidurl";
+  }
+}
 
-var myurl = "/post/" + (post_id + "/poststate.json");
+var myurl = geturl(lst);
+
+var post_id = List.nth(lst, List.length(lst) - 1 | 0);
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(myurl, /* array */[])), "onepost");
 
@@ -35,6 +60,7 @@ ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, A
 
 exports.url = url;
 exports.lst = lst;
-exports.post_id = post_id;
+exports.geturl = geturl;
 exports.myurl = myurl;
+exports.post_id = post_id;
 /*  Not a pure module */

@@ -76,13 +76,13 @@ end
 (* [tag_serve] serves the posts associated with [tag]. The data itself is requested by the client
  and is served by [post_state st] *)
 let tag_serve = get "/tag/:tag" begin fun req ->
-  let s = filepath_to_string "my-react-app/tags.html" in
+  let s = filepath_to_string "my-react-app/tagposts.html" in
   `String s |> respond'
 end
 
 (* [tag_serve2] serves the posts associated with [tag] but when an [/] is appended *)
 let tag_serve2 = get "/tag/:tag/" begin fun req ->
-  let s = filepath_to_string "my-react-app/tags.html" in
+  let s = filepath_to_string "my-react-app/tagposts.html" in
   `String s |> respond'
 end
 

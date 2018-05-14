@@ -1,0 +1,39 @@
+<!-- this page displays the associated posts of the tag -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Caml-flage</title>
+  <link rel = "stylesheet" type = "text/css" href = "../../public/styles/all.css" media = "all" /> 
+</head>
+<body>
+
+<div id="title"></div>
+
+    <nav class = "navbar">
+      <a class="navlink" href = "http://localhost:3000/">Dashboard</a>
+      <a class="navlink" href = "http://localhost:3000/tags">Tags</a>
+      <div class = "navlink dropdown">
+        <a class = "dropbtn">My Profile</a>
+        <div class = "dropdown-menu">
+          <a href = "">My Posts</a>
+          <a href = "">Exposed Users</a>
+       </div>
+      </div>
+    </nav>
+
+    <div class="hide">
+      <div id="input"></div>
+      <div id="posts"></div>
+      <div id = "onepost"></div>
+      <div id = "comments"></div>
+      <div id = "comment_input"></div>
+      <div id="tags"></div>
+    </div>
+
+    <div id="poststag"></div>
+  
+    <script src = "../../build/Index.js"></script>
+
+</body>
+</html>
