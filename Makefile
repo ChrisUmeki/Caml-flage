@@ -1,6 +1,7 @@
 default:
 	@echo "Usage:"
-	@echo "  make run  			make and run Caml-flage
+	@echo "  make run  			compile and run Caml-flage
+	@echo "  make compile  			compile Caml-flage
 	@echo "  make clean                     remove build files"
 
 run:
