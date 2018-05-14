@@ -6,7 +6,6 @@ type t
 *)
 val get_id : t -> int 
 
-
 (* [up_camel a] is a with its score incremented *)
 val up_camel : t -> unit
 
@@ -15,6 +14,9 @@ val down_camel : t -> unit
 
 (* [get_score a] is the score of a *)
 val get_score : t -> int 
+
+(* [get_text a] is the text of a *)
+val get_text : t -> string 
 
 (* TODO: make this a ref? *)
 (* [get_par a] is the id of the parent *)

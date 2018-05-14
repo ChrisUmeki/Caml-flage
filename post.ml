@@ -17,22 +17,32 @@ type t = {
 let get_id a =
   a.id
 
-let add_reply par reply =
+let add_reply par reply = 
   par.children <- reply::par.children
 
-let up_camel a =
+let up_camel a = 
   a.score <- a.score + 1
 
-let down_camel a =
+let down_camel a = 
   a.score <- a.score - 1
 
-let get_score a =
+let get_score a =  
   a.score
 
-let get_children a = a.children
+let get_title a =
+  a.title
+
+let get_text a =
+  a.text
+
+let get_children a = 
+  a.children
+
+let get_tag a = 
+  a.tag
 
 let get_hot_score a = 
-  let t = a.timestamp -. 1134028003. in 
+  let t = a.timestamp -. 1516892400. in 
     let y = if a.score > 0 then 1 
             else if a.score = 0 then 0 
             else -1 in 
@@ -113,11 +123,3 @@ let to_json a =
   ("tag", `String a.tag); 
   ("timestamp", `Float a.timestamp);]
 
-
-<<<<<<< HEAD
-
-=======
-let get_children a = a.children
-
-let get_tag a = a.tag
->>>>>>> 4d72e1a247a2d25cc28a840135aaa45092df5a2a

@@ -10,4 +10,6 @@ val to_json: t -> (string * Ezjsonm.value) list
 
 val empty: string -> t
 
+val tag_from_params: string -> Post.t ref list -> t
+
 val add_post: t -> Post.t -> unit

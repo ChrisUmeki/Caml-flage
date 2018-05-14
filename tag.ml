@@ -21,4 +21,9 @@ let empty s = {
   posts = [];
 }
 
+let tag_from_params s plist = {
+  name = s;
+  posts = plist;
+}
+
 let add_post tag p = tag.posts <- (ref p)::tag.posts

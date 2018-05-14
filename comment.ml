@@ -21,7 +21,14 @@ open Ezjsonm
   let get_score a =
     a.score
 
-  let get_par a = a.parent_id
+  let get_text a =
+  a.text
+
+  let get_children a =
+    a.children
+
+  let get_par a = 
+    a.parent_id
 
   let add_reply par reply =
     par.children <- reply::par.children
@@ -70,4 +77,3 @@ open Ezjsonm
     ("children", `A (List.map helper_c a.children));
     ("parent_id", Ezjsonm.int a.parent_id);]
 
-  let get_children a = a.children
