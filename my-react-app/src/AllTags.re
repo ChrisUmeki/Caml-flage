@@ -1,3 +1,5 @@
+/* This file handles displaying the full list of tags stored */ 
+
 type state = {
     tagsData: option(array(TagsData.tag)),
   };
