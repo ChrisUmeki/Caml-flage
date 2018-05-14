@@ -68,7 +68,16 @@
           "text": "with comments too",
           "score": 1,
           "user": "",
-          "children": [],
+          "children": [
+            {
+              "comment_id": 4,
+              "text": "and nested too",
+              "score": 1,
+              "user": "",
+              "children": [],
+              "parent_id": 4
+            }
+          ],
           "parent_id": 4
         }
       ],
