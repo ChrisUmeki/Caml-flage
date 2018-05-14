@@ -21,7 +21,7 @@ val get_text : t -> string
 (* [get_par a] is the id of the parent *)
 val get_par : t -> int 
 
-(* [add_reply par reply] adds reply [reply] to the children of parent [par] *)
+(* [add_reply par reply] adds a reply [reply] to the children of a parent [par] *)
 val add_reply : t -> t -> unit
 
 (* [get_children a] is the list of children of a *)
@@ -39,6 +39,6 @@ val comment_from_params : int -> int -> string -> string -> t list -> int -> t
 (* [comment_of_json j] is a list of comments read from a json file [j] *)
 val comments_of_json : Ezjsonm.value -> t list
 
-(* [to_json a] is an string and Ezjsonm value association list representing a comment [a] *)
+(* [to_json a] is a string and Ezjsonm value association list representing a comment [a] *)
 val to_json : t -> (string * Ezjsonm.value) list
 

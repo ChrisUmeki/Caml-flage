@@ -5,11 +5,14 @@ type t = {
   mutable posts: (Post.t ref) list;
 }
 
-let posts_list tag = let f x = !x in List.map f tag.posts
+let posts_list tag = 
+  let f x = !x in List.map f tag.posts
 
-let tag_name tag = tag.name
+let tag_name tag = 
+  tag.name
 
-let helper_p p = Ezjsonm.value (`O (Post.to_json p))
+let helper_p p = 
+  Ezjsonm.value (`O (Post.to_json p))
 
 let to_json a = 
   [("name", Ezjsonm.string a.name);
@@ -26,4 +29,5 @@ let tag_from_params s plist = {
   posts = plist;
 }
 
-let add_post tag p = tag.posts <- (ref p)::tag.posts
+let add_post tag p = 
+  tag.posts <- (ref p)::tag.posts

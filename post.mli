@@ -3,7 +3,7 @@ type t
 (* [get_id a] is the id of a *)
 val get_id : t -> int
 
-(* [add_reply par reply] adds reply [reply] to the children of parent [par] *)
+(* [add_reply par reply] adds a reply [reply] to the children of a parent [par] *)
 val add_reply : t -> Comment.t -> unit
 
 (* [up_camel a] is a with its score incremented *)
