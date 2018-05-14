@@ -1,4 +1,4 @@
-PKG opium
+PKG opium, ounit
 
 B _build/
 S *

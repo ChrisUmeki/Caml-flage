@@ -5,7 +5,7 @@ default:
 	@echo "  make clean.........remove build files"
 
 test:
-	@ocamlbuild -use-ocamlfind test.byte && ./test.byte
+	@ocamlbuild -pkgs 'ezjsonm,ounit' test.byte && ./test.byte
 
 run:
 	@sleep 3 && open "http://localhost:3000" && echo "" && echo "Press ctrl-c to quit!" &
