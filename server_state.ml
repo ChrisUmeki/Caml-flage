@@ -73,9 +73,9 @@ let get_comments st i =
       ("comment_list", comment_list)
      ]
 
-let update_users t (new_user : User.t) =
-  if not (List.mem new_user t.users) then
-    t.users <- new_user::t.users
+let update_users st (u : User.t) =
+  if not (List.mem u st.users) then
+    st.users <- u::st.users
 
 (* [update_posts st p] adds post p to state st *)
 let update_posts st (p : Post.t) =
@@ -90,36 +90,35 @@ let update_comments st (c : Comment.t) =
     incr st.numcomments;
     Post.add_reply p c
     
-let update_tags t (new_tag : Tag.t) =
-  if not (List.mem new_tag t.tags) then
-    t.tags <- new_tag::t.tags
+let update_tags st (tag : Tag.t) =
+  if not (List.mem tag st.tags) then
+    st.tags <- tag::st.tags
 
 let sort_posts lst =
   let f a b = Post.get_hot_score a - Post.get_hot_score b in
   List.sort f lst
 
-let get_front_posts s =
-  let l = sort_posts s.posts in
+let get_front_posts st =
+  let l = sort_posts st.posts in
   let f j p = (Ezjsonm.value (`O (Post.to_json_front p)))::j in
   `O [
     ("posts", (`A (List.fold_left f [] l)));
-    ("tags", `A (List.map (fun tag -> `String (tag_name tag)) s.tags))
+    ("tags", `A (List.map (fun tag -> `String (tag_name tag)) st.tags))
     ]
 
-(* TODO: show only posts with tag id *)
-let get_tag_posts s id =
-  let mytag = List.find (fun x -> id = Tag.tag_name x) s.tags in
+let get_tag_posts st id =
+  let mytag = List.find (fun x -> id = Tag.tag_name x) st.tags in
   let l = Tag.posts_list mytag |> sort_posts in
   let f j p = (Ezjsonm.value (`O (Post.to_json_front p)))::j in
   `O [
     ("posts", (`A (List.fold_left f [] l)))
   ]
 
-let get_next_post_id s =
-  (List.length s.posts) + 1
+let get_next_post_id st =
+  (List.length st.posts) + 1
 
-let get_next_comment_id s =
-  !(s.numcomments) + 1
+let get_next_comment_id st =
+  !(st.numcomments) + 1
 
 
 
