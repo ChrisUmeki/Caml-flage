@@ -1,4 +1,4 @@
-
+/* AllPosts.re displays all posts currently stored in the Json  */
 type state = {
   postsData: option(array(PostsData.frontpost)),
 };

@@ -1,3 +1,4 @@
+/* AllComments.re displays all comments associated with a post */ 
 type state = {
     commentsData: option(array(CommentData.comment)),
   };
