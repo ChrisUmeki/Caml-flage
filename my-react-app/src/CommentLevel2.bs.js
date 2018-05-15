@@ -60,6 +60,7 @@ function make(text, score, post_id, comment_id, _, _$1) {
                     Axios.post("/vote", {
                               direction: "up",
                               user_id: 0,
+                              post_id: post_id,
                               comment_id: comment_id,
                               entry_type: "comment"
                             }).then((function (response) {
@@ -76,6 +77,7 @@ function make(text, score, post_id, comment_id, _, _$1) {
                               direction: "down",
                               user_id: 0,
                               comment_id: comment_id,
+                              post_id: post_id,
                               entry_type: "comment"
                             }).then((function (response) {
                               return Promise.resolve((console.log(response.data), /* () */0));

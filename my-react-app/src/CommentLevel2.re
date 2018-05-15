@@ -23,7 +23,12 @@ reducer: (action, state) =>
   switch (action) {
   | Upvote => 
     Js.Promise.(
-    Axios.postData("/vote", {{"direction": "up", "user_id": 0, "comment_id": comment_id, "entry_type": "comment"}})
+    Axios.postData("/vote", {
+      {"direction": "up",
+      "user_id": 0, 
+      "post_id": post_id,
+      "comment_id": comment_id, 
+      "entry_type": "comment"}})
     |> then_((response) => resolve(Js.log(response##data)))
     |> catch((error) => resolve(Js.log(error)))
     |> ignore
@@ -32,7 +37,12 @@ reducer: (action, state) =>
 
   | Downvote => 
   Js.Promise.(
-    Axios.postData("/vote", {{"direction": "down", "user_id": 0, "comment_id": comment_id, "entry_type": "comment"}})
+    Axios.postData("/vote", {
+      {"direction": "down",
+       "user_id": 0,
+       "comment_id": comment_id,
+       "post_id": post_id,
+       "entry_type": "comment"}})
     |> then_((response) => resolve(Js.log(response##data)))
     |> catch((error) => resolve(Js.log(error)))
     |> ignore

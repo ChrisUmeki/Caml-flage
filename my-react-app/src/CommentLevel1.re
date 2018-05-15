@@ -23,7 +23,12 @@ let make = (~text, ~score, ~post_id, ~comment_id, ~nestedcomments, _children) =>
     switch (action) {
     | Upvote => 
       Js.Promise.(
-      Axios.postData("/vote", {{"direction": "up", "user_id": 0, "comment_id": comment_id, "entry_type": "comment"}})
+      Axios.postData("/vote", {
+        {"direction": "up",
+        "user_id": 0, 
+        "post_id": post_id,
+        "comment_id": comment_id, 
+        "entry_type": "comment"}})
       |> then_((response) => resolve(Js.log(response##data)))
       |> catch((error) => resolve(Js.log(error)))
       |> ignore
@@ -32,7 +37,12 @@ let make = (~text, ~score, ~post_id, ~comment_id, ~nestedcomments, _children) =>
 
     | Downvote => 
     Js.Promise.(
-      Axios.postData("/vote", {{"direction": "down", "user_id": 0, "comment_id": comment_id, "entry_type": "comment"}})
+      Axios.postData("/vote", {
+        {"direction": "down", 
+        "user_id": 0, 
+        "post_id": post_id,
+        "comment_id": comment_id,
+        "entry_type": "comment"}})
       |> then_((response) => resolve(Js.log(response##data)))
       |> catch((error) => resolve(Js.log(error)))
       |> ignore
@@ -90,7 +100,12 @@ let make = (~text, ~score, ~post_id, ~comment_id, ~nestedcomments, _children) =>
       (ReasonReact.arrayToElement(
       Array.map(
               (comment: CommentData.comment) => 
-              <CommentLevel2 post_id=post_id  text=comment.text score=comment.score comment_id=comment.comment_id nestedcomments=comment.children/>,
+              <CommentLevel2 
+                post_id=post_id  
+                text=comment.text
+                score=comment.score 
+                comment_id=comment.comment_id 
+                nestedcomments=comment.children/>,
               nestedcomments
             )
       ))
