@@ -1,33 +1,26 @@
 # Caml-flage Design Document
-#### Arzu Mammadova | am2692 \\ Shea Murphy | sm967 \\ Chris Umeki | ctu3 \\ Mena Wang | mw749
+#### Arzu Mammadova (am2692)  Shea Murphy (sm967) Chris Umeki (ctu3) Mena Wang (mw749)
 
 
 ## System Description
-Caml-flage is a social networking platform that, as its title suggests, allows users to interact with each other anonymously. People start out as anonymous users and are able to post text, links, and photos, and interact with each other on a public dashboard. Users tag posts with different topics to categorize discussions. Each post and reply will have three camel-shaped buttons - up-camel (like), down-camel (dislike), and double-camel (direct reply) - thereby enabling users to react to one another’s posts. 
+Caml-flage is a social networking platform that, as its title suggests, allows users to interact with each other anonymously. Anonymous users post text posts and reply to each other on a public dashboard. Users tag posts with different topics to categorize discussions. 
 
-Each account has a “points” accumulator initially set to 0. Once a direct conversation starts between two users, they will both have an interaction score that increases with each reply. Once the score reaches a certain number, the two users will no longer be anonymous to each other. That is, both of the users identities will be exposed and each user will now be able to see the other’s personal profile, i.e. text, photos, etc. 
+Each post and comment has three buttons - up-camel (like), down-camel (dislike), and comment (direct reply) - thereby enabling users to react to one another’s posts. 
 
 ## System Design
 
-### server.ml
+### Server
 The server module stores all the data that is necessary for the platform to operate including data on each user, posts, comments, and tags. Each individual data group will have another module of their own, detailed below. 
 
-We are still investigating the uses of our external libraries and how to connect the data and the server. Therefore, we will be adding more functions to server.mli later on. 
 
-### users.ml
-The users module will be responsible for keeping track of data related to the user-- such as the username, their posts, as well as a list of users which they’ve surpassed the interaction score threshold. In addition, the users module will store a hashtable of interaction scores between specific users. 
-
-This information will be kept in a record for each individual user, whereas the data of all the users on the server are the individual records stored in a tree. 
-
-
-### post.ml 
-Posts are top level entries posted by the users, that are displayed on the dashboard. 
+### Post
+Posts are top level entries posted by the users, that are displayed on the dashboard.
 
 The type defined for a post is a record with fields that store the id, score (determined by the sum of total up-camels and down-camels), title, text, user, url, tag, list of comments associated with a post, as well as the time the post was published. 
 
 The posts module contains the key functions for creating post given the needed arguments, accessing the fields of a post, calculating the "hot score" that is assigned to a post for sorting, as well as functions that extract post data to a json.
 
-### comment.ml 
+### Comment
 Comments are replies to posts or comments. 
 
 The type defined for a comment is similar to posts. It is a record with fields that store the id, score, title, text, user, url, the id of a post under which the comment was added and the parent comment id, if the comment was added under another comment.
@@ -36,31 +29,31 @@ The comments module contains the key functions for creating a comment given the 
 
 Besides the differences in some fields, major differences between posts and comments include that comments are linked back to a parent entry, and that comments are not sorted.
 
-### tags.ml
+### Tag
 Tags are a way for users to categorize their posts as well as to find posts pertaining to a certain topic. Each tag is defined as a record with two fields: a string which is the name of the tag as well as the mutable posts field that contains a list of posts associated with a a tag. 
 
 ## Data
 
-Most of our data will be stored in records and lists of records. In addition, we will be using a hash table to store the interaction score between users. 
+Most of our data will be stored in record types and lists of records.
 
-We are using Yojson to store all of our information in order to maintain the server. 
+We are using Ezjsonm to store all of our information in order to maintain the server. 
 
-In terms of communication, we will be using HTTP GET and POST requests. GET requests will be used to return the contents of the webpage-- it is functional because it doesn’t change the state of the server.
+The server responds HTTP GET and POST requests. GET requests return the contents of the webpage-- it is functional because it doesn’t change the state of the server.
 
 ## External Dependencies
 
 ### Opium
-Opium will allow us to maintain the web application, handle HTTP requests, and interact with databases that contain all the users’ and posts’ information. 
+We use Opium to maintain the web application and handle HTTP requests.
 
 ```
 $ opam install opium
 ```
 
 ### ReasonReact
-Our goal is to display all the posts on the server onto an actual webpage. We will use ReasonReact to build the frontend (display of the webpage and user interface) of this project.
+We use ReasonReact to build the frontend (display of the webpage and user interface) of this project.
 
 ### Ezjsonm
-We will use Ezjsonm to store the data of users, posts, comments, and tags-- this will ensure that data already stored on the server will not be lost. 
+We use Ezjsonm to store the entire state of the server, and to store it to Json. In addition we use Ezjsonm to send and receive Json data from the client.
 
 ## Testing
 
