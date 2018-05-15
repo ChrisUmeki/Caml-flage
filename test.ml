@@ -40,6 +40,7 @@ let tests =
     "post4 # of children" >:: (fun _ -> assert_equal 1 (List.length (Post.get_children post4)));
     "post1 hot score" >:: (fun _ -> assert_equal 209 (Post.get_hot_score post1));
     "post5 neg hot score" >:: (fun _ -> assert_equal (-207) (Post.get_hot_score post5));
+    "post1 timestamp" >:: (fun _ -> assert_equal 1526275325. (Post.get_timestamp post1));
     "comment1 id" >:: (fun _ -> assert_equal 1000 (Comment.get_id comment1));
     "comment1 neg score" >:: (fun _ -> assert_equal (-8) (Comment.get_score comment1));
     "comment2 text" >:: (fun _ -> assert_equal "this is the greatest comment on earth" (Comment.get_text comment2));
