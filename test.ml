@@ -24,7 +24,25 @@ let unit3 = Post.add_reply post2 comment2
 let unit4 = Comment.up_camel comment4 
 let unit5 = Comment.down_camel comment5 
 let unit6 = Comment.add_reply comment5 comment3
+let json = `String ("savedstate.json")
 
+let json1 = [("post_id", `Float (431.));
+  ("score", `Float (50.));
+  ("title", `String "test"); 
+  ("text", `String "this is a test"); 
+  ("has_url", `Bool false); 
+  ("url", `Null ); 
+  ("user", `String ("coolguy42")); 
+  ("children", `A []); 
+  ("tag", `String "testtag"); 
+  ("timestamp", `Float 1526275325.);]
+
+let json2 = [("post_id", `Float (431.));
+  ("title", `String "test"); 
+  ("text", `String "this is a test");
+  ("score", `Float (51.));
+  ("num_comments", `Float 1.);
+  ("tag", `String "testtag")]
 
 let tests =
   [
@@ -38,9 +56,11 @@ let tests =
     "post1 score down-cameled" >:: (fun _ -> assert_equal (-11) (Post.get_score post5));
     "post1 add reply" >:: (fun _ -> assert_equal [comment2] (Post.get_children post2));
     "post4 # of children" >:: (fun _ -> assert_equal 1 (List.length (Post.get_children post4)));
-    "post1 hot score" >:: (fun _ -> assert_equal 209 (Post.get_hot_score post1));
-    "post5 neg hot score" >:: (fun _ -> assert_equal (-207) (Post.get_hot_score post5));
     "post1 timestamp" >:: (fun _ -> assert_equal 1526275325. (Post.get_timestamp post1));
+    "post1 get hot score" >:: (fun _ -> assert_equal 209 (Post.get_hot_score post1));
+    "post5 get hot score" >:: (fun _ -> assert_equal (-207) (Post.get_hot_score post5));
+    "post 1 to json" >:: (fun _ -> assert_equal json1 (Post.to_json post1));
+    "post 2 front json" >:: (fun _ -> assert_equal json2 (Post.to_json_front post2));
     "comment1 id" >:: (fun _ -> assert_equal 1000 (Comment.get_id comment1));
     "comment1 neg score" >:: (fun _ -> assert_equal (-8) (Comment.get_score comment1));
     "comment2 text" >:: (fun _ -> assert_equal "this is the greatest comment on earth" (Comment.get_text comment2));
