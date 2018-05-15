@@ -1,5 +1,7 @@
 # Caml-flage 🐫
 
+In your browser, go to https://nodejs.org/en/download/ and download the version for your OS.
+
 Dependency
 ```bash
 $ opam install opium
