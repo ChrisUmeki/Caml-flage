@@ -1,4 +1,4 @@
-/* type generatedAuth0Client = {.
+type generatedAuth0Client = {.
   "authorize": [@bs.meth] (unit => unit)
 };
 
@@ -11,4 +11,4 @@ type clientOptions = {
   "scope": string
 };
 
-[@bs.module "auth0-js"] [@bs.new]  external createClient : (clientOptions => generatedAuth0Client) = "WebAuth"; */
+[@bs.module "auth0-js"] [@bs.new]  external createClient : (clientOptions => generatedAuth0Client) = "WebAuth";
