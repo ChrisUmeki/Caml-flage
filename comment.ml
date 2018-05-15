@@ -24,7 +24,7 @@ open Ezjsonm
     a.score
 
   let get_text a =
-  a.text
+    a.text
 
   let get_children a =
     a.children
@@ -66,7 +66,7 @@ open Ezjsonm
       parent_is_post = Ezjsonm.find o ["parent_is_post"] |> Ezjsonm.get_bool;
     }
 
-  let comment_from_params i s t u c p =
+  let comment_from_params i s t u c p pcid pip =
     {
       id = i;
       score = s;
@@ -74,8 +74,8 @@ open Ezjsonm
       user = u;
       children = c; 
       post_id = p;
-      parent_comment_id = -1;
-      parent_is_post = true;
+      parent_comment_id = pcid;
+      parent_is_post = pip;
     }
 
   let comments_of_json j = match j with

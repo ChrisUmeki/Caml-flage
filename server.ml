@@ -12,6 +12,13 @@ let front_state st sort = get "/state.json" begin fun req ->
   `Json (get_front_posts sort st) |> respond'
 end
 
+let front_state_sorted st = get "/sorted/:sort/state.json" begin fun req ->
+  match param req "sort" with
+  | "hot" -> `Json (get_front_posts Hot st) |> respond'
+  | "time" -> `Json (get_front_posts Time st) |> respond'
+  | _ -> `Json (get_front_posts Hot st) |> respond'
+end
+
 (* [post_state st] serves json data for the post at /post/:id *)
 let post_state st = get "/post/:id/poststate.json" begin fun req ->
   let id = param req "id" |> int_of_string in
@@ -47,6 +54,12 @@ let filepath_to_string f =
 
 (* [front_serve] serves the front page *)
 let front_serve = get "/" begin fun req ->
+  let s = filepath_to_string "my-react-app/index.html" in
+  `String s |> respond'
+end
+
+(* [front_serve_sort] serves the front page with a chosen sort *)
+let front_serve_sort = get "/sorted/:sort" begin fun req ->
   let s = filepath_to_string "my-react-app/index.html" in
   `String s |> respond'
 end
@@ -127,10 +140,12 @@ let () = App.empty
          |> middleware (Middleware.static ~local_path:"./my-react-app/public" ~uri_prefix:"/public")
          |> middleware (Middleware.static ~local_path:"./my-react-app/build" ~uri_prefix:"/build")
          |> front_state my_state (Hot)
+         |> front_state_sorted my_state
          |> post_state my_state
          |> tag_state my_state (Hot)
          |> save_state my_state
          |> front_serve
+         |> front_serve_sort
          |> post_serve
          |> post_serve2
          |> all_tags

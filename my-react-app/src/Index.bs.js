@@ -15,11 +15,24 @@ ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, T
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, PostInput$ReactTemplate.make("Create a new post here!", /* array */[])), "input");
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make("/state.json", /* array */[])), "posts");
-
 var url = ReasonReact.Router[/* dangerouslyGetInitialUrl */3](/* () */0);
 
 var lst = url[/* path */0];
+
+function sorturl(url) {
+  if (url && url[0] === "sorted") {
+    var match = url[1];
+    if (match && !match[1]) {
+      return "/sorted/" + (match[0] + "/state.json");
+    } else {
+      return "/state.json";
+    }
+  } else {
+    return "/state.json";
+  }
+}
+
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(sorturl(lst), /* array */[])), "posts");
 
 var post_id = List.nth(lst, List.length(lst) - 1 | 0);
 
@@ -66,6 +79,7 @@ ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, A
 
 exports.url = url;
 exports.lst = lst;
+exports.sorturl = sorturl;
 exports.post_id = post_id;
 exports.renderToElement = renderToElement;
 exports.geturl = geturl;

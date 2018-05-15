@@ -2,10 +2,20 @@ ReactDOMRe.renderToElementWithId(<Title message="Welcome to Caml-flage" />, "tit
 
 ReactDOMRe.renderToElementWithId (<PostInput initialText ="Create a new post here!" />, "input");
 
-ReactDOMRe.renderToElementWithId(<AllPosts postsUrl="/state.json"/>, "posts");
-
 let url = ReasonReact.Router.dangerouslyGetInitialUrl ();
 let lst = url.path;
+
+
+let sorturl = url => {
+  switch (url) {
+  | [] => "/state.json" 
+  | ["sorted", sort] => "/sorted/"++sort++"/state.json"
+  | _ => "/state.json"
+  }
+};
+
+ReactDOMRe.renderToElementWithId(<AllPosts postsUrl=sorturl(lst)/>, "posts");
+
 
 let post_id = List.nth(lst, List.length(lst) - 1);
 
