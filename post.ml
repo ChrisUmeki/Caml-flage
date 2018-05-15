@@ -41,6 +41,9 @@ let get_children a =
 let get_tag a = 
   a.tag
 
+let get_timestamp a = 
+  a.timestamp
+  
 let get_hot_score a = 
   let t = a.timestamp -. 1516892400. in 
     let y = if a.score > 0 then 1 

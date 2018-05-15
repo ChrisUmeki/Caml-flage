@@ -5,9 +5,11 @@ open Comment
 open Tag
 
 
+
+
 (* [front_state st] serves json data for the front page *)
-let front_state st = get "/state.json" begin fun req ->
-  `Json (get_front_posts st) |> respond'
+let front_state st sort = get "/state.json" begin fun req ->
+  `Json (get_front_posts sort st) |> respond'
 end
 
 (* [post_state st] serves json data for the post at /post/:id *)
@@ -17,9 +19,9 @@ let post_state st = get "/post/:id/poststate.json" begin fun req ->
 end
 
 (* [tag_state st] serves json data for the tags at /tag/:tag *)
-let tag_state st = get "/tag/:tagid/tagstate.json" begin fun req ->
+let tag_state st sort = get "/tag/:tagid/tagstate.json" begin fun req ->
   let tagid = param req "tagid" in
-  `Json (get_tag_posts st tagid) |> respond'
+  `Json (get_tag_posts st tagid sort) |> respond'
 end
 
 (* [save_state st] saves the data in st as a json and also displays it to the client
@@ -116,12 +118,13 @@ end
 
 let my_state = state_of_json "savedstate.json"
 
+
 let () = App.empty
          |> middleware (Middleware.static ~local_path:"./my-react-app/public" ~uri_prefix:"/public")
          |> middleware (Middleware.static ~local_path:"./my-react-app/build" ~uri_prefix:"/build")
-         |> front_state my_state
+         |> front_state my_state (Hot)
          |> post_state my_state
-         |> tag_state my_state
+         |> tag_state my_state (Hot)
          |> save_state my_state
          |> front_serve
          |> post_serve

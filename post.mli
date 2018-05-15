@@ -27,6 +27,9 @@ val get_children : t -> Comment.t list
 (* [get_tag a] is the tag of a *)
 val get_tag : t -> string
 
+(* [get_timestamp] is the timestamp of a*)
+val get_timestamp : t -> float
+
 (* [get_hot_score a] is the "hot score" of a *)
 val get_hot_score : t -> int
 

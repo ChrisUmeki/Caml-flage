@@ -5,6 +5,10 @@ open Tag
 
 type t
 
+type sort = 
+  | Hot
+  | Time 
+
 (* [empty_state] creates a new server state *)
 val empty_state : t
 
@@ -34,10 +38,10 @@ val update_comments : t -> Comment.t -> unit
 val update_tags : t -> Post.t -> unit
 
 (* [get_front_posts st] converts posts from the server state [st] to JSON for the front page of the website *)
-val get_front_posts : t -> Ezjsonm.t
+val get_front_posts : sort -> t -> Ezjsonm.t
 
 (* [get_tag_posts st id] converts posts from the server state [st] to JSON for a tag page on the website *)
-val get_tag_posts : t -> string -> Ezjsonm.t
+val get_tag_posts : t -> string -> sort ->  Ezjsonm.t
 
 (* [get_next_post_id st] generates a new unique id for a post based on the total number of posts in the server state [st] *)
 val get_next_post_id : t -> int

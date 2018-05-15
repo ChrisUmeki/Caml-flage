@@ -11,6 +11,10 @@ type t = {
   numcomments : int ref;
 }
 
+type sort = 
+   | Hot 
+   | Time
+
 let empty_state = {
   users = [];
   posts = [];
@@ -101,21 +105,24 @@ let update_comments st (c : Comment.t) =
     incr st.numcomments;
     Post.add_reply p c
 
-let sort_posts lst =
-  let f a b = Post.get_hot_score a - Post.get_hot_score b in
-  List.sort f lst
+let sort_posts sort lst =
+ match sort with 
+ | Hot -> (let hot a b = Post.get_hot_score a - Post.get_hot_score b in
+  List.sort hot lst)
+ | Time -> (let time a b = int_of_float (Post.get_timestamp a -. Post.get_timestamp b) in 
+  List.sort time lst)
 
-let get_front_posts st =
-  let l = sort_posts st.posts in
+let get_front_posts sort st =
+  let l = sort_posts sort st.posts in
   let f j p = (Ezjsonm.value (`O (Post.to_json_front p)))::j in
   `O [
     ("posts", (`A (List.fold_left f [] l)));
     ("tags", `A (List.map (fun tag -> `String (tag_name tag)) st.tags))
     ]
 
-let get_tag_posts st id =
+let get_tag_posts st id sort =
   let mytag = List.find (fun x -> id = Tag.tag_name x) st.tags in
-  let l = Tag.posts_list mytag |> sort_posts in
+  let l = Tag.posts_list mytag |> sort_posts sort in
   let f j p = (Ezjsonm.value (`O (Post.to_json_front p)))::j in
   `O [
     ("posts", (`A (List.fold_left f [] l)))
