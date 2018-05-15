@@ -44,7 +44,6 @@ open Ezjsonm
     }
 
   let rec comment_from_val o =
-    let f v = comment_from_val v in
     let childrenlst = Ezjsonm.find o ["children"] |> Ezjsonm.get_list comment_from_val in
     {
       id = Ezjsonm.find o ["comment_id"] |> Ezjsonm.get_int;
