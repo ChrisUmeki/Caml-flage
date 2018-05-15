@@ -46,9 +46,7 @@ type state = {
       },
   
     render: ({state: {text}, send, handle}) => {
-    /* <div>
-      (ReasonReact.stringToElement("new post"))
-    </div>  */
+
     <div> 
       <div>
       (ReasonReact.stringToElement("New comment"))

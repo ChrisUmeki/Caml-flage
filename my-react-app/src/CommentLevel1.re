@@ -1,20 +1,22 @@
 /* CommentLevel1.re displays nested comments on level 1 */ 
 type state = {
     count: int,
+    show: bool, 
   };
 
 type action =
   | Upvote
-  | Downvote;
+  | Downvote
+  | Comment;
   
 let component = ReasonReact.reducerComponent("CommentLevel1");
 
 
-let rec make = (~text, ~score, ~comment_id, ~nestedcomments, _children) => {
+let make = (~text, ~score, ~comment_id, ~nestedcomments, _children) => {
 
   ...component,
 
-  initialState: () => {count: score},
+  initialState: () => {count: score, show: false},
 
   /* State transitions */
   reducer: (action, state) =>
@@ -36,6 +38,8 @@ let rec make = (~text, ~score, ~comment_id, ~nestedcomments, _children) => {
       |> ignore
     );
     ReasonReact.Update({...state, count: state.count - 1});
+
+    | Comment => ReasonReact.Update({...state, show: ! state.show});
     },
 
   render: self => {
@@ -54,6 +58,10 @@ let rec make = (~text, ~score, ~comment_id, ~nestedcomments, _children) => {
             (ReasonReact.stringToElement(up))
             </button>
 
+            <button className = "comment" onClick=(_event => self.send(Comment))> 
+            (ReasonReact.stringToElement("Comment"))
+            </button>
+
             <button className = "down" onClick=(_event => self.send(Downvote))>
             (ReasonReact.stringToElement(down))
             </button>
@@ -62,7 +70,23 @@ let rec make = (~text, ~score, ~comment_id, ~nestedcomments, _children) => {
             (ReasonReact.stringToElement("number of camels: " ++ count))
             </div>
         </div> 
-        
+
+          (
+          self.state.show ?
+            <CommentInput post_id=string_of_int(comment_id) initialText="Write a comment"/> : ReasonReact.stringToElement("")
+          )
+
+      </div>
+
+      /* nested comments */
+      <div>
+      (ReasonReact.arrayToElement(
+      Array.map(
+              (comment: CommentData.comment) => 
+              <CommentLevel2 text=comment.text score=comment.score comment_id=comment.comment_id nestedcomments=comment.children/>,
+              nestedcomments
+            )
+      ))
       </div>
 
     </div>;

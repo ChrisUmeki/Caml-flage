@@ -79,6 +79,11 @@
     margin-left: 30px; 
 }
 
+.nested2{
+    border-style:solid;
+    margin-left: 60px;
+}
+
 .gr {
     font-size: 25px;
     text-align: center;
