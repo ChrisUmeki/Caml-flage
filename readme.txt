@@ -21,5 +21,9 @@ $ cd ..
 $ make run
 ```
 
-Make browser fullscreen for best experience! To shut down the server, press ctrl + c.
+Your browser should automatically open after a few seconds. Make browser fullscreen for best experience! 
 
+Shut down and save the server
+```bash
+$ make save
+```
