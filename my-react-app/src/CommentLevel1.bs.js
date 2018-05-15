@@ -47,7 +47,7 @@ function make(text, score, comment_id, nestedcomments, _) {
                                       onClick: (function () {
                                           return Curry._1(self[/* send */4], /* Downvote */1);
                                         })
-                                    }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count)), match ? ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(String(comment_id), "Write a comment", /* array */[])) : ""), React.createElement("div", undefined, $$Array.map((function (comment) {
+                                    }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count)), React.createElement("div", undefined, match ? ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(String(comment_id), "Write a comment", /* array */[])) : "")), React.createElement("div", undefined, $$Array.map((function (comment) {
                                     return ReasonReact.element(/* None */0, /* None */0, CommentLevel2$ReactTemplate.make(comment[/* text */1], comment[/* score */2], comment[/* comment_id */0], comment[/* children */3], /* array */[]));
                                   }), nestedcomments)));
             }),

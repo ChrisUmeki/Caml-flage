@@ -49,6 +49,7 @@ let make = (~text, ~score, ~comment_id, ~nestedcomments, _children) => {
     <div>
        /* nested comment */ 
       <div className="nested1">
+      
         <div className = "gr">
           <p>(ReasonReact.stringToElement(text))</p>
         </div>
@@ -71,10 +72,12 @@ let make = (~text, ~score, ~comment_id, ~nestedcomments, _children) => {
             </div>
         </div> 
 
+        <div> 
           (
           self.state.show ?
             <CommentInput post_id=string_of_int(comment_id) initialText="Write a comment"/> : ReasonReact.stringToElement("")
           )
+        </div> 
 
       </div>
 
