@@ -12,13 +12,12 @@ Compile react files
 ```bash
 $ cd my-react-app
 $ npm install
-$ npm start
-$ npm run webpack
-$ cd ..
+$ npm start & npm run webpack
 ```
 
-Compile and run (on port 3000)
+Compile and run in new tab
 ```bash
+$ cd ..
 $ make run
 ```
 
