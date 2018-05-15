@@ -12,9 +12,13 @@ let post3 = post_from_params 431 49 "test" "this is a test" false None "coolguy4
 let post4 = post_from_params 431 50 "test" "this is a test" false None "coolguy42" [comment1] "testtag" 1526275325.
 let post5 = post_from_params 431 (-10) "test" "this is a test" false None "coolguy42" [] "testtag" 1526275325.
 let comment3 = comment_from_params 1000 (-9) "wow i like your test" "coolguy43" [] 431 431 true
-let comment4 = comment_from_params 1002 (4) "i agree nice test bro" "coolguy44" [] (-1) 1000 false
+let commentnested = comment_from_params 1009 (4) "the nicest" "coolguy45" [] (-1) 1002 false
+let comment4 = comment_from_params 1002 (4) "i agree nice test bro" "coolguy44" [commentnested] (-1) 1000 false
 let comment5 = comment_from_params 1000 (-8) "wow i like your test" "coolguy43" [comment4] 431 431 true
+let comment6 = comment_from_params 1003 (2) "woah" "dogluvr2" [] 431 431 true
+let comment7 = comment_from_params 1004 (0) "what a nice post" "niceman88" [] 431 431 true
 let post6 = post_from_params 432 50 "test" "this is a test" false None "coolguy42" [] "testtag" (1526275325. -. 604800.)
+let post7 = post_from_params 431 50 "test" "this is a test" false None "coolguy42" [comment5; comment6; comment7] "testtag" 1526275325.
 let tag1 = tag_from_params "hi" [(ref post1); (ref post2)]
 let tag2 = empty "hi"
 let tag3 = tag_from_params "bye" []
@@ -81,8 +85,11 @@ let tests =
     "tag02" >:: (fun _ -> assert_equal [] (Tag.posts_list tag3));
     "tag03" >:: (fun _ -> assert_equal [post1;post2] (Tag.posts_list tag1));
     "tag04" >:: (fun _ -> assert_equal [post3] (Tag.posts_list tag2));
-
-
+    "DFS post7 1000" >:: (fun _ -> assert_equal comment5 (Post.find_comment 1000 post7));
+    "DFS post7 1003" >:: (fun _ -> assert_equal comment6 (Post.find_comment 1003 post7));
+    "DFS post7 1004" >:: (fun _ -> assert_equal comment7 (Post.find_comment 1004 post7));
+    "DFS post7 1002 (nested)" >:: (fun _ -> assert_equal comment4 (Post.find_comment 1002 post7));
+    "DFS post7 1009 (2 nested)" >:: (fun _ -> assert_equal commentnested (Post.find_comment 1009 post7));
   ]
 
 let suite =
