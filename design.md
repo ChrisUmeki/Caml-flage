@@ -112,6 +112,8 @@ Shea: I mostly worked on backend .ml files like post, comment, tag, and server +
 
 Mena: I worked mostly on frontend such as the displaying the posts, comments, and tags. This included parsing the data from the json files (sent to us from the server) and showing them on the appropriate pages. In addition, I worked on the functions that handled data on client side and sent the data to the server when certain buttons were pressed. 
 
+Arzu: I mostly workd on fronted such as defining the type of posts and comments, parsing post/comment data from json by extracting the necessary fields and displaying them on the main page. I also worked on adding two options for sorting posts by defining a new variant and modifying functions in server.ml and server_state.ml. In addition, I built most of the html files with the necessary links and buttons and added styling using CSS. For testing, I added unit tests for some functions in .ml files.
+
 
 ## Sources used
 
