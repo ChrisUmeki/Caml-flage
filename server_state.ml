@@ -99,11 +99,21 @@ let update_posts st (p : Post.t) =
     
 (* [update_comments st c] adds comment c to state st *)
 let update_comments st (c : Comment.t) =
-  let f = (fun x -> Post.get_id x = Comment.get_par c) in
-  if (List.exists f st.posts) then
-    let p = List.find f st.posts in
+  if Comment.par_is_post c
+  then
+    let f = (fun x -> Post.get_id x = Comment.get_post_id c) in
+    if (List.exists f st.posts)
+    then
+      let p = List.find f st.posts in
+      incr st.numcomments;
+      Post.add_reply p c
+    else
+      raise (Failure "Parent post not found")
+  else
+    let p = List.find (fun x -> Post.get_id x = Comment.get_post_id c) st.posts in
+    let par = Post.find_comment (Comment.get_par c) p in
     incr st.numcomments;
-    Post.add_reply p c
+    Comment.add_reply par c
 
 let sort_posts sort lst =
  match sort with 

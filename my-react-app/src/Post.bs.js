@@ -49,7 +49,7 @@ function make(title, tag, text, score, post_id, _) {
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Downvote */1);
                                     })
-                                }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count), React.createElement("div", undefined, match ? ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(false, String(post_id), String(post_id), "Write a comment", /* array */[])) : "")));
+                                }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count), React.createElement("div", undefined, match ? ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(true, String(post_id), String(post_id), "Write a comment", /* array */[])) : "")));
             }),
           /* initialState */(function () {
               return /* record */[

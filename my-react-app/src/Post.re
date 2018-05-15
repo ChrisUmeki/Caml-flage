@@ -82,7 +82,7 @@ let make = (~title, ~tag, ~text, ~score, ~post_id, _children) => {
         (
         self.state.show ?
           <CommentInput 
-            parent_is_post=false 
+            parent_is_post=true
             parent_id=string_of_int(post_id)
             post_id=string_of_int(post_id)
             initialText="Write a comment"/>

@@ -6,7 +6,9 @@ open Ezjsonm
     text: string;
     user: string;
     mutable children: t list;
-    parent_id: int;
+    post_id: int;
+    parent_comment_id: int;
+    parent_is_post: bool;
   }
 
   let get_id a =
@@ -28,7 +30,13 @@ open Ezjsonm
     a.children
 
   let get_par a = 
-    a.parent_id
+    a.parent_comment_id
+
+  let par_is_post a =
+    a.parent_is_post
+  
+  let get_post_id a =
+    a.post_id
 
   let add_reply par reply =
     par.children <- reply::par.children
@@ -40,7 +48,9 @@ open Ezjsonm
       text = Ezjsonm.find o ["text"] |> Ezjsonm.get_string;
       user = Ezjsonm.find o ["user_id"] |> Ezjsonm.get_string;
       children = [];
-      parent_id = Ezjsonm.find o ["post_id"] |> Ezjsonm.get_int;
+      post_id = Ezjsonm.find o ["post_id"] |> Ezjsonm.get_int;
+      parent_comment_id = Ezjsonm.find o ["parent_comment_id"] |> Ezjsonm.get_int;
+      parent_is_post = Ezjsonm.find o ["parent_is_post"] |> Ezjsonm.get_bool;
     }
 
   let rec comment_from_val o =
@@ -51,7 +61,9 @@ open Ezjsonm
       text = Ezjsonm.find o ["text"] |> Ezjsonm.get_string;
       user = Ezjsonm.find o ["user"] |> Ezjsonm.get_string;
       children = childrenlst;
-      parent_id = Ezjsonm.find o ["parent_id"] |> Ezjsonm.get_int;
+      post_id = Ezjsonm.find o ["post_id"] |> Ezjsonm.get_int;
+      parent_comment_id = Ezjsonm.find o ["parent_comment_id"] |> Ezjsonm.get_int;
+      parent_is_post = Ezjsonm.find o ["parent_is_post"] |> Ezjsonm.get_bool;
     }
 
   let comment_from_params i s t u c p =
@@ -61,7 +73,9 @@ open Ezjsonm
       text = t;
       user = u;
       children = c; 
-      parent_id = p;
+      post_id = p;
+      parent_comment_id = -1;
+      parent_is_post = true;
     }
 
   let comments_of_json j = match j with
@@ -73,10 +87,14 @@ open Ezjsonm
   let rec helper_c c = Ezjsonm.value (`O (to_json c))
 
   and to_json a = 
-    [("comment_id", Ezjsonm.int a.id);
-    ("text", `String a.text); 
-    ("score", `Float (float_of_int a.score));
-    ("user", Ezjsonm.string a.user);
-    ("children", `A (List.map helper_c a.children));
-    ("parent_id", Ezjsonm.int a.parent_id);]
+    [
+      ("comment_id", Ezjsonm.int a.id);
+      ("text", `String a.text); 
+      ("score", `Float (float_of_int a.score));
+      ("user", Ezjsonm.string a.user);
+      ("children", `A (List.map helper_c a.children));
+      ("post_id", Ezjsonm.int a.post_id);
+      ("parent_comment_id", Ezjsonm.int a.parent_comment_id);
+      ("parent_is_post", Ezjsonm.bool a.parent_is_post);
+    ]
 

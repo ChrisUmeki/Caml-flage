@@ -107,7 +107,11 @@ end
 (* [comment_listen st] adds new posts to [st] in response to incoming POST requests *)
 let comment_listen st = post "/comment" begin fun req ->
   let j = App.json_of_body_exn req in
-  let f = fun x -> update_comments st (Comment.comment_from_new (Ezjsonm.value x) (Server_state.get_next_comment_id st)) |> Lwt.return in
+  let newid = Server_state.get_next_comment_id st in
+  let f = fun x -> 
+            Comment.comment_from_new (Ezjsonm.value x) newid
+            |> update_comments st
+            |> Lwt.return in
   Lwt.bind j f |> ignore;
   `String "Comment made" |> respond'
 end

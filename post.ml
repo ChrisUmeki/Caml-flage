@@ -150,6 +150,6 @@ let rec depth_first_search id curr  =
 
 let find_comment comment_id p =
   match depth_first_search comment_id (P p) with
-  | None -> raise (Failure "Comment id not found")
+  | None -> raise (Failure ("Comment " ^ (string_of_int comment_id) ^ " not found"))
   | Some (C c) -> c
   | Some (P p) -> raise (Failure "Shouldn't find a post")

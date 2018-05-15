@@ -21,6 +21,12 @@ val get_text : t -> string
 (* [get_par a] is the id of the parent *)
 val get_par : t -> int 
 
+(* [par_is_post a] is whether [a] is a direct reply to a post *)
+val par_is_post : t -> bool
+
+(* [get_post_id a] is the id of the post *)
+val get_post_id : t -> int
+
 (* [add_reply par reply] adds a reply [reply] to the children of a parent [par] *)
 val add_reply : t -> t -> unit
 
