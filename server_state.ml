@@ -22,14 +22,30 @@ let empty_state = {
   numcomments = ref 0;
 }
 
-(* [new_vote st j] updates the state by incrementing or decrementing a Post score
-    as specified in j *)
-let new_vote st j = 
-  let j' = Ezjsonm.value j in
+let vote_post st j' =
   let i = Ezjsonm.find j' ["post_id"] |> Ezjsonm.get_int in
   match Ezjsonm.find j' ["direction"] with
   | `String "up" -> List.find (fun x -> Post.get_id x = i) st.posts |> Post.up_camel
   | `String "down" -> List.find (fun x -> Post.get_id x = i) st.posts |> Post.down_camel
+  | _ -> ()
+
+let vote_comment st j' =
+  let postid = Ezjsonm.find j' ["post_id"] |> Ezjsonm.get_int in
+  let comment_id = Ezjsonm.find j' ["comment_id"] |> Ezjsonm.get_int in
+  let p = List.find (fun x -> Post.get_id x = postid) st.posts in
+  let c = Post.find_comment comment_id p in
+  match Ezjsonm.find j' ["direction"] with
+  | `String "up" -> Comment.up_camel c
+  | `String "down" -> Comment.down_camel c
+  | _ -> () 
+
+(* [new_vote st j] updates the state by incrementing or decrementing an entry score
+    as specified in j *)
+let new_vote st j = 
+  let j' = Ezjsonm.value j in
+  match Ezjsonm.find j' ["entry_type"] with
+  | `String "post" -> vote_post st j'
+  | `String "comment" -> vote_comment st j'
   | _ -> ()
 
 (* TODO: Fill empty tags with post refs *)
