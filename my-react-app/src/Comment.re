@@ -12,7 +12,7 @@ type action =
 let component = ReasonReact.reducerComponent("Comment");
 
 
-let make = (~text, ~score, ~comment_id, ~nestedcomments, _children) => {
+let make = (~text, ~score, ~post_id, ~comment_id, ~nestedcomments, _children) => {
 
 ...component,
 
@@ -75,7 +75,12 @@ render: self => {
       <div> 
         (
         self.state.show ?
-          <CommentInput post_id=string_of_int(comment_id) initialText="Write a comment"/> : ReasonReact.stringToElement("")
+          <CommentInput 
+            parent_is_post=false 
+            parent_id=string_of_int(comment_id)
+            post_id=string_of_int(post_id)
+            initialText="Write a comment"/>
+          : ReasonReact.stringToElement("")
         )
       </div> 
 
@@ -86,7 +91,7 @@ render: self => {
     (ReasonReact.arrayToElement(
     Array.map(
             (comment: CommentData.comment) => 
-            <CommentLevel1 text=comment.text score=comment.score comment_id=comment.comment_id nestedcomments=comment.children/>,
+            <CommentLevel1 post_id=post_id text=comment.text score=comment.score comment_id=comment.comment_id nestedcomments=comment.children/>,
             nestedcomments
           )
     ))

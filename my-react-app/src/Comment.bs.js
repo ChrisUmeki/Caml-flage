@@ -12,7 +12,7 @@ var CommentLevel1$ReactTemplate = require("./CommentLevel1.bs.js");
 
 var component = ReasonReact.reducerComponent("Comment");
 
-function make(text, score, comment_id, nestedcomments, _) {
+function make(text, score, post_id, comment_id, nestedcomments, _) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -47,8 +47,8 @@ function make(text, score, comment_id, nestedcomments, _) {
                                       onClick: (function () {
                                           return Curry._1(self[/* send */4], /* Downvote */1);
                                         })
-                                    }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count)), React.createElement("div", undefined, match ? ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(String(comment_id), "Write a comment", /* array */[])) : "")), React.createElement("div", undefined, $$Array.map((function (comment) {
-                                    return ReasonReact.element(/* None */0, /* None */0, CommentLevel1$ReactTemplate.make(comment[/* text */1], comment[/* score */2], comment[/* comment_id */0], comment[/* children */3], /* array */[]));
+                                    }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count)), React.createElement("div", undefined, match ? ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(false, String(comment_id), String(post_id), "Write a comment", /* array */[])) : "")), React.createElement("div", undefined, $$Array.map((function (comment) {
+                                    return ReasonReact.element(/* None */0, /* None */0, CommentLevel1$ReactTemplate.make(comment[/* text */1], comment[/* score */2], post_id, comment[/* comment_id */0], comment[/* children */3], /* array */[]));
                                   }), nestedcomments)));
             }),
           /* initialState */(function () {

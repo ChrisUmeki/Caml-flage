@@ -9,10 +9,10 @@ type action =
 | Downvote
 | Comment;
 
-let component = ReasonReact.reducerComponent("CommentLevel1");
+let component = ReasonReact.reducerComponent("CommentLevel2");
 
 
-let make = (~text, ~score, ~comment_id, ~nestedcomments, _children) => {
+let make = (~text, ~score, ~post_id, ~comment_id, ~nestedcomments, _children) => {
 
 ...component,
 
@@ -75,7 +75,13 @@ render: self => {
       <div> 
         (
         self.state.show ?
-          <CommentInput post_id=string_of_int(comment_id) initialText="Write a comment"/> : ReasonReact.stringToElement("")
+          <CommentInput
+            parent_is_post=false 
+            parent_id=string_of_int(comment_id)
+            post_id=string_of_int(post_id)
+            initialText="Write a comment"
+            /> 
+          : ReasonReact.stringToElement("")
         )
       </div> 
 

@@ -8,7 +8,7 @@ type state = {
   
   let component = ReasonReact.reducerComponent("AllComments");
   
-  let make = (~postsUrl, _children) => {
+  let make = (~postsUrl, ~post_id, _children) => {
     ...component,
     initialState: () => {
       commentsData: None
@@ -42,7 +42,7 @@ type state = {
         | Some(commentdata) => ReasonReact.arrayToElement(
             Array.map(
               (comment: CommentData.comment) => 
-              <Comment text=comment.text score=comment.score comment_id=comment.comment_id nestedcomments=comment.children/>,
+              <Comment post_id=post_id text=comment.text score=comment.score comment_id=comment.comment_id nestedcomments=comment.children/>,
               commentdata
             )
           )

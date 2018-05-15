@@ -18,20 +18,23 @@ type state = {
   let setInputElement = (theRef, {ReasonReact.state}) => 
   state.inputElement := Js.toOption(theRef);
    
-  let make = (~post_id, ~initialText, _) => {
+  let make = (~parent_is_post, ~parent_id, ~post_id, ~initialText, _) => {
     ...component,
     initialState: () => {text:initialText, inputElement: ref(None)}, 
   
-    /* reducer: (newText, state) => ReasonReact.Update({...state, text: newText}), */
-    /* reducer: (action, newText, state) => 
-    switch (action){
-     | Submit => ReasonReact.Update ({...state, text: newText})
-    }, */
     reducer: (action) => 
       switch (action){
       | Submit(newText) => 
         Js.Promise.(
-          Axios.postData("/comment", {{"user_id": "", "post_id": int_of_string(post_id), "text": newText}})
+          Axios.postData("/comment", {
+            {
+              "user_id": "",
+              "post_id": int_of_string(post_id),
+              "text": newText,
+              "parent_is_post": parent_is_post,
+              "parent_comment_id": int_of_string(parent_id)
+            }
+          })
           |> then_((response) => resolve(Js.log(response##data)))
           |> catch((error) => resolve(Js.log(error)))
           |> ignore

@@ -3,6 +3,7 @@
 
 var List = require("bs-platform/lib/js/list.js");
 var ReactDOMRe = require("reason-react/src/ReactDOMRe.js");
+var Caml_format = require("bs-platform/lib/js/caml_format.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Title$ReactTemplate = require("./Title.bs.js");
 var AllTags$ReactTemplate = require("./AllTags.bs.js");
@@ -26,8 +27,8 @@ var post_id = List.nth(lst, List.length(lst) - 1 | 0);
 function renderToElement(posttype, myurl, id) {
   if (posttype === "post") {
     ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(myurl, /* array */[])), "onepost");
-    ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(myurl, /* array */[])), "comments");
-    return ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(post_id, "Write a comment", /* array */[])), "comment_input");
+    ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(myurl, Caml_format.caml_int_of_string(post_id), /* array */[])), "comments");
+    return ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(true, post_id, post_id, "Write a comment", /* array */[])), "comment_input");
   } else {
     ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Title$ReactTemplate.make(id, /* array */[])), "tagtitle");
     return ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(myurl, /* array */[])), "poststag");

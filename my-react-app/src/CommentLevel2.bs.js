@@ -8,9 +8,9 @@ var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var CommentInput$ReactTemplate = require("./CommentInput.bs.js");
 
-var component = ReasonReact.reducerComponent("CommentLevel1");
+var component = ReasonReact.reducerComponent("CommentLevel2");
 
-function make(text, score, comment_id, _, _$1) {
+function make(text, score, post_id, comment_id, _, _$1) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -45,7 +45,7 @@ function make(text, score, comment_id, _, _$1) {
                                       onClick: (function () {
                                           return Curry._1(self[/* send */4], /* Downvote */1);
                                         })
-                                    }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count)), React.createElement("div", undefined, match ? ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(String(comment_id), "Write a comment", /* array */[])) : "")));
+                                    }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count)), React.createElement("div", undefined, match ? ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(false, String(comment_id), String(post_id), "Write a comment", /* array */[])) : "")));
             }),
           /* initialState */(function () {
               return /* record */[

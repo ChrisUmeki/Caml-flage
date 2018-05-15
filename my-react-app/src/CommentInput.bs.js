@@ -19,7 +19,7 @@ function setInputElement(theRef, param) {
   return /* () */0;
 }
 
-function make(post_id, initialText, _) {
+function make(parent_is_post, parent_id, post_id, initialText, _) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -66,7 +66,9 @@ function make(post_id, initialText, _) {
                 Axios.post("/comment", {
                           user_id: "",
                           post_id: Caml_format.caml_int_of_string(post_id),
-                          text: action[0]
+                          text: action[0],
+                          parent_is_post: parent_is_post,
+                          parent_comment_id: Caml_format.caml_int_of_string(parent_id)
                         }).then((function (response) {
                           return Promise.resolve((console.log(response.data), /* () */0));
                         })).catch((function (error) {
