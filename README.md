@@ -3,11 +3,22 @@
 Dependency
 ```bash
 $ opam install opium
+$ opam install Ezjsonm
+$ npm install
+```
+
+Compile react files
+```bash
+$ cd my-react-app
+$ npm start
+$ npm run webpack
 ```
 
 Compile and run (on port 3000)
 ```bash
-$ ocamlbuild -pkg opium server.native && ./server.native
+$ make run
 ```
+
+Make browser fullscreen for best experience! To shut down the server, press ctrl + c.
 
 

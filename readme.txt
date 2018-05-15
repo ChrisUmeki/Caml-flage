@@ -1,4 +1,4 @@
-1. opam install opium ezjsonm reasonreact (anywhere) - Installs external dependencies
+1. opam install opium ezjsonm (anywhere) - Installs external dependencies
 2. npm install - Installs ReasonReact.
 3. npm start (in my-react-app folder) - Runs bucklescript, which compiles re to bs.js
 4. npm run webpack (in my-react-app folder) - Runs webpack, which takes those bs.js files, as well as their dependencies in node_modules, and condenses them all together into Index.js
