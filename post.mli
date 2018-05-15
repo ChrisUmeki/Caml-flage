@@ -1,5 +1,10 @@
 type t 
 
+
+type entry = 
+  | P of t
+  | C of Comment.t
+
 (* [get_id a] is the id of a *)
 val get_id : t -> int
 
@@ -52,4 +57,6 @@ val to_json_front : t -> (string * Ezjsonm.value) list
 (* [to_json a] extracts all the data of a post to json *)
 val to_json : t -> (string * Ezjsonm.value) list
 
+(* [find_comment comment_id p] returns the Comment in Post [p] with id [comment_id] *)
+val find_comment : int -> t -> Comment.t
 

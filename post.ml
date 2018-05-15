@@ -14,6 +14,10 @@ type t = {
     timestamp: float;
 }
 
+type entry = 
+  | P of t
+  | C of Comment.t
+
 let get_id a =
   a.id
 
@@ -126,3 +130,26 @@ let to_json a =
   ("tag", `String a.tag); 
   ("timestamp", `Float a.timestamp);]
 
+(* [depth_first_search id curr] is a DFS traversal of [curr], returning an option
+ * of a Comment with [id] *)
+let rec depth_first_search id curr  =
+  let (ch, iscomment, currid) = match curr with
+  | P p -> get_children p, false, get_id p
+  | C c -> Comment.get_children c, true, Comment.get_id c
+  in
+  if iscomment && id = currid
+  then Some curr
+  else
+    (* if List.exists (fun x -> id = Comment.get_id x) ch
+    then Some (C (List.find (fun x -> id = Comment.get_id x) ch))
+    else *)
+      let lst = List.map (fun c -> depth_first_search id (C c)) ch in
+      if List.exists (fun x -> match x with Some _ -> true | None -> false) lst
+      then List.find (fun x -> match x with Some _ -> true | None -> false) lst
+      else None
+
+let find_comment comment_id p =
+  match depth_first_search comment_id (P p) with
+  | None -> raise (Failure "Comment id not found")
+  | Some (C c) -> c
+  | Some (P p) -> raise (Failure "Shouldn't find a post")
