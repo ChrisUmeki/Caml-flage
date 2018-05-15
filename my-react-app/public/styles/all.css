@@ -67,6 +67,20 @@
     display: block;
 }
 
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: initial;
+}
+
+#sortbutt {
+    position: relative;
+    margin-left: 38%;
+    margin-top: 5%;
+}
 .one {
     border-style: solid;
     border-color: black;
