@@ -19,17 +19,25 @@ The users module will be responsible for keeping track of data related to the us
 
 This information will be kept in a record for each individual user, whereas the data of all the users on the server are the individual records stored in a tree. 
 
-### entry.ml
-Entry has two types: posts and comments. Posts are top level entries posted by the users whereas comments are replies to posts or other comments. 
 
-The type defined for a post will include the list of comments associated with a post, which will be implemented as a list of linked lists, a relevance score, determined by the number of up-camels and down-camels, content(text, images,etc.), id of the post, and the date and time the post was published.
+### post.ml 
+Posts are top level entries posted by the users, that are displayed on the dashboard. 
 
-The type defined for a comment will be similar to posts. Major differences between the two types would be that comments are linked back to the parent entry, and posts have a title as well as content.
+The type defined for a post is a record with fields that store the id, score (determined by the sum of total up-camels and down-camels), title, text, user, url, tag, list of comments associated with a post, as well as the time the post was published. 
 
-Similar to posts, comments will also store the list of comments/replies, a relevance score determined by the number of up-camels and down-camels, as well as the date and time that the comment was posted. 
+The posts module contains the key functions for creating post given the needed arguments, accessing the fields of a post, calculating the "hot score" that is assigned to a post for sorting, as well as functions that extract post data to a json.
+
+### comment.ml 
+Comments are replies to posts or comments. 
+
+The type defined for a comment is similar to posts. It is a record with fields that store the id, score, title, text, user, url, the id of a post under which the comment was added and the parent comment id, if the comment was added under another comment.
+
+The comments module contains the key functions for creating a comment given the needed arguments, accessing the fields of a comment and functions that extract comment data to a json.
+
+Besides the differences in some fields, major differences between posts and comments include that comments are linked back to a parent entry, and that comments are not sorted.
 
 ### tags.ml
-Tags are a way for users to categorize their posts as well as to find posts pertaining to a certain topic. Each tag is defined as a string which is the name of the tag as well as the posts that are linked to the tag. 
+Tags are a way for users to categorize their posts as well as to find posts pertaining to a certain topic. Each tag is defined as a record with two fields: a string which is the name of the tag as well as the mutable posts field that contains a list of posts associated with a a tag. 
 
 ## Data
 
@@ -59,6 +67,12 @@ We will use Ezjsonm to store the data of users, posts, comments, and tags-- this
 Because we have many records and record lists that are used to store data, we will be unit testing all the functions that change the records to make sure data is being stored correctly. Module tests will be written for each of the module listed above. In addition, we will be testing the server requests to ensure that data is being processed correctly and that the webpage functions the way we want. These tests will be more interactive instead of in modules and unit testing. 
 
 Depending on how we split up the modules and coding, each person will be responsible for unit testing their own modules since they’ll be most familiar with how their code should function (this mostly includes the functions that will not be in the .mli). Once we begin implementing the front end portion of the project, everybody is responsible for testing the interactive elements on the webpage. 
+
+## Testing functions in .ml files 
+
+We added unit tests for functions in post.ml and comment.ml that create posts and comments given corresponding arguments, functions that get the id, score, title, children, tags and timestamp (for posts only), add replies, and calculate the hot score assigned to each post for sorting purposes. We also created json values to test the functions that extract post and comment data to json. In addition, we tested tag.ml functions that create tags, access tag name and the list of posts associated with a tag. 
+
+
 
 ## Division of Labor
 
