@@ -1,18 +1,20 @@
 /* Post.re creates one post */
 type state = {
     count: int,
+    show: bool,
   };
   
 type action =
   | Upvote
-  | Downvote;
+  | Downvote
+  | Comment;
   
 let component = ReasonReact.reducerComponent("Post");
 
 let make = (~title, ~tag, ~text, ~score, ~post_id, _children) => {
   ...component,
 
-  initialState: () => {count: score},
+  initialState: () => {count: score, show: false},
 
   /* The action passed in determines what changes will be made to the state */
   reducer: (action, state) =>
@@ -35,6 +37,8 @@ let make = (~title, ~tag, ~text, ~score, ~post_id, _children) => {
       |> ignore
     );
     ReasonReact.Update({...state, count: state.count - 1});
+
+    | Comment => ReasonReact.Update({...state, show: ! state.show});
 
     },
 
@@ -62,11 +66,9 @@ let make = (~title, ~tag, ~text, ~score, ~post_id, _children) => {
           (ReasonReact.stringToElement(up))
         </button>
 
-        <a href= {"/post/" ++ string_of_int(post_id) ++ "/"}> 
-        <button className = "comment">
+        <button className = "comment" onClick=(_event => self.send(Comment))>
           (ReasonReact.stringToElement("Comment"))
         </button>
-        </a>
 
         <button className = "down" onClick=(_event => self.send(Downvote))>
           (ReasonReact.stringToElement(down))
@@ -75,6 +77,18 @@ let make = (~title, ~tag, ~text, ~score, ~post_id, _children) => {
         <div>
           (ReasonReact.stringToElement("number of camels: " ++ count))
         </div>
+
+        <div> 
+        (
+        self.state.show ?
+          <CommentInput 
+            parent_is_post=false 
+            parent_id=string_of_int(post_id)
+            post_id=string_of_int(post_id)
+            initialText="Write a comment"/>
+          : ReasonReact.stringToElement("")
+        )
+      </div> 
 
       </div>
     </div>;

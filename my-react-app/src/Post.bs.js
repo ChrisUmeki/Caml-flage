@@ -6,6 +6,7 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var Axios = require("axios");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
+var CommentInput$ReactTemplate = require("./CommentInput.bs.js");
 
 var component = ReasonReact.reducerComponent("Post");
 
@@ -22,6 +23,7 @@ function make(title, tag, text, score, post_id, _) {
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
               var count = String(self[/* state */2][/* count */0]);
+              var match = self[/* state */2][/* show */1];
               return React.createElement("div", undefined, React.createElement("div", {
                               className: "one"
                             }, React.createElement("div", {
@@ -37,46 +39,63 @@ function make(title, tag, text, score, post_id, _) {
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Upvote */0);
                                     })
-                                }, "UpCaml"), React.createElement("a", {
-                                  href: "/post/" + (String(post_id) + "/")
-                                }, React.createElement("button", {
-                                      className: "comment"
-                                    }, "Comment")), React.createElement("button", {
+                                }, "UpCaml"), React.createElement("button", {
+                                  className: "comment",
+                                  onClick: (function () {
+                                      return Curry._1(self[/* send */4], /* Comment */2);
+                                    })
+                                }, "Comment"), React.createElement("button", {
                                   className: "down",
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Downvote */1);
                                     })
-                                }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count)));
+                                }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count), React.createElement("div", undefined, match ? ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(false, String(post_id), String(post_id), "Write a comment", /* array */[])) : "")));
             }),
           /* initialState */(function () {
-              return /* record */[/* count */score];
+              return /* record */[
+                      /* count */score,
+                      /* show */false
+                    ];
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, state) {
-              if (action) {
-                Axios.post("/vote", {
-                          direction: "down",
-                          user_id: 0,
-                          post_id: post_id,
-                          entry_type: "post"
-                        }).then((function (response) {
-                          return Promise.resolve((console.log(response.data), /* () */0));
-                        })).catch((function (error) {
-                        return Promise.resolve((console.log(error), /* () */0));
-                      }));
-                return /* Update */Block.__(0, [/* record */[/* count */state[/* count */0] - 1 | 0]]);
-              } else {
-                Axios.post("/vote", {
-                          direction: "up",
-                          user_id: 0,
-                          post_id: post_id,
-                          entry_type: "post"
-                        }).then((function (response) {
-                          return Promise.resolve((console.log(response.data), /* () */0));
-                        })).catch((function (error) {
-                        return Promise.resolve((console.log(error), /* () */0));
-                      }));
-                return /* Update */Block.__(0, [/* record */[/* count */state[/* count */0] + 1 | 0]]);
+              switch (action) {
+                case 0 : 
+                    Axios.post("/vote", {
+                              direction: "up",
+                              user_id: 0,
+                              post_id: post_id,
+                              entry_type: "post"
+                            }).then((function (response) {
+                              return Promise.resolve((console.log(response.data), /* () */0));
+                            })).catch((function (error) {
+                            return Promise.resolve((console.log(error), /* () */0));
+                          }));
+                    return /* Update */Block.__(0, [/* record */[
+                                /* count */state[/* count */0] + 1 | 0,
+                                /* show */state[/* show */1]
+                              ]]);
+                case 1 : 
+                    Axios.post("/vote", {
+                              direction: "down",
+                              user_id: 0,
+                              post_id: post_id,
+                              entry_type: "post"
+                            }).then((function (response) {
+                              return Promise.resolve((console.log(response.data), /* () */0));
+                            })).catch((function (error) {
+                            return Promise.resolve((console.log(error), /* () */0));
+                          }));
+                    return /* Update */Block.__(0, [/* record */[
+                                /* count */state[/* count */0] - 1 | 0,
+                                /* show */state[/* show */1]
+                              ]]);
+                case 2 : 
+                    return /* Update */Block.__(0, [/* record */[
+                                /* count */state[/* count */0],
+                                /* show */!state[/* show */1]
+                              ]]);
+                
               }
             }),
           /* subscriptions */component[/* subscriptions */13],

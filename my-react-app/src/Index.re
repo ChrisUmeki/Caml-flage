@@ -16,7 +16,7 @@ let renderToElement = (posttype, myurl, id) => {
 
     ReactDOMRe.renderToElementWithId(<AllComments post_id=int_of_string(post_id)  postsUrl={myurl}/>, "comments"); 
 
-    ReactDOMRe.renderToElementWithId(<CommentInput parent_is_post=true parent_id=post_id post_id=post_id initialText="Write a comment"/>, "comment_input");
+    /* ReactDOMRe.renderToElementWithId(<CommentInput parent_is_post=true parent_id=post_id post_id=post_id initialText="Write a comment"/>, "comment_input"); */
 
     } else {
 

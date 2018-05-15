@@ -10,7 +10,6 @@ var AllTags$ReactTemplate = require("./AllTags.bs.js");
 var AllPosts$ReactTemplate = require("./AllPosts.bs.js");
 var PostInput$ReactTemplate = require("./PostInput.bs.js");
 var AllComments$ReactTemplate = require("./AllComments.bs.js");
-var CommentInput$ReactTemplate = require("./CommentInput.bs.js");
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Title$ReactTemplate.make("Welcome to Caml-flage", /* array */[])), "title");
 
@@ -27,8 +26,7 @@ var post_id = List.nth(lst, List.length(lst) - 1 | 0);
 function renderToElement(posttype, myurl, id) {
   if (posttype === "post") {
     ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(myurl, /* array */[])), "onepost");
-    ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(myurl, Caml_format.caml_int_of_string(post_id), /* array */[])), "comments");
-    return ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, CommentInput$ReactTemplate.make(true, post_id, post_id, "Write a comment", /* array */[])), "comment_input");
+    return ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllComments$ReactTemplate.make(myurl, Caml_format.caml_int_of_string(post_id), /* array */[])), "comments");
   } else {
     ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Title$ReactTemplate.make(id, /* array */[])), "tagtitle");
     return ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, AllPosts$ReactTemplate.make(myurl, /* array */[])), "poststag");
