@@ -14,11 +14,16 @@ let comment2 = comment_from_params 1000 (-7) "wow i like your test" "coolguy43" 
 let comment3 = comment_from_params 1000 (-9) "wow i like your test" "coolguy43" [] 431
 let comment4 = comment_from_params 1001 (4) "i agree nice test bro" "coolguy44" [] 1000
 let comment5 = comment_from_params 1000 (-8) "wow i like your test" "coolguy43" [comment4] 431
+let empty = empty "hi"
+let tag1 = tag_from_params "hi" [(ref post1); (ref post2)]
+let tag2 = empty 
+let unit = add_post tag2 post3
+
 
 
 let tests =
   [
-    "post1 id" >:: (fun _ -> assert_equal 432 (Post.get_id post1));
+    "post1 id" >:: (fun _ -> assert_equal 431 (Post.get_id post1));
     "post1 score" >:: (fun _ -> assert_equal 50 (Post.get_score post1));
     "post1 title" >:: (fun _ -> assert_equal "test" (Post.get_title post1));
     "post1 text" >:: (fun _ -> assert_equal "this is a test" (Post.get_text post1));
@@ -39,6 +44,12 @@ let tests =
     "comment1 score down-cameled" >:: (fun _ -> assert_equal comment3 (Comment.down_camel comment1));
     "comment1 add reply" >:: (fun _ -> assert_equal comment5 (Comment.add_reply comment1 comment1)); *)
     "comment5 children" >:: (fun _ -> assert_equal [comment4] (Comment.get_children comment5));
+    "tag01" >:: (fun _ -> assert_equal "hi" (Tag.tag_name tag1));
+    "tag02" >:: (fun _ -> assert_equal [] (Tag.posts_list empty));
+    "tag03" >:: (fun _ -> assert_equal [post1;post2] (Tag.posts_list tag1));
+    "tag04" >:: (fun _ -> assert_equal [post3] (Tag.posts_list tag2));
+
+
   ]
 
 let suite =
