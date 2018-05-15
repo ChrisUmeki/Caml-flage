@@ -49,7 +49,8 @@ type state = {
         | None => ReasonReact.stringToElement("Loading...")
         };
   
-        <div className="display">        {comments}
+      <div className="display">
+      {comments}
       </div>
     }
   

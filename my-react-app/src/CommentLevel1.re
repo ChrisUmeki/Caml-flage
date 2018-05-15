@@ -1,4 +1,4 @@
-/* Comment.re displays one comment */ 
+/* CommentLevel1.re displays nested comments on level 1 */ 
 type state = {
     count: int,
   };
@@ -7,7 +7,7 @@ type action =
   | Upvote
   | Downvote;
   
-let component = ReasonReact.reducerComponent("Comment");
+let component = ReasonReact.reducerComponent("CommentLevel1");
 
 
 let rec make = (~text, ~score, ~comment_id, ~nestedcomments, _children) => {
@@ -43,34 +43,26 @@ let rec make = (~text, ~score, ~comment_id, ~nestedcomments, _children) => {
     let down = "DownCaml";
     let count = string_of_int(self.state.count);
     <div>
-       /* one comment */ 
-      <div className="one">
+       /* nested comment */ 
+      <div className="nested1">
         <div className = "gr">
           <p>(ReasonReact.stringToElement(text))</p>
         </div>
 
-        <button className = "up" onClick=(_event => self.send(Upvote))>
-          (ReasonReact.stringToElement(up))
-        </button>
+        <div className="comment-buttons">
+            <button className = "up" onClick=(_event => self.send(Upvote))>
+            (ReasonReact.stringToElement(up))
+            </button>
 
-        <button className = "down" onClick=(_event => self.send(Downvote))>
-          (ReasonReact.stringToElement(down))
-        </button>
+            <button className = "down" onClick=(_event => self.send(Downvote))>
+            (ReasonReact.stringToElement(down))
+            </button>
 
-        <div>
-          (ReasonReact.stringToElement("number of camels: " ++ count))
-        </div>
-      </div>
-      
-      /* nested comments */
-      <div>
-      (ReasonReact.arrayToElement(
-      Array.map(
-              (comment: CommentData.comment) => 
-              <CommentLevel1 text=comment.text score=comment.score comment_id=comment.comment_id nestedcomments=comment.children/>,
-              nestedcomments
-            )
-      ))
+            <div>
+            (ReasonReact.stringToElement("number of camels: " ++ count))
+            </div>
+        </div> 
+        
       </div>
 
     </div>;
