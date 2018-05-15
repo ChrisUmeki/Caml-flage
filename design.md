@@ -39,7 +39,36 @@ Tags are a way for users to categorize their posts as well as to find posts pert
 #### Index
 Index is the entrypoint to determining which components to render.
 
-#### AllPosts
+#### Posts
+##### AllPosts 
+AllPosts renders all the posts that are received from the json. The json is parsed in PostsData and stored in a frontpost record. 
+
+##### Post
+Post renders one post component based on the data that was received from PostsData and AllPosts. This component includes buttons for Upcaml-ing, Downcaml-ing, and commenting on a post. When the score changes, the data is sent to the server using Axios. 
+
+##### PostInput 
+PostInput is the input field that users can type into to create a new post. This data is then sent to the server using Axios. 
+
+#### Comments 
+##### AllComments
+AllComments renders all the comments that are received from the json. The json is parsed in CommentData and stored in a comment record. Comments are different from posts because they have fields which determine what parent post / comments they are nested under. 
+
+##### Comment 
+Comment renders one comment component based on the data that was received from CommentData and AllComments. Buttons rendered for a comment component are similar to a post component. 
+
+##### CommentInput 
+CommentInput is the input field that users can type into to create a new input. This data is sent to the server using Axios. It differs from a PostInput because it sends additional data storing the parent post or comment. 
+
+#### Tags 
+##### AllTags 
+AllTags is the component that displays all the tags received by the server. This data is parsed from TagsData.
+
+##### Tag 
+Each Tag component is a link to a tag page that displays all the posts related to the tag. 
+
+#### Title 
+The title component is a stateless component that displays Caml-flage on every page. 
+
  
 
 ## Data
