@@ -81,6 +81,12 @@ a.button {
     margin-left: 38%;
     margin-top: 5%;
 }
+
+.dropbtn {
+    text-decoration: none;
+    text-decoration-line: none;
+    text-decoration-style: none;
+}
 .one {
     border-style: solid;
     border-color: black;

@@ -88,7 +88,7 @@ let tests =
     "DFS post7 1000" >:: (fun _ -> assert_equal comment5 (Post.find_comment 1000 post7));
     "DFS post7 1003" >:: (fun _ -> assert_equal comment6 (Post.find_comment 1003 post7));
     "DFS post7 1004" >:: (fun _ -> assert_equal comment7 (Post.find_comment 1004 post7));
-    "DFS post7 1002 (nested)" >:: (fun _ -> assert_equal comment4 (Post.find_comment 1002 post7));
+    "DFS post7 1002 (nested)" >:: (fun _ -> assert_equal comment4 (Post.find_comment 1002 post7)); (*testing that nested comments work*)
     "DFS post7 1009 (2 nested)" >:: (fun _ -> assert_equal commentnested (Post.find_comment 1009 post7));
   ]
 
