@@ -9,28 +9,38 @@ Each post and comment has three buttons - up-camel (like), down-camel (dislike),
 
 ## System Design
 
-### Server
+### Ocaml (.ml, .mli)
+
+#### Server
 The server module stores all the data that is necessary for the platform to operate including data on each user, posts, comments, and tags. Each individual data group will have another module of their own, detailed below. 
 
 
-### Post
+#### Post
 Posts are top level entries posted by the users, that are displayed on the dashboard.
 
 The type defined for a post is a record with fields that store the id, score (determined by the sum of total up-camels and down-camels), title, text, user, url, tag, list of comments associated with a post, as well as the time the post was published. 
 
 The posts module contains the key functions for creating post given the needed arguments, accessing the fields of a post, calculating the "hot score" that is assigned to a post for sorting, as well as functions that extract post data to a json.
 
-### Comment
+#### Comment
 Comments are replies to posts or comments. 
 
-The type defined for a comment is similar to posts. It is a record with fields that store the id, score, title, text, user, url, the id of a post under which the comment was added and the parent comment id, if the comment was added under another comment.
+Comments are defined similarly to posts. It is a record with fields that store the id, score, title, text, user, associated post id, the parent comment id, and whether the comment is a direct reply to a post. When the comment is a direct reply to a post, the parent_comment_id has no meaning.
 
-The comments module contains the key functions for creating a comment given the needed arguments, accessing the fields of a comment and functions that extract comment data to a json.
+The comments module contains the key functions for creating a comment from json, accessing the fields of a comment and functions that extract comment data to a json.
 
 Besides the differences in some fields, major differences between posts and comments include that comments are linked back to a parent entry, and that comments are not sorted.
 
-### Tag
-Tags are a way for users to categorize their posts as well as to find posts pertaining to a certain topic. Each tag is defined as a record with two fields: a string which is the name of the tag as well as the mutable posts field that contains a list of posts associated with a a tag. 
+#### Tag
+Tags are a way for users to categorize their posts as well as to find posts pertaining to a certain topic. Each tag is defined as a record with two fields: a string which is the name of the tag as well as the mutable posts field that contains a list of posts associated with a a tag.
+
+### ReasonML (.re)
+
+#### Index
+Index is the entrypoint to determining which components to render.
+
+#### AllPosts
+ 
 
 ## Data
 
