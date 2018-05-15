@@ -3,13 +3,15 @@ type comment = {
     comment_id: int, 
     text: string, 
     score: int,
+    children: array(comment),
   };
    
-let parseCommentsJson = (json : Js.Json.t) : comment => 
+let rec parseCommentsJson = (json : Js.Json.t) : comment => 
     Json.Decode.{
       comment_id: field("comment_id", int, json),
       text: field("text", string, json), 
       score: field("score", int, json),
+      children: field("children", Json.Decode.array(parseCommentsJson), json),
     };
 
 /* comments is name of array */

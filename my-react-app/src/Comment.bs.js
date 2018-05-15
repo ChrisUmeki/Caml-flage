@@ -9,7 +9,7 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 
 var component = ReasonReact.reducerComponent("Comment");
 
-function make(text, score, comment_id, _) {
+function make(text, score, comment_id, _, _$1) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -36,7 +36,7 @@ function make(text, score, comment_id, _) {
                                   onClick: (function () {
                                       return Curry._1(self[/* send */4], /* Downvote */1);
                                     })
-                                }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count)));
+                                }, "DownCaml"), React.createElement("div", undefined, "number of camels: " + count)), React.createElement("div", undefined));
             }),
           /* initialState */(function () {
               return /* record */[/* count */score];

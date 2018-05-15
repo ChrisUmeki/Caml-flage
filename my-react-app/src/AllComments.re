@@ -42,7 +42,7 @@ type state = {
         | Some(commentdata) => ReasonReact.arrayToElement(
             Array.map(
               (comment: CommentData.comment) => 
-              <Comment text=comment.text score=comment.score comment_id=comment.comment_id/>,
+              <Comment text=comment.text score=comment.score comment_id=comment.comment_id nestedcomments=comment.children/>,
               commentdata
             )
           )

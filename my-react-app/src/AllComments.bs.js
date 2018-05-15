@@ -34,7 +34,7 @@ function make(postsUrl, _) {
           /* render */(function (self) {
               var match = self[/* state */2][/* commentsData */0];
               var comments = match ? $$Array.map((function (comment) {
-                        return ReasonReact.element(/* None */0, /* None */0, Comment$ReactTemplate.make(comment[/* text */1], comment[/* score */2], comment[/* comment_id */0], /* array */[]));
+                        return ReasonReact.element(/* None */0, /* None */0, Comment$ReactTemplate.make(comment[/* text */1], comment[/* score */2], comment[/* comment_id */0], comment[/* children */3], /* array */[]));
                       }), match[0]) : "Loading...";
               return React.createElement("div", {
                           className: "display"

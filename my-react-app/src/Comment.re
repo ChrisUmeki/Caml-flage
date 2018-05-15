@@ -10,7 +10,7 @@ type action =
 let component = ReasonReact.reducerComponent("Comment");
 
 
-let make = (~text, ~score, ~comment_id, _children) => {
+let rec make = (~text, ~score, ~comment_id, ~nestedcomments, _children) => {
 
   ...component,
 
@@ -43,7 +43,8 @@ let make = (~text, ~score, ~comment_id, _children) => {
     let down = "DownCaml";
     let count = string_of_int(self.state.count);
     <div>
-      <div className="one">
+
+      <div className="one"> /* one comment */ 
         <div className = "gr">
           <p>(ReasonReact.stringToElement(text))</p>
         </div>
@@ -60,6 +61,17 @@ let make = (~text, ~score, ~comment_id, _children) => {
           (ReasonReact.stringToElement("number of camels: " ++ count))
         </div>
       </div>
+
+      <div>
+      /* (ReasonReact.arrayToElement(
+      Array.map(
+              (comment: CommentData.comment) => 
+              <Comment text=comment.text score=comment.score comment_id=comment.comment_id nestedcomments=comment.children/>,
+              nestedcomments
+            )
+      )) */
+      </div>
+
     </div>;
   },
 }; 

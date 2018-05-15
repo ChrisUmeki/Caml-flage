@@ -7,7 +7,10 @@ function parseCommentsJson(json) {
   return /* record */[
           /* comment_id */Json_decode.field("comment_id", Json_decode.$$int, json),
           /* text */Json_decode.field("text", Json_decode.string, json),
-          /* score */Json_decode.field("score", Json_decode.$$int, json)
+          /* score */Json_decode.field("score", Json_decode.$$int, json),
+          /* children */Json_decode.field("children", (function (param) {
+                  return Json_decode.array(parseCommentsJson, param);
+                }), json)
         ];
 }
 
