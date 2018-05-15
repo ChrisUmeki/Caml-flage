@@ -18,7 +18,10 @@ let make = (~text, ~score, ~post_id, ~comment_id, ~nestedcomments, _children) =>
 
 initialState: () => {count: score, show: false},
 
-/* State transitions */
+/* State transitions 
+* Upvote adds 1 to state.score
+* Downvote subtracts 1 from state.score 
+* Comment shows the CommentInput */
 reducer: (action, state) =>
   switch (action) {
   | Upvote => 

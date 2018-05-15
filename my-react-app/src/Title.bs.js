@@ -26,7 +26,7 @@ function make(message, _) {
           /* render */(function (self) {
               return React.createElement("div", {
                           style: {
-                            color: "#3a9cff",
+                            color: "#00000",
                             fontSize: "68px",
                             textAlign: "center"
                           },

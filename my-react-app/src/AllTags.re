@@ -37,7 +37,8 @@ type state = {
           })
       };
     },
-  
+    
+    /* tagsData is an array which is passed to Tag to make a tag component */
     render: (self) => {
       let tags =
         switch (self.state.tagsData) {

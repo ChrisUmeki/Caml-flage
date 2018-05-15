@@ -18,7 +18,10 @@ let make = (~text, ~score, ~post_id, ~comment_id, ~nestedcomments, _children) =>
 
   initialState: () => {count: score, show: false},
 
-  /* State transitions */
+/* State transitions 
+* Upvote adds 1 to state.score
+* Downvote subtracts 1 from state.score 
+* Comment shows the CommentInput */
   reducer: (action, state) =>
     switch (action) {
     | Upvote => 
@@ -64,6 +67,7 @@ let make = (~text, ~score, ~post_id, ~comment_id, ~nestedcomments, _children) =>
           <p>(ReasonReact.stringToElement(text))</p>
         </div>
 
+        /* buttons that are included on the component */
         <div className="comment-buttons">
             <button className = "up" onClick=(_event => self.send(Upvote))>
             (ReasonReact.stringToElement(up))
@@ -89,7 +93,8 @@ let make = (~text, ~score, ~post_id, ~comment_id, ~nestedcomments, _children) =>
             parent_is_post=false 
             post_id=string_of_int(post_id)
             parent_id=string_of_int(comment_id)
-            initialText="Write a comment"/> : ReasonReact.stringToElement("")
+            initialText="Write a comment"/> 
+            : ReasonReact.stringToElement("")
           )
         </div> 
 

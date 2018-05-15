@@ -37,13 +37,20 @@ let make = (~postsUrl, _children) => {
     };
   },
 
+  /* AllPosts is an array that passes along the data to create a Post component */
   render: (self) => {
     let posts =
       switch (self.state.postsData) {
       | Some(postdata) => ReasonReact.arrayToElement(
           Array.map(
             (frontpost: PostsData.frontpost) => 
-            <Post title=frontpost.title tag=frontpost.tag text=frontpost.text score=frontpost.score post_id=frontpost.post_id/>,
+            <Post 
+              title=frontpost.title 
+              tag=frontpost.tag 
+              text=frontpost.text 
+              score=frontpost.score 
+              post_id=frontpost.post_id
+            />,
             postdata
           )
         )

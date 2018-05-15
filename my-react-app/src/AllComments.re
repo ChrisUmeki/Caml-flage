@@ -36,13 +36,20 @@ type state = {
       };
     },
   
+    /* render passes in the data stored in commentsData and renders individual Comment components */
     render: (self) => {
       let comments =
         switch (self.state.commentsData) {
         | Some(commentdata) => ReasonReact.arrayToElement(
             Array.map(
               (comment: CommentData.comment) => 
-              <Comment post_id=post_id text=comment.text score=comment.score comment_id=comment.comment_id nestedcomments=comment.children/>,
+              <Comment 
+              post_id=post_id 
+              text=comment.text 
+              score=comment.score 
+              comment_id=comment.comment_id 
+              nestedcomments=comment.children
+              />,
               commentdata
             )
           )

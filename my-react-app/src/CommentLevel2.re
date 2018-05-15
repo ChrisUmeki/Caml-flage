@@ -18,7 +18,10 @@ let make = (~text, ~score, ~post_id, ~comment_id, ~nestedcomments, _children) =>
 
 initialState: () => {count: score, show: false},
 
-/* State transitions */
+/* State transitions 
+* Upvote adds 1 to state.score
+* Downvote subtracts 1 from state.score 
+* Comment shows the CommentInput */
 reducer: (action, state) =>
   switch (action) {
   | Upvote => 
@@ -57,7 +60,7 @@ render: self => {
   let down = "DownCaml";
   let count = string_of_int(self.state.count);
   <div>
-     /* nested comment */ 
+    /* nested comment */ 
     <div className="nested2">
     
       <div className = "gr">
