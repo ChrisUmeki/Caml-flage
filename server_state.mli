@@ -30,8 +30,8 @@ val update_posts : t -> Post.t -> unit
 (* [update_comments st c] adds a new comment [c] to the server state [st] *)
 val update_comments : t -> Comment.t -> unit
 
-(* [update_tags st tag] adds a new tag [tag] to the server state [st] *)
-val update_tags : t -> Tag.t -> unit
+(* [update_tags st p] attaches a reference of post [p] to an existing tag or a new tag in server state [st] *)
+val update_tags : t -> Post.t -> unit
 
 (* [get_front_posts st] converts posts from the server state [st] to JSON for the front page of the website *)
 val get_front_posts : t -> Ezjsonm.t

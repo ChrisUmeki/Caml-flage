@@ -77,10 +77,21 @@ let update_users st (u : User.t) =
   if not (List.mem u st.users) then
     st.users <- u::st.users
 
+let update_tags st p =
+  let tagnames = List.map (fun x -> Tag.tag_name x) st.tags in
+  let posttag = Post.get_tag p in
+  if not (List.mem posttag tagnames)
+  then st.tags <- (Tag.empty posttag)::st.tags
+  else ();
+  let mytag = List.find (fun x -> Tag.tag_name x = posttag) st.tags in 
+  Tag.add_post mytag p
+
 (* [update_posts st p] adds post p to state st *)
 let update_posts st (p : Post.t) =
   if not (List.mem p st.posts) then
-    st.posts <- p::st.posts
+    st.posts <- p::st.posts;
+    update_tags st p
+
     
 (* [update_comments st c] adds comment c to state st *)
 let update_comments st (c : Comment.t) =
@@ -89,10 +100,6 @@ let update_comments st (c : Comment.t) =
     let p = List.find f st.posts in
     incr st.numcomments;
     Post.add_reply p c
-    
-let update_tags st (tag : Tag.t) =
-  if not (List.mem tag st.tags) then
-    st.tags <- tag::st.tags
 
 let sort_posts lst =
   let f a b = Post.get_hot_score a - Post.get_hot_score b in
