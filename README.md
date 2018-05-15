@@ -4,14 +4,15 @@ Dependency
 ```bash
 $ opam install opium
 $ opam install Ezjsonm
-$ npm install
 ```
 
 Compile react files
 ```bash
 $ cd my-react-app
+$ npm install
 $ npm start
 $ npm run webpack
+$ cd ..
 ```
 
 Compile and run (on port 3000)
