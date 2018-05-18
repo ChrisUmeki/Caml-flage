@@ -125,7 +125,7 @@ reddit.com
 https://medium.com/hacking-and-gonzo/how-reddit-ranking-algorithms-work-ef111e33d0d9
 
 ### ReasonReact:
-general formatting:
+general formatting and parsing data:
 https://jaredforsyth.com/posts/a-reason-react-tutorial/
 
 toggle:
