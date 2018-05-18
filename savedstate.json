@@ -80,11 +80,32 @@
               "user": "",
               "children": [
                 {
+                  "comment_id": 6,
+                  "text": "testing nested",
+                  "score": 1,
+                  "user": "",
+                  "children": [],
+                  "post_id": 4,
+                  "parent_comment_id": 4,
+                  "parent_is_post": false
+                },
+                {
                   "comment_id": 5,
                   "text": "more nested",
                   "score": 1,
                   "user": "",
-                  "children": [],
+                  "children": [
+                    {
+                      "comment_id": 7,
+                      "text": "testing nested (not expected to show)",
+                      "score": 1,
+                      "user": "",
+                      "children": [],
+                      "post_id": 4,
+                      "parent_comment_id": 5,
+                      "parent_is_post": false
+                    }
+                  ],
                   "post_id": 4,
                   "parent_comment_id": 4,
                   "parent_is_post": false
@@ -105,7 +126,7 @@
     },
     {
       "post_id": 5,
-      "score": 1,
+      "score": -9,
       "title": "Title",
       "text": "Create a new post here!",
       "has_url": false,
@@ -114,13 +135,99 @@
       "children": [],
       "tag": "Tag",
       "timestamp": 1526404484
+    },
+    {
+      "post_id": 6,
+      "score": 1,
+      "title": "3110 ROCKS MY SOCKS",
+      "text": "i <3 nate foster",
+      "has_url": false,
+      "url": null,
+      "user": "",
+      "children": [],
+      "tag": "fun",
+      "timestamp": 1526663641
+    },
+    {
+      "post_id": 7,
+      "score": 2,
+      "title": "Creating a new tag",
+      "text": "I'm creating a new tag",
+      "has_url": false,
+      "url": null,
+      "user": "",
+      "children": [],
+      "tag": "TagNew",
+      "timestamp": 1526663811
+    },
+    {
+      "post_id": 8,
+      "score": 2,
+      "title": "round 2",
+      "text": "of testing",
+      "has_url": false,
+      "url": null,
+      "user": "",
+      "children": [],
+      "tag": "TagNew",
+      "timestamp": 1526663861
+    },
+    {
+      "post_id": 9,
+      "score": 30,
+      "title": "json input",
+      "text": "\"fun\", \"timestamp\": 1526663641 }, { \"post_id\": 7, \"score\": 2, \"title\": \"Creating a new tag\", \"text\": \"I'm creating a new tag\", \"has_url\": false, \"url\": null, \"user\": \"\", \"children\": [], \"tag\": \"TagNew",
+      "has_url": false,
+      "url": null,
+      "user": "",
+      "children": [
+        {
+          "comment_id": 8,
+          "text": "asdhwuisd",
+          "score": 4,
+          "user": "",
+          "children": [],
+          "post_id": 9,
+          "parent_comment_id": 9,
+          "parent_is_post": true
+        }
+      ],
+      "tag": "Tag",
+      "timestamp": 1526664051
+    },
+    {
+      "post_id": 10,
+      "score": 1,
+      "title": "HEQsdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+      "text": "HU@IP#I@UP",
+      "has_url": false,
+      "url": null,
+      "user": "",
+      "children": [],
+      "tag": "#",
+      "timestamp": 1526664123
+    },
+    {
+      "post_id": 11,
+      "score": 1,
+      "title": "🐫",
+      "text": "🐫",
+      "has_url": false,
+      "url": null,
+      "user": "",
+      "children": [],
+      "tag": "🐫",
+      "timestamp": 1526664195
     }
   ],
   "tags": [
+    "🐫",
+    "#",
+    "TagNew",
     "Tag",
     "test",
     "jedi",
     "fun"
   ],
-  "numcomments": 5
+  "numcomments": 8
 }

@@ -108,12 +108,15 @@ We added unit tests for functions in post.ml and comment.ml that create posts an
 
 ## Division of Labor
 
+50 hr each
+
 Shea: I mostly worked on backend .ml files like post, comment, tag, and server + server_state. I implemented some of the functions in all of these files, wrote a lot of the specifications, and did a lot of the unit testing for these files as well. I also did a lot of research about various sorting algorithms, and ended up deciding to implement a slightly modified version of reddit's previous hot score algorithm for posts. I have also helped with interactive testing and writing the design documentation. 
 
 Mena: I worked mostly on frontend such as the displaying the posts, comments, and tags. This included parsing the data from the json files (sent to us from the server) and showing them on the appropriate pages. In addition, I worked on the functions that handled data on client side and sent the data to the server when certain buttons were pressed. 
 
-Arzu: I mostly workd on fronted such as defining the type of posts and comments, parsing post/comment data from json by extracting the necessary fields and displaying them on the main page. I also worked on adding two options for sorting posts by defining a new variant and modifying functions in server.ml and server_state.ml. In addition, I built most of the html files with the necessary links and buttons and added styling using CSS. For testing, I added unit tests for some functions in .ml files.
+Arzu: I mostly worked on fronted such as defining the type of posts and comments, parsing post/comment data from json by extracting the necessary fields and displaying them on the main page. I also worked on adding two options for sorting posts by defining a new variant and modifying functions in server.ml and server_state.ml. In addition, I built most of the html files with the necessary links and buttons and added styling using CSS. For testing, I added unit tests for some functions in .ml files.
 
+Chris: I designed the communication interface between server and front-end. This means all the functions that receive and send data, and determining the layout in which data is sent, because Json is very particular. I did a bunch of server functions as well. Check the gitlog.
 
 ## Sources used
 
